@@ -28,7 +28,7 @@ describe("BoardComponent", () => {
   });
 
   describe("onExecutePlay", () => {
-    describe("", () => {
+    describe("Amount one", () => {
       it("should call the onExecutePlay event handler on click", () => {
         const spyOnOnExecutePlay = jest.spyOn(component, "onExecutePlay");
         const buttonElement = fixture.debugElement.query(
@@ -38,6 +38,32 @@ describe("BoardComponent", () => {
         buttonElement.triggerEventHandler("click", {});
 
         expect(spyOnOnExecutePlay).toHaveBeenCalledWith(1);
+      });
+    });
+
+    describe("Amount two", () => {
+      it("should call the onExecutePlay event handler on click", () => {
+        const spyOnOnExecutePlay = jest.spyOn(component, "onExecutePlay");
+        const buttonElement = fixture.debugElement.query(
+          By.css("[data-test-id='execute-play-two']")
+        );
+
+        buttonElement.triggerEventHandler("click", {});
+
+        expect(spyOnOnExecutePlay).toHaveBeenCalledWith(2);
+      });
+    });
+
+    describe("Amount three", () => {
+      it("should call the onExecutePlay event handler on click", () => {
+        const spyOnOnExecutePlay = jest.spyOn(component, "onExecutePlay");
+        const buttonElement = fixture.debugElement.query(
+          By.css("[data-test-id='execute-play-three']")
+        );
+
+        buttonElement.triggerEventHandler("click", {});
+
+        expect(spyOnOnExecutePlay).toHaveBeenCalledWith(3);
       });
     });
   });
