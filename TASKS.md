@@ -30,8 +30,8 @@ A player could only input the amount of sticks and the amount will be decreased 
 
 [x] Install jest
 [x] Add husky
-[] Create a component with a module which represents the board
-[] Create a buttons which represent the amount
+[x] Create a component with a module which represents the board
+[x] Create a buttons which represent the amount
 [] Create a GameEngine in class in the shared folder
 
 - It should provide a method _executePlay_
