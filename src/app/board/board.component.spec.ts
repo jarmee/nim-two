@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { BoardComponent } from "./board.component";
+import { By } from "@angular/platform-browser";
 
 describe("BoardComponent", () => {
   let component: BoardComponent;
@@ -26,5 +27,18 @@ describe("BoardComponent", () => {
     expect(fixture).toMatchSnapshot();
   });
 
-  
+  describe("onExecutePlay", () => {
+    describe("", () => {
+      it("should call the onExecutePlay event handler on click", () => {
+        const spyOnOnExecutePlay = jest.spyOn(component, "onExecutePlay");
+        const buttonElement = fixture.debugElement.query(
+          By.css("[data-test-id='execute-play-one']")
+        );
+
+        buttonElement.triggerEventHandler("click", {});
+
+        expect(spyOnOnExecutePlay).toHaveBeenCalledWith(1);
+      });
+    });
+  });
 });

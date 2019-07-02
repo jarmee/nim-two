@@ -5,4 +5,6 @@ import { Component, OnInit } from "@angular/core";
   templateUrl: "./board.component.html",
   styleUrls: ["./board.component.scss"]
 })
-export class BoardComponent {}
+export class BoardComponent {
+  onExecutePlay(amount: number) {}
+}

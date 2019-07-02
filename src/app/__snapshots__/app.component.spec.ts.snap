@@ -4,6 +4,14 @@ exports[`AppComponent should match the snapshot 1`] = `
 <app-root
   title={[Function String]}
 >
+  <app-board>
+    <button
+      data-test-id="execute-play-one"
+      type="button"
+    >
+       1
   
+    </button>
+  </app-board>
 </app-root>
 `;

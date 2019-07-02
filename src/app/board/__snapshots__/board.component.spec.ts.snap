@@ -2,6 +2,12 @@
 
 exports[`BoardComponent should match the snapshot 1`] = `
 <app-board>
+  <button
+    data-test-id="execute-play-one"
+    type="button"
+  >
+     1
   
+  </button>
 </app-board>
 `;
