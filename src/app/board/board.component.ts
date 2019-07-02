@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { Observable } from "rxjs";
+import { GameEngineService } from "../shared/game-engine/game-engine.service";
 
 @Component({
   selector: "app-board",
@@ -6,5 +8,11 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./board.component.scss"]
 })
 export class BoardComponent {
-  onExecutePlay(amount: number) {}
+  amount$: Observable<number> = this.gameEngine.amount$;
+
+  constructor(private gameEngine: GameEngineService) {}
+
+  onExecutePlay(amount: number) {
+    this.gameEngine.executePlay(amount);
+  }
 }

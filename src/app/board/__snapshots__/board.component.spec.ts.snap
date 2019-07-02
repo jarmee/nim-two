@@ -1,7 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BoardComponent should match the snapshot 1`] = `
-<app-board>
+<app-board
+  amount$={[Function AnonymousSubject]}
+  gameEngine={[Function GameEngineService]}
+>
   <button
     data-test-id="execute-play-one"
     type="button"
@@ -20,6 +23,8 @@ exports[`BoardComponent should match the snapshot 1`] = `
   >
      3
   
-  </button>
+  </button><span>
+    78890
+  </span>
 </app-board>
 `;

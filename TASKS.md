@@ -24,15 +24,15 @@
 
 A player could only input the amount of sticks and the amount will be decreased by the given amount
 
-### 2 - xxx
-
-## Tasks
+#### Tasks
 
 [x] Install jest
 [x] Add husky
 [x] Create a component with a module which represents the board
 [x] Create a buttons which represent the amount
-[] Create a GameEngine in class in the shared folder
+[x] Create a GameEngine in class in the shared folder
 
 - It should provide a method _executePlay_
 - It should include a BehaviorSubject
+
+### 2 - xxx

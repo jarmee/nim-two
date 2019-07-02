@@ -26,6 +26,9 @@ exports[`AppComponent should match the snapshot 1`] = `
        3
   
     </button>
+    <span>
+      
+    </span>
   </app-board>
 </app-root>
 `;
