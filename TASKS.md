@@ -2,7 +2,7 @@
 
 ## Requirements
 
-[] npm start should start the application
+[x] npm start should start the application
 [x] npm test should run all tests
 [] Two player game (1 human & 1 PC)
 [] Playground should include 13 sticks
@@ -18,7 +18,7 @@
   o A check has to be executed if there are enough sticks on the board. If there not enough sticks it should decrease the amount of sticks (random pick)
   o After each pick a check has to be executed if the game has a winner
 
-## Prototype
+## Prototypes
 
 ### 1 - Stick counter
 
