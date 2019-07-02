@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppComponent should match the snapshot 1`] = `
+<app-root
+  title={[Function String]}
+>
+  
+</app-root>
+`;
