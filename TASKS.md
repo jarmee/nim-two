@@ -29,7 +29,7 @@ A player could only input the amount of sticks and the amount will be decreased 
 ## Tasks
 
 [x] Install jest
-[] Install ngrx
+[] Add husky
 [] Create a component with a module which represents the board
 [] Create a buttons which represent the amount
 [] Create a GameEngine in class in the shared folder
