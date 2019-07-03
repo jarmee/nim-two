@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { BoardFormComponent } from "./board-form.component";
+import { BoardFormBuilderService } from "./board-form-builder.service";
 
 describe("BoardFormComponent", () => {
   let component: BoardFormComponent;
@@ -8,7 +9,8 @@ describe("BoardFormComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [BoardFormComponent]
+      declarations: [BoardFormComponent],
+      providers: [BoardFormBuilderService]
     }).compileComponents();
   }));
 
