@@ -4,11 +4,15 @@ import {
   Input,
   OnChanges,
   SimpleChanges,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  Output,
+  OnDestroy,
+  EventEmitter
 } from "@angular/core";
 import { Board, Columns } from "src/app/shared/board/board.model";
 import { BoardFormBuilderService } from "./board-form-builder.service";
 import { FormGroup } from "@angular/forms";
+import { Observable, Subscription, EMPTY } from "rxjs";
 
 function areRowsDifferent(currentValue: Board, previousValue: Board): boolean {
   return Object.keys(currentValue).length != Object.keys(previousValue).length;
@@ -44,9 +48,14 @@ export function hasChanged(currentValue: Board, previousValue: Board): boolean {
   styleUrls: ["./board-form.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BoardFormComponent implements OnChanges {
+export class BoardFormComponent implements OnChanges, OnDestroy {
+  private subscriptions: Subscription[] = [];
+
   @Input()
   board: Board;
+
+  @Output()
+  boardChange = new EventEmitter<Board>();
 
   formGroup: FormGroup = this.formBuilder.initial();
 
@@ -72,8 +81,20 @@ export class BoardFormComponent implements OnChanges {
       this.board = currentValue;
       if (hasChanged(currentValue, previousValue)) {
         this.formGroup = this.formBuilder.of(currentValue);
+        this.subscriptions = [
+          ...this.subscriptions,
+          this.formGroup.valueChanges.subscribe((value: Board) =>
+            this.boardChange.emit(value)
+          )
+        ];
       }
       this.formGroup.patchValue(changes.board.currentValue);
     }
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((subscription: Subscription) =>
+      subscription.unsubscribe()
+    );
   }
 }

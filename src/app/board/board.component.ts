@@ -18,4 +18,8 @@ export class BoardComponent {
   onExecutePlay(amount: number) {
     this.gameEngine.executePlay(amount);
   }
+
+  onChange(board: Board) {
+    console.log(board);
+  }
 }
