@@ -24,7 +24,7 @@ exports[`BoardComponent should match the snapshot 1`] = `
      3
   
   </button><span>
-    78890
+    13
   </span>
 </app-board>
 `;

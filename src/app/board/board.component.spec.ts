@@ -8,7 +8,9 @@ import { GameEngineService } from "../shared/game-engine/game-engine.service";
 import * as faker from "faker";
 
 describe("BoardComponent", () => {
-  const initialGameState = gameStateFactory.build();
+  const initialGameState = gameStateFactory.build({
+    amount: 13
+  });
 
   let component: BoardComponent;
   let fixture: ComponentFixture<BoardComponent>;

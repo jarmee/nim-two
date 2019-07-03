@@ -1,1 +1,2 @@
-export type Board = Record<number, Record<number, boolean>>;
+export type Column = Record<number, boolean>;
+export type Board = Record<number, Column>;
