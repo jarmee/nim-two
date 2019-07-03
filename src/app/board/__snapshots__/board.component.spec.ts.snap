@@ -29,9 +29,11 @@ exports[`BoardComponent should match the snapshot 1`] = `
   </span><app-board-form
     ng-reflect-board="[object Object]"
   >
-    <p>
-      board-form works!
-    </p>
+    <form
+      class="ng-untouched ng-pristine ng-valid"
+      ng-reflect-form="[object Object]"
+      novalidate=""
+    />
   </app-board-form>
 </app-board>
 `;

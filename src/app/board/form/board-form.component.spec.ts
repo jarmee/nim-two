@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { BoardFormComponent } from "./board-form.component";
 import { BoardFormBuilderService } from "./board-form-builder.service";
+import { ReactiveFormsModule } from "@angular/forms";
 
 describe("BoardFormComponent", () => {
   let component: BoardFormComponent;
@@ -10,6 +11,7 @@ describe("BoardFormComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [BoardFormComponent],
+      imports: [ReactiveFormsModule],
       providers: [BoardFormBuilderService]
     }).compileComponents();
   }));

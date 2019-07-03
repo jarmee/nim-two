@@ -3,9 +3,12 @@
 exports[`BoardFormComponent should match the snapshot 1`] = `
 <app-board-form
   formBuilder={[Function BoardFormBuilderService]}
+  formGroup={[Function FormGroup]}
 >
-  <p>
-    board-form works!
-  </p>
+  <form
+    class="ng-untouched ng-pristine ng-valid"
+    ng-reflect-form="[object Object]"
+    novalidate=""
+  />
 </app-board-form>
 `;

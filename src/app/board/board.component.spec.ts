@@ -8,6 +8,7 @@ import { GameEngineService } from "../shared/game-engine/game-engine.service";
 import * as faker from "faker";
 import { BoardFormComponent } from "./form/board-form.component";
 import { BoardFormBuilderService } from "./form/board-form-builder.service";
+import { ReactiveFormsModule } from "@angular/forms";
 
 describe("BoardComponent", () => {
   const initialGameState = gameStateFactory.build({
@@ -21,7 +22,10 @@ describe("BoardComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [BoardComponent, BoardFormComponent],
-      imports: [GameEngineModule.forRoot(initialGameState)],
+      imports: [
+        GameEngineModule.forRoot(initialGameState),
+        ReactiveFormsModule
+      ],
       providers: [BoardFormBuilderService]
     }).compileComponents();
   }));

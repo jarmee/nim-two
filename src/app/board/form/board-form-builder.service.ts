@@ -1,7 +1,11 @@
 import { Injectable } from "@angular/core";
-import { BoardModule } from "../board.module";
+import { FormGroup, FormBuilder } from "@angular/forms";
 
 @Injectable()
 export class BoardFormBuilderService {
-  constructor() {}
+  constructor(private formBuilder: FormBuilder) {}
+
+  initial(): FormGroup {
+    return this.formBuilder.group({});
+  }
 }
