@@ -3,6 +3,7 @@
 exports[`BoardComponent should match the snapshot 1`] = `
 <app-board
   amount$={[Function AnonymousSubject]}
+  board$={[Function AnonymousSubject]}
   gameEngine={[Function GameEngineService]}
 >
   <button
@@ -25,7 +26,9 @@ exports[`BoardComponent should match the snapshot 1`] = `
   
   </button><span>
     13
-  </span><app-board-form>
+  </span><app-board-form
+    ng-reflect-board="[object Object]"
+  >
     <p>
       board-form works!
     </p>
