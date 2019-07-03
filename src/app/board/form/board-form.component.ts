@@ -6,9 +6,37 @@ import {
   SimpleChanges,
   ChangeDetectionStrategy
 } from "@angular/core";
-import { Board } from "src/app/shared/board/board.model";
+import { Board, Columns } from "src/app/shared/board/board.model";
 import { BoardFormBuilderService } from "./board-form-builder.service";
 import { FormGroup } from "@angular/forms";
+
+function areRowsDifferent(currentBoard: Board, previousBoard: Board): boolean {
+  return Object.keys(currentBoard).length != Object.keys(previousBoard).length;
+}
+
+function areColumnsDifferent(
+  currentBoard: Board,
+  previousBoard: Board
+): boolean {
+  return Object.keys(currentBoard)
+    .map((rowKey: string) => [currentBoard[rowKey], previousBoard[rowKey]])
+    .map(
+      ([currentColumns, previousColumns]: [Columns, Columns]) =>
+        Object.keys(currentColumns).length !=
+        Object.keys(previousColumns).length
+    )
+    .some((result: boolean) => result);
+}
+
+export function hasChanged(currentBoard: Board, previousBoard: Board): boolean {
+  if (!currentBoard && !previousBoard) return false;
+  if (!currentBoard && previousBoard) return true;
+  if (currentBoard && !previousBoard) return true;
+  if (areRowsDifferent(currentBoard, previousBoard)) return true;
+  if (areColumnsDifferent(currentBoard, previousBoard)) return true;
+
+  return false;
+}
 
 @Component({
   selector: "app-board-form",
@@ -26,7 +54,12 @@ export class BoardFormComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.board) {
-      this.board = changes.board.currentValue;
+      const { currentValue, previousValue } = changes.board;
+      this.board = currentValue;
+      if (hasChanged(currentValue, previousValue)) {
+        //FIXME this.formGroup = this.formBuilder.of(currentValue);
+      }
+      this.formGroup.patchValue(changes.board.currentValue);
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Board, Column } from "../board.model";
+import { Board, Columns } from "../board.model";
 import * as Factory from "factory.ts";
 
 export const boardFactory: () => Board = () => ({

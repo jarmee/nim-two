@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { BoardFormComponent } from "./board-form.component";
+import { BoardFormComponent, hasChanged } from "./board-form.component";
 import { BoardFormBuilderService } from "./board-form-builder.service";
 import { ReactiveFormsModule } from "@angular/forms";
 import { boardFactory } from "src/app/shared/board/testing/board.mock";
@@ -32,6 +32,59 @@ describe("BoardFormComponent", () => {
 
   it("should match the snapshot", () => {
     expect(fixture).toMatchSnapshot();
+  });
+
+  describe("hasChanged", () => {
+    it("should return false if both values are null", () => {
+      expect(hasChanged(null, null)).toBe(false);
+    });
+
+    it("should return true if the current board is null and the previous board has a value", () => {
+      expect(hasChanged(null, {})).toBe(true);
+    });
+
+    it("should return true if the current board is not null and the previous board is null", () => {
+      expect(hasChanged({}, null)).toBe(true);
+    });
+
+    it("should return true if the row count of both boards is not equal", () => {
+      const currentBoard = {
+        0: {},
+        1: {},
+        2: {}
+      };
+      const previousBoard = {
+        0: {}
+      };
+      expect(hasChanged(currentBoard, previousBoard)).toBe(true);
+    });
+
+    it("should return true if the row count is equal but one colum count of one row differs", () => {
+      const currentBoard = {
+        0: {
+          0: false
+        },
+        1: {
+          0: false,
+          2: true
+        },
+        2: {
+          0: false
+        }
+      };
+      const previousBoard = {
+        0: {
+          0: false
+        },
+        1: {
+          0: false
+        },
+        2: {
+          0: false
+        }
+      };
+      expect(hasChanged(currentBoard, previousBoard)).toBe(true);
+    });
   });
 
   describe("ngOnChanges", () => {
