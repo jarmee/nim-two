@@ -25,6 +25,10 @@ exports[`BoardComponent should match the snapshot 1`] = `
   
   </button><span>
     13
-  </span>
+  </span><app-board-form>
+    <p>
+      board-form works!
+    </p>
+  </app-board-form>
 </app-board>
 `;

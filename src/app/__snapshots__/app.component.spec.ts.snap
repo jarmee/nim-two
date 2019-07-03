@@ -29,6 +29,11 @@ exports[`AppComponent should match the snapshot 1`] = `
     <span>
       
     </span>
+    <app-board-form>
+      <p>
+        board-form works!
+      </p>
+    </app-board-form>
   </app-board>
 </app-root>
 `;

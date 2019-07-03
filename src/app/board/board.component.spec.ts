@@ -6,6 +6,7 @@ import { GameEngineModule } from "../shared/game-engine/game-engine.module";
 import { gameStateFactory } from "../shared/game-engine/testing/game-engine.mock";
 import { GameEngineService } from "../shared/game-engine/game-engine.service";
 import * as faker from "faker";
+import { BoardFormComponent } from "./form/board-form.component";
 
 describe("BoardComponent", () => {
   const initialGameState = gameStateFactory.build({
@@ -18,7 +19,7 @@ describe("BoardComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [BoardComponent],
+      declarations: [BoardComponent, BoardFormComponent],
       imports: [GameEngineModule.forRoot(initialGameState)]
     }).compileComponents();
   }));
