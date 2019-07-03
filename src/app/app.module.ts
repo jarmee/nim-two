@@ -6,7 +6,6 @@ import { BoardModule } from "./board/board.module";
 import { GameEngineModule } from "./shared/game-engine/game-engine.module";
 
 const initialGameState = {
-  amount: 13,
   board: {
     0: {
       0: false,

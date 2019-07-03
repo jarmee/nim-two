@@ -57,7 +57,7 @@ describe("GameEngineService", () => {
   describe("amount$", () => {
     it("should emit the current amount", done => {
       service.amount$.subscribe((actualAmount: number) => {
-        expect(actualAmount).toBe(store.snapshot.amount);
+        expect(actualAmount).toBe(13);
         done();
       });
     });

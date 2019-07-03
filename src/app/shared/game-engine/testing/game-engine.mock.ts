@@ -4,6 +4,5 @@ import { GameState } from "../game-engine.model";
 import { boardFactory } from "../../board/testing/board.mock";
 
 export const gameStateFactory = Factory.Sync.makeFactory<GameState>({
-  amount: faker.random.number(),
   board: boardFactory()
 });

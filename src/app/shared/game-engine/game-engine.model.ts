@@ -3,7 +3,6 @@ import { GameEngineStore } from "./game-engine.store";
 import { Board } from "../board/board.model";
 
 export interface GameState {
-  amount: number;
   board: Board;
 }
 
