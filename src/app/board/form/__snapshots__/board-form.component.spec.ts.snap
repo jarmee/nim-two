@@ -12,6 +12,8 @@ exports[`BoardFormComponent should match the snapshot 1`] = `
     novalidate=""
   >
     
+     No data :( 
+    
   </form>
 </app-board-form>
 `;

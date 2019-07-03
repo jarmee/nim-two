@@ -34,6 +34,7 @@ exports[`AppComponent should match the snapshot 1`] = `
         novalidate=""
       >
         
+        
       </form>
     </app-board-form>
   </app-board>
