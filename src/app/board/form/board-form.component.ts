@@ -57,7 +57,7 @@ export class BoardFormComponent implements OnChanges {
       const { currentValue, previousValue } = changes.board;
       this.board = currentValue;
       if (hasChanged(currentValue, previousValue)) {
-        //FIXME this.formGroup = this.formBuilder.of(currentValue);
+        this.formGroup = this.formBuilder.of(currentValue);
       }
       this.formGroup.patchValue(changes.board.currentValue);
     }
