@@ -45,3 +45,6 @@ Implement a dynamic form. Each form control represents a stick.
 [x] Create a board form component
 [x] Create a board form builder
 [x] Create a board factory
+[] Create a validator of the form
+[] Save the player data within the state
+[] Implement the oponent
