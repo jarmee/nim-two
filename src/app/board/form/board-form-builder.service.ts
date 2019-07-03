@@ -2,6 +2,8 @@ import { Injectable } from "@angular/core";
 import { FormGroup, FormBuilder, FormControl } from "@angular/forms";
 import { Board, Columns } from "src/app/shared/board/board.model";
 
+const initalFormGroup = new FormGroup({});
+
 function createFormGroupForRow(columns: Columns): FormGroup {
   return Object.keys(columns).reduce((rowFormGroup: FormGroup, columnKey) => {
     rowFormGroup.addControl(columnKey, new FormControl(columns[columnKey]));
@@ -23,6 +25,6 @@ export class BoardFormBuilderService {
   }
 
   initial(): FormGroup {
-    return new FormGroup({});
+    return initalFormGroup;
   }
 }

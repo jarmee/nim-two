@@ -9,6 +9,7 @@ import { Board } from "src/app/shared/board/board.model";
 import { Board } from "src/app/shared/board/board.model";
 
 describe("BoardFormComponent", () => {
+  const board: Board = boardFactory();
   let component: BoardFormComponent;
   let fixture: ComponentFixture<BoardFormComponent>;
 
@@ -23,6 +24,7 @@ describe("BoardFormComponent", () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(BoardFormComponent);
     component = fixture.componentInstance;
+    component.board = board;
     fixture.detectChanges();
   });
 
@@ -88,16 +90,25 @@ describe("BoardFormComponent", () => {
   });
 
   describe("ngOnChanges", () => {
-    it("should set the board property", () => {
-      const changedBoard: Board = boardFactory();
-      const changes: SimpleChanges = {
-        board: new SimpleChange(null, changedBoard, true)
-      };
+    const changes: SimpleChanges = {
+      board: new SimpleChange(null, board, true)
+    };
+    beforeEach(() => {
       component.board = null;
+    });
 
+    it("should set the board property", () => {
       component.ngOnChanges(changes);
 
-      expect(component.board).toBe(changedBoard);
+      expect(component.board).toBe(board);
+    });
+
+    it("should set the form group", () => {
+      component.ngOnChanges(changes);
+
+      expect(Object.keys(component.formGroup.controls).length).toBe(
+        Object.keys(board).length
+      );
     });
   });
 });

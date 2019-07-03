@@ -2,6 +2,7 @@
 
 exports[`BoardFormComponent should match the snapshot 1`] = `
 <app-board-form
+  board={[Function Object]}
   formBuilder={[Function BoardFormBuilderService]}
   formGroup={[Function FormGroup]}
 >
