@@ -10,6 +10,7 @@ import { Board } from "../shared/board/board.model";
 })
 export class BoardComponent {
   amount$: Observable<number> = this.gameEngine.amount$;
+
   board$: Observable<Board> = this.gameEngine.board$;
 
   constructor(private gameEngine: GameEngineService) {}
