@@ -117,8 +117,14 @@ exports[`BoardComponent should match the snapshot 1`] = `
           type="checkbox"
         />
       </div>
+      <div />
       
-      
+      <button
+        data-test-id="execute-play-button"
+        type="button"
+      >
+         Finish Play 
+      </button>
     </form>
   </app-board-form>
 </app-board>

@@ -43,5 +43,5 @@ Implement a dynamic form. Each form control represents a stick.
 
 [x] Create a board model (map within a map)
 [x] Create a board form component
-[] Create a board form builder
-[] Create a board factory
+[x] Create a board form builder
+[x] Create a board factory

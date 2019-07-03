@@ -12,9 +12,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { boardFactory } from "../shared/board/testing/board.mock";
 
 describe("BoardComponent", () => {
-  const initialGameState = gameStateFactory.build({
-    amount: 13
-  });
+  const initialGameState = gameStateFactory.build();
 
   let component: BoardComponent;
   let fixture: ComponentFixture<BoardComponent>;
@@ -66,7 +64,7 @@ describe("BoardComponent", () => {
           By.css("[data-test-id='board']")
         );
 
-        boardElement.triggerEventHandler("boardChange", board);
+        boardElement.triggerEventHandler("executePlay", board);
 
         expect(component.onExecutePlay).toHaveBeenCalledWith(board);
       });

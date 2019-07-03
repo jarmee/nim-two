@@ -7,6 +7,7 @@ import { boardFactory } from "src/app/shared/board/testing/board.mock";
 import { SimpleChange, SimpleChanges } from "@angular/core";
 import { Board } from "src/app/shared/board/board.model";
 import { Board } from "src/app/shared/board/board.model";
+import { By } from "@angular/platform-browser";
 
 describe("BoardFormComponent", () => {
   const board: Board = boardFactory();
@@ -153,6 +154,34 @@ describe("BoardFormComponent", () => {
       component.formGroup = new FormGroup({ 0: new FormGroup({}) });
 
       expect(component.hasControls).toBe(true);
+    });
+  });
+
+  describe("onExecutePlay", () => {
+    it("should call the emit method of the executePlay event handler", () => {
+      component.executePlay.emit = jest.fn();
+
+      component.onExecutePlay();
+
+      expect(component.executePlay.emit).toHaveBeenCalledWith(
+        component.formGroup.value
+      );
+    });
+
+    it("should call the emit method of the executePlay event handler", () => {
+      component.board = board;
+      fixture.detectChanges();
+
+      component.executePlay.emit = jest.fn();
+
+      const buttonElement = fixture.debugElement.query(
+        By.css("[data-test-id='execute-play-button']")
+      );
+      buttonElement.triggerEventHandler("click", {});
+
+      expect(component.executePlay.emit).toHaveBeenCalledWith(
+        component.formGroup.value
+      );
     });
   });
 });

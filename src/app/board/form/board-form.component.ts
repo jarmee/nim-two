@@ -48,14 +48,12 @@ export function hasChanged(currentValue: Board, previousValue: Board): boolean {
   styleUrls: ["./board-form.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BoardFormComponent implements OnChanges, OnDestroy {
-  private subscriptions: Subscription[] = [];
-
+export class BoardFormComponent implements OnChanges {
   @Input()
   board: Board;
 
   @Output()
-  boardChange = new EventEmitter<Board>();
+  executePlay = new EventEmitter<Board>();
 
   formGroup: FormGroup = this.formBuilder.initial();
 
@@ -75,28 +73,20 @@ export class BoardFormComponent implements OnChanges, OnDestroy {
     return Object.keys(rowFormGroup.controls);
   }
 
+  onExecutePlay() {
+    this.executePlay.emit(this.formGroup.value);
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes.board) {
       const { currentValue, previousValue } = changes.board;
       this.board = currentValue;
       if (hasChanged(currentValue, previousValue)) {
         this.formGroup = this.formBuilder.of(currentValue);
-        this.subscriptions = [
-          ...this.subscriptions,
-          this.formGroup.valueChanges.subscribe((value: Board) =>
-            this.boardChange.emit(value)
-          )
-        ];
       }
       this.formGroup.patchValue(changes.board.currentValue || {}, {
         emitEvent: false
       });
     }
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.forEach((subscription: Subscription) =>
-      subscription.unsubscribe()
-    );
   }
 }

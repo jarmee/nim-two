@@ -12,8 +12,16 @@
         [formControlName]="formControlName"
       />
     </div>
+    <div></div>
   </ng-container>
   <ng-template #noData>
     No data :(
   </ng-template>
+  <button
+    data-test-id="execute-play-button"
+    type="button"
+    (click)="onExecutePlay()"
+  >
+    Finish Play
+  </button>
 </form>

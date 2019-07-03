@@ -3,10 +3,9 @@
 exports[`BoardFormComponent should match the snapshot 1`] = `
 <app-board-form
   board={[Function Object]}
-  boardChange={[Function EventEmitter]}
+  executePlay={[Function EventEmitter]}
   formBuilder={[Function BoardFormBuilderService]}
   formGroup={[Function FormGroup]}
-  subscriptions={[Function Array]}
 >
   <form
     class="ng-untouched ng-pristine ng-valid"
@@ -16,6 +15,12 @@ exports[`BoardFormComponent should match the snapshot 1`] = `
     
      No data :( 
     
+    <button
+      data-test-id="execute-play-button"
+      type="button"
+    >
+       Finish Play 
+    </button>
   </form>
 </app-board-form>
 `;
