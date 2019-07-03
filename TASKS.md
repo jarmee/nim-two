@@ -35,4 +35,13 @@ A player could only input the amount of sticks and the amount will be decreased 
 - It should provide a method _executePlay_
 - It should include a BehaviorSubject
 
-### 2 - xxx
+### 2 - Extended Stick Counter Example
+
+Implement a dynamic form. Each form control represents a stick.
+
+#### Tasks
+
+[] Create a board model (map within a map)
+[] Create a board form component
+[] Create a board form builder
+[] Create a board factory
