@@ -88,7 +88,9 @@ export class BoardFormComponent implements OnChanges, OnDestroy {
           )
         ];
       }
-      this.formGroup.patchValue(changes.board.currentValue);
+      this.formGroup.patchValue(changes.board.currentValue || {}, {
+        emitEvent: false
+      });
     }
   }
 

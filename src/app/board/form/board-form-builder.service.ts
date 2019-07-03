@@ -12,6 +12,7 @@ function createFormGroupForRow(columns: Columns): FormGroup {
 }
 
 function createFormGroupForBoard(board: Board): FormGroup {
+  if (!board) return initalFormGroup;
   return Object.keys(board).reduce((formGroup: FormGroup, rowKey: string) => {
     formGroup.addControl(rowKey, createFormGroupForRow(board[rowKey]));
     return formGroup;

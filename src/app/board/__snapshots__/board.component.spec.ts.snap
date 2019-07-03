@@ -6,27 +6,10 @@ exports[`BoardComponent should match the snapshot 1`] = `
   board$={[Function AnonymousSubject]}
   gameEngine={[Function GameEngineService]}
 >
-  <button
-    data-test-id="execute-play-one"
-    type="button"
-  >
-     1
-  
-  </button><button
-    data-test-id="execute-play-two"
-    type="button"
-  >
-     2
-  
-  </button><button
-    data-test-id="execute-play-three"
-    type="button"
-  >
-     3
-  
-  </button><span>
+  <span>
     13
   </span><app-board-form
+    data-test-id="board"
     ng-reflect-board="[object Object]"
   >
     <form
@@ -43,68 +26,94 @@ exports[`BoardComponent should match the snapshot 1`] = `
       >
         
         <input
+          class="ng-untouched ng-pristine ng-valid"
           id="0"
           name="0"
+          ng-reflect-name="0"
           type="checkbox"
         />
         <input
+          class="ng-untouched ng-pristine ng-valid"
           id="1"
           name="1"
+          ng-reflect-name="1"
           type="checkbox"
         />
         <input
+          class="ng-untouched ng-pristine ng-valid"
           id="2"
           name="2"
+          ng-reflect-name="2"
           type="checkbox"
         />
         <input
+          class="ng-untouched ng-pristine ng-valid"
           id="3"
           name="3"
+          ng-reflect-name="3"
           type="checkbox"
         />
         <input
+          class="ng-untouched ng-pristine ng-valid"
           id="4"
           name="4"
+          ng-reflect-name="4"
           type="checkbox"
         />
         <input
+          class="ng-untouched ng-pristine ng-valid"
           id="5"
           name="5"
+          ng-reflect-name="5"
           type="checkbox"
         />
         <input
+          class="ng-untouched ng-pristine ng-valid"
           id="6"
           name="6"
+          ng-reflect-name="6"
           type="checkbox"
         />
         <input
+          class="ng-untouched ng-pristine ng-valid"
           id="7"
           name="7"
+          ng-reflect-name="7"
           type="checkbox"
         />
         <input
+          class="ng-untouched ng-pristine ng-valid"
           id="8"
           name="8"
+          ng-reflect-name="8"
           type="checkbox"
         />
         <input
+          class="ng-untouched ng-pristine ng-valid"
           id="9"
           name="9"
+          ng-reflect-name="9"
           type="checkbox"
         />
         <input
+          class="ng-untouched ng-pristine ng-valid"
           id="10"
           name="10"
+          ng-reflect-name="10"
           type="checkbox"
         />
         <input
+          class="ng-untouched ng-pristine ng-valid"
           id="11"
           name="11"
+          ng-reflect-name="11"
           type="checkbox"
         />
         <input
+          class="ng-untouched ng-pristine ng-valid"
           id="12"
           name="12"
+          ng-reflect-name="12"
           type="checkbox"
         />
       </div>

@@ -15,11 +15,7 @@ export class BoardComponent {
 
   constructor(private gameEngine: GameEngineService) {}
 
-  onExecutePlay(amount: number) {
-    this.gameEngine.executePlay(amount);
-  }
-
-  onChange(board: Board) {
-    console.log(board);
+  onExecutePlay(board: Board) {
+    this.gameEngine.executePlay(board);
   }
 }

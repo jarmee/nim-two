@@ -5,31 +5,12 @@ exports[`AppComponent should match the snapshot 1`] = `
   title={[Function String]}
 >
   <app-board>
-    <button
-      data-test-id="execute-play-one"
-      type="button"
-    >
-       1
-  
-    </button>
-    <button
-      data-test-id="execute-play-two"
-      type="button"
-    >
-       2
-  
-    </button>
-    <button
-      data-test-id="execute-play-three"
-      type="button"
-    >
-       3
-  
-    </button>
     <span>
       
     </span>
-    <app-board-form>
+    <app-board-form
+      data-test-id="board"
+    >
       <form
         novalidate=""
       >

@@ -9,6 +9,7 @@ import * as faker from "faker";
 import { BoardFormComponent } from "./form/board-form.component";
 import { BoardFormBuilderService } from "./form/board-form-builder.service";
 import { ReactiveFormsModule } from "@angular/forms";
+import { boardFactory } from "../shared/board/testing/board.mock";
 
 describe("BoardComponent", () => {
   const initialGameState = gameStateFactory.build({
@@ -47,12 +48,12 @@ describe("BoardComponent", () => {
   });
 
   describe("onExecutePlay", () => {
+    const board = boardFactory();
+
     it("should call the executePlay method of the GameEngine", () => {
-      const amount = faker.random.number();
+      component.onExecutePlay(board);
 
-      component.onExecutePlay(amount);
-
-      expect(gameEngine.executePlay).toHaveBeenCalledWith(amount);
+      expect(gameEngine.executePlay).toHaveBeenCalledWith(board);
     });
 
     describe("UI Interaction", () => {
@@ -60,42 +61,14 @@ describe("BoardComponent", () => {
         component.onExecutePlay = jest.fn();
       });
 
-      describe("Amount one", () => {
-        it("should call the onExecutePlay event handler on click", () => {
-          const buttonElement = fixture.debugElement.query(
-            By.css("[data-test-id='execute-play-one']")
-          );
+      it("should call the onExecutePlay event handler on board change", () => {
+        const boardElement = fixture.debugElement.query(
+          By.css("[data-test-id='board']")
+        );
 
-          buttonElement.triggerEventHandler("click", {});
+        boardElement.triggerEventHandler("boardChange", board);
 
-          expect(component.onExecutePlay).toHaveBeenCalledWith(1);
-        });
-      });
-
-      describe("Amount two", () => {
-        it("should call the onExecutePlay event handler on click", () => {
-          const spyOnOnExecutePlay = jest.spyOn(component, "onExecutePlay");
-          const buttonElement = fixture.debugElement.query(
-            By.css("[data-test-id='execute-play-two']")
-          );
-
-          buttonElement.triggerEventHandler("click", {});
-
-          expect(component.onExecutePlay).toHaveBeenCalledWith(2);
-        });
-      });
-
-      describe("Amount three", () => {
-        it("should call the onExecutePlay event handler on click", () => {
-          const spyOnOnExecutePlay = jest.spyOn(component, "onExecutePlay");
-          const buttonElement = fixture.debugElement.query(
-            By.css("[data-test-id='execute-play-three']")
-          );
-
-          buttonElement.triggerEventHandler("click", {});
-
-          expect(component.onExecutePlay).toHaveBeenCalledWith(3);
-        });
+        expect(component.onExecutePlay).toHaveBeenCalledWith(board);
       });
 
       afterEach(() => {

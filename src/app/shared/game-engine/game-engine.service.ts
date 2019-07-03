@@ -17,11 +17,9 @@ export class GameEngineService {
 
   constructor(@Inject(GAME_STATE_STORE) private store: GameEngineStore) {}
 
-  executePlay(amountToDecrease: number) {
-    const { amount } = this.store.snapshot;
-    const newAmount = amount - amountToDecrease;
+  executePlay(newState: Board) {
     this.store.next({
-      amount: newAmount
+      board: newState
     });
   }
 }

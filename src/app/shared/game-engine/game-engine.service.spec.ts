@@ -5,6 +5,7 @@ import { GameState, GAME_STATE_STORE } from "./game-engine.model";
 import { gameStateFactory } from "./testing/game-engine.mock";
 import { GameEngineStore } from "./game-engine.store";
 import { Board } from "../board/board.model";
+import { boardFactory } from "../board/testing/board.mock";
 
 describe("GameEngineService", () => {
   const initialGameState: GameState = gameStateFactory.build();
@@ -39,14 +40,12 @@ describe("GameEngineService", () => {
     });
 
     it("should call the next method of the store with the decreased amount", () => {
-      const amount = store.snapshot.amount;
-      const decreaseAmountByOne = 1;
-      const expectedAmount = amount - decreaseAmountByOne;
+      const expectedBoard = boardFactory();
 
-      service.executePlay(decreaseAmountByOne);
+      service.executePlay(expectedBoard);
 
       expect(store.next).toHaveBeenCalledWith({
-        amount: expectedAmount
+        board: expectedBoard
       });
     });
 

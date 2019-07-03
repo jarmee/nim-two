@@ -1,26 +1,6 @@
-<button
-  type="button"
-  data-test-id="execute-play-one"
-  (click)="onExecutePlay(1)"
->
-  1
-</button>
-<button
-  type="button"
-  data-test-id="execute-play-two"
-  (click)="onExecutePlay(2)"
->
-  2
-</button>
-<button
-  type="button"
-  data-test-id="execute-play-three"
-  (click)="onExecutePlay(3)"
->
-  3
-</button>
 <span>{{ amount$ | async }}</span>
 <app-board-form
+  data-test-id="board"
   [board]="board$ | async"
-  (boardChange)="onChange($event)"
+  (boardChange)="onExecutePlay($event)"
 ></app-board-form>
