@@ -10,16 +10,16 @@ import { Board, Columns } from "src/app/shared/board/board.model";
 import { BoardFormBuilderService } from "./board-form-builder.service";
 import { FormGroup } from "@angular/forms";
 
-function areRowsDifferent(currentBoard: Board, previousBoard: Board): boolean {
-  return Object.keys(currentBoard).length != Object.keys(previousBoard).length;
+function areRowsDifferent(currentValue: Board, previousValue: Board): boolean {
+  return Object.keys(currentValue).length != Object.keys(previousValue).length;
 }
 
 function areColumnsDifferent(
-  currentBoard: Board,
-  previousBoard: Board
+  currentValue: Board,
+  previousValue: Board
 ): boolean {
-  return Object.keys(currentBoard)
-    .map((rowKey: string) => [currentBoard[rowKey], previousBoard[rowKey]])
+  return Object.keys(currentValue)
+    .map((rowKey: string) => [currentValue[rowKey], previousValue[rowKey]])
     .map(
       ([currentColumns, previousColumns]: [Columns, Columns]) =>
         Object.keys(currentColumns).length !=
@@ -28,12 +28,12 @@ function areColumnsDifferent(
     .some((result: boolean) => result);
 }
 
-export function hasChanged(currentBoard: Board, previousBoard: Board): boolean {
-  if (!currentBoard && !previousBoard) return false;
-  if (!currentBoard && previousBoard) return true;
-  if (currentBoard && !previousBoard) return true;
-  if (areRowsDifferent(currentBoard, previousBoard)) return true;
-  if (areColumnsDifferent(currentBoard, previousBoard)) return true;
+export function hasChanged(currentValue: Board, previousValue: Board): boolean {
+  if (!currentValue && !previousValue) return false;
+  if (!currentValue && previousValue) return true;
+  if (currentValue && !previousValue) return true;
+  if (areRowsDifferent(currentValue, previousValue)) return true;
+  if (areColumnsDifferent(currentValue, previousValue)) return true;
 
   return false;
 }
