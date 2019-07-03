@@ -52,6 +52,14 @@ export class BoardFormComponent implements OnChanges {
 
   constructor(private formBuilder: BoardFormBuilderService) {}
 
+  get formGroupControlNames() {
+    return Object.keys(this.formGroup.controls);
+  }
+
+  get hasControls() {
+    return this.formGroupControlNames.length > 0;
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes.board) {
       const { currentValue, previousValue } = changes.board;

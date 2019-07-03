@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { BoardFormComponent, hasChanged } from "./board-form.component";
 import { BoardFormBuilderService } from "./board-form-builder.service";
-import { ReactiveFormsModule } from "@angular/forms";
+import { ReactiveFormsModule, FormGroup } from "@angular/forms";
 import { boardFactory } from "src/app/shared/board/testing/board.mock";
 import { SimpleChange, SimpleChanges } from "@angular/core";
 import { Board } from "src/app/shared/board/board.model";
@@ -109,6 +109,28 @@ describe("BoardFormComponent", () => {
       expect(Object.keys(component.formGroup.controls).length).toBe(
         Object.keys(board).length
       );
+    });
+  });
+
+  describe("formGroupControlNames", () => {
+    it("should return the names of all form groups", () => {
+      component.formGroup = new FormGroup({ 0: new FormGroup({}) });
+
+      expect(component.formGroupControlNames).toEqual(["0"]);
+    });
+  });
+
+  describe("hasControls", () => {
+    it("should return false if no controls are available", () => {
+      component.formGroup = new FormGroup({});
+
+      expect(component.hasControls).toBe(false);
+    });
+
+    it("should return true if at least one control is available", () => {
+      component.formGroup = new FormGroup({ 0: new FormGroup({}) });
+
+      expect(component.hasControls).toBe(true);
     });
   });
 });

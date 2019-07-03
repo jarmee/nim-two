@@ -1,3 +1,8 @@
 <form [formGroup]="formGroup">
-    
+  <ng-container *ngIf="hasControls">
+    <div
+      [formGroupName]="formGroupControlName"
+      *ngFor="let formGroupControlName of formGroupControlNames"
+    ></div>
+  </ng-container>
 </form>

@@ -10,6 +10,8 @@ exports[`BoardFormComponent should match the snapshot 1`] = `
     class="ng-untouched ng-pristine ng-valid"
     ng-reflect-form="[object Object]"
     novalidate=""
-  />
+  >
+    
+  </form>
 </app-board-form>
 `;
