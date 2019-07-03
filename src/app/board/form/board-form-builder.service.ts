@@ -18,14 +18,11 @@ function createFormGroupForBoard(board: Board): FormGroup {
 
 @Injectable()
 export class BoardFormBuilderService {
-  form: FormGroup;
-  constructor(private formBuilder: FormBuilder) {}
-
   of(board: Board): FormGroup {
     return createFormGroupForBoard(board);
   }
 
   initial(): FormGroup {
-    return this.formBuilder.group({});
+    return new FormGroup({});
   }
 }
