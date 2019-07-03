@@ -3,7 +3,14 @@
     <div
       [formGroupName]="formGroupControlName"
       *ngFor="let formGroupControlName of formGroupControlNames"
-    ></div>
+    >
+      <input
+        *ngFor="let formControlName of formContolNamesOf(formGroupControlName)"
+        type="checkbox"
+        [name]="formControlName"
+        [attr.id]="formControlName"
+      />
+    </div>
   </ng-container>
   <ng-template #noData>
     No data :(

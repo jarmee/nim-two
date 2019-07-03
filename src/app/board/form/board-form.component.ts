@@ -52,12 +52,18 @@ export class BoardFormComponent implements OnChanges {
 
   constructor(private formBuilder: BoardFormBuilderService) {}
 
-  get formGroupControlNames() {
+  get formGroupControlNames(): string[] {
     return Object.keys(this.formGroup.controls);
   }
 
-  get hasControls() {
+  get hasControls(): boolean {
     return this.formGroupControlNames.length > 0;
+  }
+
+  formContolNamesOf(formGroupName: string): string[] {
+    const rowFormGroup = this.formGroup.get(formGroupName) as FormGroup;
+    if (!rowFormGroup) return [];
+    return Object.keys(rowFormGroup.controls);
   }
 
   ngOnChanges(changes: SimpleChanges) {

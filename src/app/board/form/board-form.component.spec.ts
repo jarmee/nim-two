@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { BoardFormComponent, hasChanged } from "./board-form.component";
 import { BoardFormBuilderService } from "./board-form-builder.service";
-import { ReactiveFormsModule, FormGroup } from "@angular/forms";
+import { ReactiveFormsModule, FormGroup, FormControl } from "@angular/forms";
 import { boardFactory } from "src/app/shared/board/testing/board.mock";
 import { SimpleChange, SimpleChanges } from "@angular/core";
 import { Board } from "src/app/shared/board/board.model";
@@ -117,6 +117,28 @@ describe("BoardFormComponent", () => {
       component.formGroup = new FormGroup({ 0: new FormGroup({}) });
 
       expect(component.formGroupControlNames).toEqual(["0"]);
+    });
+  });
+
+  describe("formContolNamesOf", () => {
+    it("should return the names of all form controls of a form group", () => {
+      component.formGroup = new FormGroup({
+        "0": new FormGroup({
+          "0": new FormControl(false),
+          "1": new FormControl(false),
+          "2": new FormControl(false),
+          "3": new FormControl(false),
+          "4": new FormControl(false)
+        })
+      });
+
+      expect(component.formContolNamesOf("0")).toEqual([
+        "0",
+        "1",
+        "2",
+        "3",
+        "4"
+      ]);
     });
   });
 

@@ -40,7 +40,74 @@ exports[`BoardComponent should match the snapshot 1`] = `
       <div
         class="ng-untouched ng-pristine ng-valid"
         ng-reflect-name="0"
-      />
+      >
+        
+        <input
+          id="0"
+          name="0"
+          type="checkbox"
+        />
+        <input
+          id="1"
+          name="1"
+          type="checkbox"
+        />
+        <input
+          id="2"
+          name="2"
+          type="checkbox"
+        />
+        <input
+          id="3"
+          name="3"
+          type="checkbox"
+        />
+        <input
+          id="4"
+          name="4"
+          type="checkbox"
+        />
+        <input
+          id="5"
+          name="5"
+          type="checkbox"
+        />
+        <input
+          id="6"
+          name="6"
+          type="checkbox"
+        />
+        <input
+          id="7"
+          name="7"
+          type="checkbox"
+        />
+        <input
+          id="8"
+          name="8"
+          type="checkbox"
+        />
+        <input
+          id="9"
+          name="9"
+          type="checkbox"
+        />
+        <input
+          id="10"
+          name="10"
+          type="checkbox"
+        />
+        <input
+          id="11"
+          name="11"
+          type="checkbox"
+        />
+        <input
+          id="12"
+          name="12"
+          type="checkbox"
+        />
+      </div>
       
       
     </form>
