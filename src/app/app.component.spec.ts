@@ -1,10 +1,10 @@
-import { TestBed, async, ComponentFixture } from "@angular/core/testing";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { AppComponent } from "./app.component";
 import { BoardModule } from "./board/board.module";
+import { BoardFormBuilderService } from "./board/form/board-form-builder.service";
+import { GameState } from "./shared/game-engine/game-engine.model";
 import { GameEngineModule } from "./shared/game-engine/game-engine.module";
 import { gameStateFactory } from "./shared/game-engine/testing/game-engine.mock";
-import { GameState } from "./shared/game-engine/game-engine.model";
-import { BoardFormBuilderService } from "./board/form/board-form-builder.service";
 
 describe("AppComponent", () => {
   const initialGameState: GameState = gameStateFactory.build();

@@ -1,9 +1,8 @@
 import { TestBed } from "@angular/core/testing";
-
-import { BoardFormBuilderService } from "./board-form-builder.service";
 import { FormGroup, ReactiveFormsModule } from "@angular/forms";
-import { boardFactory } from "src/app/shared/board/testing/board.mock";
 import * as faker from "faker";
+import { boardFactory } from "src/app/shared/board/testing/board.mock";
+import { BoardFormBuilderService } from "./board-form-builder.service";
 
 describe("BoardFormBuilderService", () => {
   let service: BoardFormBuilderService;

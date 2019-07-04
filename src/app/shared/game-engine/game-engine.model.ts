@@ -1,6 +1,6 @@
 import { InjectionToken } from "@angular/core";
-import { GameEngineStore } from "./game-engine.store";
 import { Board } from "../board/board.model";
+import { GameEngineStore } from "./game-engine.store";
 
 export interface GameState {
   board: Board;

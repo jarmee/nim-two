@@ -1,5 +1,4 @@
-import { NgModule, InjectionToken, ModuleWithProviders } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { ModuleWithProviders, NgModule } from "@angular/core";
 import { GameState, GAME_STATE_STORE } from "./game-engine.model";
 import { GameEngineService } from "./game-engine.service";
 import { GameEngineStore } from "./game-engine.store";

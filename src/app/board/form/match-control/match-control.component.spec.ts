@@ -1,9 +1,8 @@
+import { ElementRef, Renderer2, Type } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-
-import { MatchControlComponent } from "./match-control.component";
-import { Renderer, ElementRef, Renderer2, Type } from "@angular/core";
-import * as faker from "faker";
 import { By } from "@angular/platform-browser";
+import * as faker from "faker";
+import { MatchControlComponent } from "./match-control.component";
 
 describe("MatchControlComponent", () => {
   let component: MatchControlComponent;

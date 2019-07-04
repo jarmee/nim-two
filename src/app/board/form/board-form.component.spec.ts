@@ -8,12 +8,12 @@ import {
 } from "./board-form.component";
 import { BoardFormBuilderService } from "./board-form-builder.service";
 import { ReactiveFormsModule, FormGroup, FormControl } from "@angular/forms";
-import { boardFactory } from "src/app/shared/board/testing/board.mock";
+import { boardFactory } from "../../shared/board/testing/board.mock";
 import { SimpleChange, SimpleChanges } from "@angular/core";
-import { Board, Column } from "src/app/shared/board/board.model";
+import { Board, Column } from "../../shared/board/board.model";
 import { By } from "@angular/platform-browser";
 import { MatchControlComponent } from "./match-control/match-control.component";
-import { BoardBuilder } from "src/app/shared/board/board.builder";
+import { BoardBuilder } from "../../shared/board/board.builder";
 import * as faker from "faker";
 
 describe("BoardFormComponent", () => {

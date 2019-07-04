@@ -1,7 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { Observable } from "rxjs";
-import { GameEngineService } from "../shared/game-engine/game-engine.service";
 import { Board } from "../shared/board/board.model";
+import { GameEngineService } from "../shared/game-engine/game-engine.service";
 
 @Component({
   selector: "app-board",

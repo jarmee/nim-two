@@ -1,8 +1,7 @@
-import { GameState } from "./game-engine.model";
-import { gameStateFactory } from "./testing/game-engine.mock";
-import { GameEngineStore } from "./game-engine.store";
-import * as faker from "faker";
 import { skip } from "rxjs/operators";
+import { GameState } from "./game-engine.model";
+import { GameEngineStore } from "./game-engine.store";
+import { gameStateFactory } from "./testing/game-engine.mock";
 
 describe("GameEngineStore", () => {
   const initialGameState: GameState = gameStateFactory.build();
@@ -20,9 +19,7 @@ describe("GameEngineStore", () => {
 
   describe("next", () => {
     it("should change the current state", done => {
-      const updatedState = gameStateFactory.build({
-        amount: faker.random.number()
-      });
+      const updatedState = gameStateFactory.build();
 
       store.pipe(skip(1)).subscribe((actualState: GameState) => {
         expect(actualState).toEqual(updatedState);

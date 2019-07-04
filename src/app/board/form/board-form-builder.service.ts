@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { FormGroup, FormBuilder, FormControl } from "@angular/forms";
-import { Board, Columns } from "src/app/shared/board/board.model";
+import { FormControl, FormGroup } from "@angular/forms";
+import { Board, Columns } from "../../shared/board/board.model";
 
 const initalFormGroup = new FormGroup({});
 

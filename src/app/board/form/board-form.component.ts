@@ -9,7 +9,7 @@ import {
   OnDestroy,
   EventEmitter
 } from "@angular/core";
-import { Board, Columns, Column } from "src/app/shared/board/board.model";
+import { Board, Columns, Column } from "../../shared/board/board.model";
 import { BoardFormBuilderService } from "./board-form-builder.service";
 import { FormGroup } from "@angular/forms";
 import { Observable, Subscription, EMPTY } from "rxjs";

@@ -1,15 +1,12 @@
 import {
   Component,
-  OnInit,
-  Renderer,
   ElementRef,
   forwardRef,
-  Renderer2,
   Input,
+  Renderer2,
   ViewChild
 } from "@angular/core";
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from "@angular/forms";
-import { templateJitUrl } from "@angular/compiler";
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 
 @Component({
   selector: "app-match-control",

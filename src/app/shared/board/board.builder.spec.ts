@@ -1,5 +1,4 @@
 import { BoardBuilder } from "./board.builder";
-import { Board } from "./board.model";
 
 describe("BoardBuilder", () => {
   describe("create", () => {

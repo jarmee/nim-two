@@ -1,11 +1,10 @@
 import { TestBed } from "@angular/core/testing";
-
-import { GameEngineService } from "./game-engine.service";
-import { GameState, GAME_STATE_STORE } from "./game-engine.model";
-import { gameStateFactory } from "./testing/game-engine.mock";
-import { GameEngineStore } from "./game-engine.store";
 import { Board } from "../board/board.model";
 import { boardFactory } from "../board/testing/board.mock";
+import { GameState, GAME_STATE_STORE } from "./game-engine.model";
+import { GameEngineService } from "./game-engine.service";
+import { GameEngineStore } from "./game-engine.store";
+import { gameStateFactory } from "./testing/game-engine.mock";
 
 describe("GameEngineService", () => {
   const initialGameState: GameState = gameStateFactory.build();

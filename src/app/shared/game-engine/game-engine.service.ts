@@ -1,9 +1,9 @@
-import { Injectable, Inject, OnDestroy } from "@angular/core";
-import { BehaviorSubject, Observable, Subscription, of } from "rxjs";
+import { Inject, Injectable, OnDestroy } from "@angular/core";
+import { BehaviorSubject, Observable, Subscription } from "rxjs";
+import { map, skip, tap, withLatestFrom } from "rxjs/operators";
+import { Board, Columns } from "../board/board.model";
 import { GameState, GAME_STATE_STORE } from "./game-engine.model";
 import { GameEngineStore } from "./game-engine.store";
-import { map, tap, skip, withLatestFrom, catchError } from "rxjs/operators";
-import { Board, Columns } from "../board/board.model";
 
 const calculateAmount = (board: Board) => {
   return Object.keys(board)

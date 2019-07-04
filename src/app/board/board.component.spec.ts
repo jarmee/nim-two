@@ -1,15 +1,13 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-
-import { BoardComponent } from "./board.component";
-import { By } from "@angular/platform-browser";
-import { GameEngineModule } from "../shared/game-engine/game-engine.module";
-import { gameStateFactory } from "../shared/game-engine/testing/game-engine.mock";
-import { GameEngineService } from "../shared/game-engine/game-engine.service";
-import * as faker from "faker";
-import { BoardFormComponent } from "./form/board-form.component";
-import { BoardFormBuilderService } from "./form/board-form-builder.service";
 import { ReactiveFormsModule } from "@angular/forms";
+import { By } from "@angular/platform-browser";
 import { boardFactory } from "../shared/board/testing/board.mock";
+import { GameEngineModule } from "../shared/game-engine/game-engine.module";
+import { GameEngineService } from "../shared/game-engine/game-engine.service";
+import { gameStateFactory } from "../shared/game-engine/testing/game-engine.mock";
+import { BoardComponent } from "./board.component";
+import { BoardFormBuilderService } from "./form/board-form-builder.service";
+import { BoardFormComponent } from "./form/board-form.component";
 import { MatchControlComponent } from "./form/match-control/match-control.component";
 
 describe("BoardComponent", () => {
