@@ -5,11 +5,11 @@
 [x] npm start should start the application
 [x] npm test should run all tests
 [x] Create a GitHub repo
+[x] Ci/Cd pipeline
 [] Two player game (1 human & 1 PC)
 [] Playground should include 13 sticks
-[] In one turn a player could pick 1, 2 or 3 sticks, but max the amount of sticks which are one the board
+[] In one turn a player could pick 1, 2 or 3 sticks, but max the amount of matches which are one the board
 [] The artificial player should be replaceable
-[] Ci/Cd pipeline
 
 ## Notes on states
 
