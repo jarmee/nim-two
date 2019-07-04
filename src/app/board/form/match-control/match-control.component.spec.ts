@@ -20,6 +20,7 @@ describe("MatchControlComponent", () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MatchControlComponent);
     component = fixture.componentInstance;
+    component.formControlName = "match-control";
     renderer = fixture.componentRef.injector.get<Renderer2>(Renderer2 as Type<
       Renderer2
     >);

@@ -3,4 +3,6 @@
   type="checkbox"
   (change)="onChange($event.target.checked)"
   (blur)="onTouched()"
+  [name]="formControlName"
+  [attr.id]="formControlName"
 />

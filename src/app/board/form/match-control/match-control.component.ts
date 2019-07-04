@@ -4,7 +4,8 @@ import {
   Renderer,
   ElementRef,
   forwardRef,
-  Renderer2
+  Renderer2,
+  Input
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from "@angular/forms";
 import { templateJitUrl } from "@angular/compiler";
@@ -22,7 +23,11 @@ import { templateJitUrl } from "@angular/compiler";
   ]
 })
 export class MatchControlComponent implements ControlValueAccessor {
+  @Input()
+  formControlName: string;
+
   onChangeCallback: (value: boolean) => void;
+
   onTouchedCallback: () => void;
 
   constructor(private renderer: Renderer2, private elementRef: ElementRef) {}
