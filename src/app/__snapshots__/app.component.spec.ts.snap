@@ -5,6 +5,9 @@ exports[`AppComponent should match the snapshot 1`] = `
   title={[Function String]}
 >
   <app-board>
+    <h1>
+      Nim 2
+    </h1>
     <span>
       
     </span>

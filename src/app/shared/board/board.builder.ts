@@ -3,20 +3,21 @@ import { Board } from "./board.model";
 export class BoardBuilder {
   board: Board = {};
 
-  currentIndex = 0;
-
   addRowWithColumns(...columns: boolean[]): BoardBuilder {
+    const currentIndex = Object.keys(this.board).length++;
     this.board = {
       ...this.board,
-      [this.currentIndex]: {
+      [currentIndex]: {
         ...columns
           .map((value: boolean, index: number) => ({
-            [index]: value
+            [index]: {
+              value,
+              player: null
+            }
           }))
           .reduce((row: any, column: any) => ({ ...row, ...column }), {})
       }
     };
-    this.currentIndex++;
     return this;
   }
 

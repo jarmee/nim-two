@@ -6,9 +6,10 @@ import { ReactiveFormsModule, FormGroup, FormControl } from "@angular/forms";
 import { boardFactory } from "src/app/shared/board/testing/board.mock";
 import { SimpleChange, SimpleChanges } from "@angular/core";
 import { Board } from "src/app/shared/board/board.model";
-import { Board } from "src/app/shared/board/board.model";
 import { By } from "@angular/platform-browser";
 import { MatchControlComponent } from "./match-control/match-control.component";
+import { BoardBuilder } from "src/app/shared/board/board.builder";
+import * as faker from "faker";
 
 describe("BoardFormComponent", () => {
   const board: Board = boardFactory();
@@ -52,41 +53,28 @@ describe("BoardFormComponent", () => {
     });
 
     it("should return true if the row count of both boards is not equal", () => {
-      const currentBoard = {
-        0: {},
-        1: {},
-        2: {}
-      };
-      const previousBoard = {
-        0: {}
-      };
+      const currentBoard = BoardBuilder.create()
+        .addRowWithColumns(false)
+        .addRowWithColumns(false)
+        .addRowWithColumns(false)
+        .build();
+      const previousBoard = BoardBuilder.create()
+        .addRowWithColumns(false)
+        .build();
       expect(hasChanged(currentBoard, previousBoard)).toBe(true);
     });
 
     it("should return true if the row count is equal but one colum count of one row differs", () => {
-      const currentBoard = {
-        0: {
-          0: false
-        },
-        1: {
-          0: false,
-          2: true
-        },
-        2: {
-          0: false
-        }
-      };
-      const previousBoard = {
-        0: {
-          0: false
-        },
-        1: {
-          0: false
-        },
-        2: {
-          0: false
-        }
-      };
+      const currentBoard = BoardBuilder.create()
+        .addRowWithColumns(true, false)
+        .addRowWithColumns(false)
+        .addRowWithColumns(false, true)
+        .build();
+      const previousBoard = BoardBuilder.create()
+        .addRowWithColumns(true, false)
+        .addRowWithColumns(false, false)
+        .addRowWithColumns(false, true)
+        .build();
       expect(hasChanged(currentBoard, previousBoard)).toBe(true);
     });
   });
@@ -122,7 +110,7 @@ describe("BoardFormComponent", () => {
     });
   });
 
-  describe("formContolNamesOf", () => {
+  describe("columnFormGroupControlNamesOf", () => {
     it("should return the names of all form controls of a form group", () => {
       component.formGroup = new FormGroup({
         "0": new FormGroup({
@@ -134,13 +122,29 @@ describe("BoardFormComponent", () => {
         })
       });
 
-      expect(component.formContolNamesOf("0")).toEqual([
+      expect(component.columnFormGroupControlNamesOf("0")).toEqual([
         "0",
         "1",
         "2",
         "3",
         "4"
       ]);
+    });
+  });
+
+  describe("playerName", () => {
+    it("should return the playerName property", () => {
+      const player = faker.name.firstName();
+      component.formGroup = new FormGroup({
+        0: new FormGroup({
+          0: new FormGroup({
+            value: new FormControl(false),
+            player: new FormControl(player)
+          })
+        })
+      });
+
+      expect(component.playerName("0", "0")).toBe(player);
     });
   });
 

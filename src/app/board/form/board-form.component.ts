@@ -9,7 +9,7 @@ import {
   OnDestroy,
   EventEmitter
 } from "@angular/core";
-import { Board, Columns } from "src/app/shared/board/board.model";
+import { Board, Columns, Column } from "src/app/shared/board/board.model";
 import { BoardFormBuilderService } from "./board-form-builder.service";
 import { FormGroup } from "@angular/forms";
 import { Observable, Subscription, EMPTY } from "rxjs";
@@ -67,10 +67,16 @@ export class BoardFormComponent implements OnChanges {
     return this.formGroupControlNames.length > 0;
   }
 
-  formContolNamesOf(formGroupName: string): string[] {
+  columnFormGroupControlNamesOf(formGroupName: string): string[] {
     const rowFormGroup = this.formGroup.get(formGroupName) as FormGroup;
     if (!rowFormGroup) return [];
     return Object.keys(rowFormGroup.controls);
+  }
+
+  playerName(formGroupName: string, columnFormGroupName: string) {
+    const rowFormGroup = this.formGroup.get(formGroupName);
+    const columnFormGroup = rowFormGroup.get(columnFormGroupName);
+    return (columnFormGroup.value as Column).player || "";
   }
 
   onExecutePlay() {

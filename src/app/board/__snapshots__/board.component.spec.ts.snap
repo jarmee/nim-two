@@ -6,7 +6,9 @@ exports[`BoardComponent should match the snapshot 1`] = `
   board$={[Function AnonymousSubject]}
   gameEngine={[Function GameEngineService]}
 >
-  <span>
+  <h1>
+    Nim 2
+  </h1><span>
     13
   </span><app-board-form
     data-test-id="board"
@@ -25,110 +27,279 @@ exports[`BoardComponent should match the snapshot 1`] = `
         ng-reflect-name="0"
       >
         
-        <app-match-control
+        <div
           class="ng-untouched ng-pristine ng-valid"
           ng-reflect-name="0"
         >
-          <input
-            type="checkbox"
-          />
-        </app-match-control>
-        <app-match-control
+          <app-match-control
+            class="ng-untouched ng-pristine ng-valid"
+            formcontrolname="value"
+            ng-reflect-form-control-name="value"
+            ng-reflect-name="value"
+          >
+            <input
+              data-test-id="match-checkbox"
+              id="value"
+              name="value"
+              type="checkbox"
+            />
+          </app-match-control>
+          <div>
+              
+          </div>
+        </div>
+        <div
           class="ng-untouched ng-pristine ng-valid"
           ng-reflect-name="1"
         >
-          <input
-            type="checkbox"
-          />
-        </app-match-control>
-        <app-match-control
+          <app-match-control
+            class="ng-untouched ng-pristine ng-valid"
+            formcontrolname="value"
+            ng-reflect-form-control-name="value"
+            ng-reflect-name="value"
+          >
+            <input
+              data-test-id="match-checkbox"
+              id="value"
+              name="value"
+              type="checkbox"
+            />
+          </app-match-control>
+          <div>
+              
+          </div>
+        </div>
+        <div
           class="ng-untouched ng-pristine ng-valid"
           ng-reflect-name="2"
         >
-          <input
-            type="checkbox"
-          />
-        </app-match-control>
-        <app-match-control
+          <app-match-control
+            class="ng-untouched ng-pristine ng-valid"
+            formcontrolname="value"
+            ng-reflect-form-control-name="value"
+            ng-reflect-name="value"
+          >
+            <input
+              data-test-id="match-checkbox"
+              id="value"
+              name="value"
+              type="checkbox"
+            />
+          </app-match-control>
+          <div>
+              
+          </div>
+        </div>
+        <div
           class="ng-untouched ng-pristine ng-valid"
           ng-reflect-name="3"
         >
-          <input
-            type="checkbox"
-          />
-        </app-match-control>
-        <app-match-control
+          <app-match-control
+            class="ng-untouched ng-pristine ng-valid"
+            formcontrolname="value"
+            ng-reflect-form-control-name="value"
+            ng-reflect-name="value"
+          >
+            <input
+              data-test-id="match-checkbox"
+              id="value"
+              name="value"
+              type="checkbox"
+            />
+          </app-match-control>
+          <div>
+              
+          </div>
+        </div>
+        <div
           class="ng-untouched ng-pristine ng-valid"
           ng-reflect-name="4"
         >
-          <input
-            type="checkbox"
-          />
-        </app-match-control>
-        <app-match-control
+          <app-match-control
+            class="ng-untouched ng-pristine ng-valid"
+            formcontrolname="value"
+            ng-reflect-form-control-name="value"
+            ng-reflect-name="value"
+          >
+            <input
+              data-test-id="match-checkbox"
+              id="value"
+              name="value"
+              type="checkbox"
+            />
+          </app-match-control>
+          <div>
+              
+          </div>
+        </div>
+        <div
           class="ng-untouched ng-pristine ng-valid"
           ng-reflect-name="5"
         >
-          <input
-            type="checkbox"
-          />
-        </app-match-control>
-        <app-match-control
+          <app-match-control
+            class="ng-untouched ng-pristine ng-valid"
+            formcontrolname="value"
+            ng-reflect-form-control-name="value"
+            ng-reflect-name="value"
+          >
+            <input
+              data-test-id="match-checkbox"
+              id="value"
+              name="value"
+              type="checkbox"
+            />
+          </app-match-control>
+          <div>
+              
+          </div>
+        </div>
+        <div
           class="ng-untouched ng-pristine ng-valid"
           ng-reflect-name="6"
         >
-          <input
-            type="checkbox"
-          />
-        </app-match-control>
-        <app-match-control
+          <app-match-control
+            class="ng-untouched ng-pristine ng-valid"
+            formcontrolname="value"
+            ng-reflect-form-control-name="value"
+            ng-reflect-name="value"
+          >
+            <input
+              data-test-id="match-checkbox"
+              id="value"
+              name="value"
+              type="checkbox"
+            />
+          </app-match-control>
+          <div>
+              
+          </div>
+        </div>
+        <div
           class="ng-untouched ng-pristine ng-valid"
           ng-reflect-name="7"
         >
-          <input
-            type="checkbox"
-          />
-        </app-match-control>
-        <app-match-control
+          <app-match-control
+            class="ng-untouched ng-pristine ng-valid"
+            formcontrolname="value"
+            ng-reflect-form-control-name="value"
+            ng-reflect-name="value"
+          >
+            <input
+              data-test-id="match-checkbox"
+              id="value"
+              name="value"
+              type="checkbox"
+            />
+          </app-match-control>
+          <div>
+              
+          </div>
+        </div>
+        <div
           class="ng-untouched ng-pristine ng-valid"
           ng-reflect-name="8"
         >
-          <input
-            type="checkbox"
-          />
-        </app-match-control>
-        <app-match-control
+          <app-match-control
+            class="ng-untouched ng-pristine ng-valid"
+            formcontrolname="value"
+            ng-reflect-form-control-name="value"
+            ng-reflect-name="value"
+          >
+            <input
+              data-test-id="match-checkbox"
+              id="value"
+              name="value"
+              type="checkbox"
+            />
+          </app-match-control>
+          <div>
+              
+          </div>
+        </div>
+        <div
           class="ng-untouched ng-pristine ng-valid"
           ng-reflect-name="9"
         >
-          <input
-            type="checkbox"
-          />
-        </app-match-control>
-        <app-match-control
+          <app-match-control
+            class="ng-untouched ng-pristine ng-valid"
+            formcontrolname="value"
+            ng-reflect-form-control-name="value"
+            ng-reflect-name="value"
+          >
+            <input
+              data-test-id="match-checkbox"
+              id="value"
+              name="value"
+              type="checkbox"
+            />
+          </app-match-control>
+          <div>
+              
+          </div>
+        </div>
+        <div
           class="ng-untouched ng-pristine ng-valid"
           ng-reflect-name="10"
         >
-          <input
-            type="checkbox"
-          />
-        </app-match-control>
-        <app-match-control
+          <app-match-control
+            class="ng-untouched ng-pristine ng-valid"
+            formcontrolname="value"
+            ng-reflect-form-control-name="value"
+            ng-reflect-name="value"
+          >
+            <input
+              data-test-id="match-checkbox"
+              id="value"
+              name="value"
+              type="checkbox"
+            />
+          </app-match-control>
+          <div>
+              
+          </div>
+        </div>
+        <div
           class="ng-untouched ng-pristine ng-valid"
           ng-reflect-name="11"
         >
-          <input
-            type="checkbox"
-          />
-        </app-match-control>
-        <app-match-control
+          <app-match-control
+            class="ng-untouched ng-pristine ng-valid"
+            formcontrolname="value"
+            ng-reflect-form-control-name="value"
+            ng-reflect-name="value"
+          >
+            <input
+              data-test-id="match-checkbox"
+              id="value"
+              name="value"
+              type="checkbox"
+            />
+          </app-match-control>
+          <div>
+              
+          </div>
+        </div>
+        <div
           class="ng-untouched ng-pristine ng-valid"
           ng-reflect-name="12"
         >
-          <input
-            type="checkbox"
-          />
-        </app-match-control>
+          <app-match-control
+            class="ng-untouched ng-pristine ng-valid"
+            formcontrolname="value"
+            ng-reflect-form-control-name="value"
+            ng-reflect-name="value"
+          >
+            <input
+              data-test-id="match-checkbox"
+              id="value"
+              name="value"
+              type="checkbox"
+            />
+          </app-match-control>
+          <div>
+              
+          </div>
+        </div>
       </div>
       <div />
       

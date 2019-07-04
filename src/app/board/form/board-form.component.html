@@ -4,10 +4,19 @@
       [formGroupName]="formGroupControlName"
       *ngFor="let formGroupControlName of formGroupControlNames"
     >
-      <app-match-control
-        *ngFor="let formControlName of formContolNamesOf(formGroupControlName)"
-        [formControlName]="formControlName"
-      ></app-match-control>
+      <div
+        [formGroupName]="columnFormGroupControlName"
+        *ngFor="
+          let columnFormGroupControlName of columnFormGroupControlNamesOf(
+            formGroupControlName
+          )
+        "
+      >
+        <app-match-control formControlName="value"></app-match-control>
+        <div>
+          {{ playerName(formGroupControlName, columnFormGroupControlName) }}
+        </div>
+      </div>
     </div>
     <div></div>
   </ng-container>

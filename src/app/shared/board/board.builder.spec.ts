@@ -47,7 +47,12 @@ describe("BoardBuilder", () => {
       const row = actual[0];
 
       expect(Object.keys(row)).toStrictEqual(["0", "1", "2", "3"]);
-      expect(Object.values(row)).toStrictEqual([true, false, true, false]);
+      expect(Object.values(row)).toStrictEqual([
+        { value: true, player: null },
+        { value: false, player: null },
+        { value: true, player: null },
+        { value: false, player: null }
+      ]);
     });
   });
 });

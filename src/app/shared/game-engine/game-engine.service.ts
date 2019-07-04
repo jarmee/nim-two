@@ -10,8 +10,9 @@ const calculateAmount = map((board: Board) => {
     .map((rowKey: string) => board[rowKey])
     .map(
       (columns: Columns) =>
-        Object.keys(columns).filter((columnKey: string) => !columns[columnKey])
-          .length
+        Object.keys(columns).filter(
+          (columnKey: string) => !columns[columnKey].value
+        ).length
     )
     .reduce(
       (amount: number, columnCount: number) => (amount += columnCount),
