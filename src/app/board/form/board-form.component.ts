@@ -14,6 +14,9 @@ import { BoardFormBuilderService } from "./board-form-builder.service";
 import { FormGroup } from "@angular/forms";
 import { Observable, Subscription, EMPTY } from "rxjs";
 
+const PLAYER_FORM_CONTROL_NAME = "player";
+const DEFAULT_PLAYER_NAME = "You";
+
 function areRowsDifferent(currentValue: Board, previousValue: Board): boolean {
   return Object.keys(currentValue).length != Object.keys(previousValue).length;
 }
@@ -42,13 +45,43 @@ export function hasChanged(currentValue: Board, previousValue: Board): boolean {
   return false;
 }
 
+export function watchColumnValueChangesOf(
+  formGroup: FormGroup,
+  colummWatcher: (column: Column, columnFormGroup: FormGroup) => void
+): Subscription[] {
+  return Object.values(formGroup.controls)
+    .map((rowFormGroup: FormGroup) =>
+      Object.values(rowFormGroup.controls).map((columnFormGroup: FormGroup) =>
+        columnFormGroup.valueChanges.subscribe((column: Column) =>
+          colummWatcher(column, columnFormGroup)
+        )
+      )
+    )
+    .reduce(
+      (subscriptions: Subscription[], innerSubscriptions: Subscription[]) => [
+        ...subscriptions,
+        ...innerSubscriptions
+      ],
+      []
+    );
+}
+
+export function andSetPlayerIfCheckedTo(playerName: string) {
+  return (column: Column, columnFormGroup: FormGroup) =>
+    columnFormGroup
+      .get(PLAYER_FORM_CONTROL_NAME)
+      .patchValue(!!column.value ? playerName : null, { emitEvent: false });
+}
+
 @Component({
   selector: "app-board-form",
   templateUrl: "./board-form.component.html",
   styleUrls: ["./board-form.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BoardFormComponent implements OnChanges {
+export class BoardFormComponent implements OnChanges, OnDestroy {
+  private subscriptions: Subscription[] = [];
+
   @Input()
   board: Board;
 
@@ -89,10 +122,20 @@ export class BoardFormComponent implements OnChanges {
       this.board = currentValue;
       if (hasChanged(currentValue, previousValue)) {
         this.formGroup = this.formBuilder.of(currentValue);
+        this.subscriptions = watchColumnValueChangesOf(
+          this.formGroup,
+          andSetPlayerIfCheckedTo(DEFAULT_PLAYER_NAME)
+        );
       }
-      this.formGroup.patchValue(changes.board.currentValue || {}, {
+      this.formGroup.patchValue(currentValue || {}, {
         emitEvent: false
       });
     }
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((subscription: Subscription) =>
+      subscription.unsubscribe()
+    );
   }
 }

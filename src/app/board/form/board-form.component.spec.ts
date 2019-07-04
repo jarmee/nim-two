@@ -1,11 +1,16 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { BoardFormComponent, hasChanged } from "./board-form.component";
+import {
+  BoardFormComponent,
+  hasChanged,
+  andSetPlayerIfCheckedTo,
+  watchColumnValueChangesOf
+} from "./board-form.component";
 import { BoardFormBuilderService } from "./board-form-builder.service";
 import { ReactiveFormsModule, FormGroup, FormControl } from "@angular/forms";
 import { boardFactory } from "src/app/shared/board/testing/board.mock";
 import { SimpleChange, SimpleChanges } from "@angular/core";
-import { Board } from "src/app/shared/board/board.model";
+import { Board, Column } from "src/app/shared/board/board.model";
 import { By } from "@angular/platform-browser";
 import { MatchControlComponent } from "./match-control/match-control.component";
 import { BoardBuilder } from "src/app/shared/board/board.builder";
@@ -187,6 +192,55 @@ describe("BoardFormComponent", () => {
       expect(component.executePlay.emit).toHaveBeenCalledWith(
         component.formGroup.value
       );
+    });
+  });
+
+  describe("watchColumnValueChangesOf", () => {
+    it("", done => {
+      const formGroup = new FormGroup({
+        0: new FormGroup({
+          0: new FormGroup({
+            value: new FormControl(false),
+            player: new FormControl(null)
+          })
+        })
+      });
+      const fakeCallback = jest.fn();
+
+      watchColumnValueChangesOf(formGroup, fakeCallback);
+
+      formGroup.valueChanges.subscribe(() => {
+        expect(fakeCallback).toHaveBeenCalled();
+        done();
+      });
+
+      formGroup.patchValue({
+        0: {
+          0: {
+            value: true,
+            player: faker.name.firstName()
+          }
+        }
+      });
+    });
+  });
+
+  describe("andSetPlayerIfCheckedTo", () => {
+    it("should set the player form control if the column is checked", () => {
+      const column: Column = {
+        value: true,
+        player: null
+      };
+      const columnFormGroup = new FormGroup({
+        value: new FormControl(false),
+        player: new FormControl(null)
+      });
+      const playerName = faker.name.firstName();
+
+      andSetPlayerIfCheckedTo(playerName)(column, columnFormGroup);
+
+      expect(columnFormGroup.value.player).not.toBeNull();
+      expect(columnFormGroup.value.player).toBe(playerName);
     });
   });
 });

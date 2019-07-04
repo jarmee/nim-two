@@ -6,6 +6,7 @@ exports[`BoardFormComponent should match the snapshot 1`] = `
   executePlay={[Function EventEmitter]}
   formBuilder={[Function BoardFormBuilderService]}
   formGroup={[Function FormGroup]}
+  subscriptions={[Function Array]}
 >
   <form
     class="ng-untouched ng-pristine ng-valid"

@@ -44,9 +44,9 @@ exports[`BoardComponent should match the snapshot 1`] = `
               type="checkbox"
             />
           </app-match-control>
-          <div>
+          <span>
               
-          </div>
+          </span>
         </div>
         <div
           class="ng-untouched ng-pristine ng-valid"
@@ -65,9 +65,9 @@ exports[`BoardComponent should match the snapshot 1`] = `
               type="checkbox"
             />
           </app-match-control>
-          <div>
+          <span>
               
-          </div>
+          </span>
         </div>
         <div
           class="ng-untouched ng-pristine ng-valid"
@@ -86,9 +86,9 @@ exports[`BoardComponent should match the snapshot 1`] = `
               type="checkbox"
             />
           </app-match-control>
-          <div>
+          <span>
               
-          </div>
+          </span>
         </div>
         <div
           class="ng-untouched ng-pristine ng-valid"
@@ -107,9 +107,9 @@ exports[`BoardComponent should match the snapshot 1`] = `
               type="checkbox"
             />
           </app-match-control>
-          <div>
+          <span>
               
-          </div>
+          </span>
         </div>
         <div
           class="ng-untouched ng-pristine ng-valid"
@@ -128,9 +128,9 @@ exports[`BoardComponent should match the snapshot 1`] = `
               type="checkbox"
             />
           </app-match-control>
-          <div>
+          <span>
               
-          </div>
+          </span>
         </div>
         <div
           class="ng-untouched ng-pristine ng-valid"
@@ -149,9 +149,9 @@ exports[`BoardComponent should match the snapshot 1`] = `
               type="checkbox"
             />
           </app-match-control>
-          <div>
+          <span>
               
-          </div>
+          </span>
         </div>
         <div
           class="ng-untouched ng-pristine ng-valid"
@@ -170,9 +170,9 @@ exports[`BoardComponent should match the snapshot 1`] = `
               type="checkbox"
             />
           </app-match-control>
-          <div>
+          <span>
               
-          </div>
+          </span>
         </div>
         <div
           class="ng-untouched ng-pristine ng-valid"
@@ -191,9 +191,9 @@ exports[`BoardComponent should match the snapshot 1`] = `
               type="checkbox"
             />
           </app-match-control>
-          <div>
+          <span>
               
-          </div>
+          </span>
         </div>
         <div
           class="ng-untouched ng-pristine ng-valid"
@@ -212,9 +212,9 @@ exports[`BoardComponent should match the snapshot 1`] = `
               type="checkbox"
             />
           </app-match-control>
-          <div>
+          <span>
               
-          </div>
+          </span>
         </div>
         <div
           class="ng-untouched ng-pristine ng-valid"
@@ -233,9 +233,9 @@ exports[`BoardComponent should match the snapshot 1`] = `
               type="checkbox"
             />
           </app-match-control>
-          <div>
+          <span>
               
-          </div>
+          </span>
         </div>
         <div
           class="ng-untouched ng-pristine ng-valid"
@@ -254,9 +254,9 @@ exports[`BoardComponent should match the snapshot 1`] = `
               type="checkbox"
             />
           </app-match-control>
-          <div>
+          <span>
               
-          </div>
+          </span>
         </div>
         <div
           class="ng-untouched ng-pristine ng-valid"
@@ -275,9 +275,9 @@ exports[`BoardComponent should match the snapshot 1`] = `
               type="checkbox"
             />
           </app-match-control>
-          <div>
+          <span>
               
-          </div>
+          </span>
         </div>
         <div
           class="ng-untouched ng-pristine ng-valid"
@@ -296,9 +296,9 @@ exports[`BoardComponent should match the snapshot 1`] = `
               type="checkbox"
             />
           </app-match-control>
-          <div>
+          <span>
               
-          </div>
+          </span>
         </div>
       </div>
       <div />

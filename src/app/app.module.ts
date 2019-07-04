@@ -6,21 +6,25 @@ import { BoardModule } from "./board/board.module";
 import { GameEngineModule } from "./shared/game-engine/game-engine.module";
 import { BoardBuilder } from "./shared/board/board.builder";
 
-const initialGameState = BoardBuilder.create().addRowWithColumns(
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false,
-  false
-);
+const initialGameState = {
+  board: BoardBuilder.create()
+    .addRowWithColumns(
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    )
+    .build()
+};
 
 @NgModule({
   declarations: [AppComponent],
