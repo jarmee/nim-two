@@ -66,7 +66,7 @@ export class GameEngineService implements OnDestroy {
               board: newBoardState
             })
           )
-          // TODO KI
+          // TODO AI
         )
         .subscribe()
     ];
