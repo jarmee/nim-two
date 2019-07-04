@@ -15,7 +15,7 @@ import { FormGroup } from "@angular/forms";
 import { Observable, Subscription, EMPTY } from "rxjs";
 
 const PLAYER_FORM_CONTROL_NAME = "player";
-const DEFAULT_PLAYER_NAME = "You";
+const DEFAULT_PLAYER_NAME = "😎";
 
 function areRowsDifferent(currentValue: Board, previousValue: Board): boolean {
   return Object.keys(currentValue).length != Object.keys(previousValue).length;
