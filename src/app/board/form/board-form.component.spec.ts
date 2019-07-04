@@ -8,6 +8,7 @@ import { SimpleChange, SimpleChanges } from "@angular/core";
 import { Board } from "src/app/shared/board/board.model";
 import { Board } from "src/app/shared/board/board.model";
 import { By } from "@angular/platform-browser";
+import { MatchControlComponent } from "./match-control/match-control.component";
 
 describe("BoardFormComponent", () => {
   const board: Board = boardFactory();
@@ -16,7 +17,7 @@ describe("BoardFormComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [BoardFormComponent],
+      declarations: [BoardFormComponent, MatchControlComponent],
       imports: [ReactiveFormsModule],
       providers: [BoardFormBuilderService]
     }).compileComponents();

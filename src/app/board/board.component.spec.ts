@@ -10,6 +10,7 @@ import { BoardFormComponent } from "./form/board-form.component";
 import { BoardFormBuilderService } from "./form/board-form-builder.service";
 import { ReactiveFormsModule } from "@angular/forms";
 import { boardFactory } from "../shared/board/testing/board.mock";
+import { MatchControlComponent } from "./form/match-control/match-control.component";
 
 describe("BoardComponent", () => {
   const initialGameState = gameStateFactory.build();
@@ -20,7 +21,7 @@ describe("BoardComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [BoardComponent, BoardFormComponent],
+      declarations: [BoardComponent, BoardFormComponent, MatchControlComponent],
       imports: [
         GameEngineModule.forRoot(initialGameState),
         ReactiveFormsModule

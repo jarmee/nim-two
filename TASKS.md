@@ -49,6 +49,7 @@ Implement a dynamic form. Each form control represents a stick.
 [] Create a match component
 [] Create a validator of the form
 [] Disable all checked checkboxes
+[] Remove all unused imports
 [] Save the player data within the state
 [] Add bootstrap
 [] Implement the oponent

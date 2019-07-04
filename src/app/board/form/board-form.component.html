@@ -4,13 +4,10 @@
       [formGroupName]="formGroupControlName"
       *ngFor="let formGroupControlName of formGroupControlNames"
     >
-      <input
+      <app-match-control
         *ngFor="let formControlName of formContolNamesOf(formGroupControlName)"
-        type="checkbox"
-        [name]="formControlName"
-        [attr.id]="formControlName"
         [formControlName]="formControlName"
-      />
+      ></app-match-control>
     </div>
     <div></div>
   </ng-container>

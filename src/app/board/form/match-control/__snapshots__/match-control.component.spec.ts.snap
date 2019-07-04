@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MatchControlComponent should match the snapshot 1`] = `
+<app-match-control
+  elementRef={[Function ElementRef]}
+  renderer={[Function DebugRenderer2]}
+>
+  <input
+    data-test-id="match-checkbox"
+    type="checkbox"
+  />
+</app-match-control>
+`;
