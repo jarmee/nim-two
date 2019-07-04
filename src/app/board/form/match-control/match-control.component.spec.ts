@@ -64,7 +64,7 @@ describe("MatchControlComponent", () => {
       component.writeValue(value);
 
       expect((renderer.setProperty as jest.Mock).mock.calls[0]).toEqual([
-        elementRef,
+        checkboxElementRef.nativeElement,
         "checked",
         value
       ]);

@@ -37,7 +37,11 @@ export class MatchControlComponent implements ControlValueAccessor {
   constructor(private renderer: Renderer2, private elementRef: ElementRef) {}
 
   writeValue(value: boolean): void {
-    this.renderer.setProperty(this.elementRef, "checked", value);
+    this.renderer.setProperty(
+      this.checkboxElementRef.nativeElement,
+      "checked",
+      value
+    );
     this.renderer.setProperty(
       this.checkboxElementRef.nativeElement,
       "disabled",

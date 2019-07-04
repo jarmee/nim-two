@@ -47,9 +47,11 @@ Implement a dynamic form. Each form control represents a stick.
 [x] Create a board form builder
 [x] Create a board builder
 [x] Create a match component
-[] Disable all checked checkboxes
-[] Create a validator of the form
-[] Remove all unused imports
-[] Save the player data within the state
-[] Add bootstrap
+[x] Disable all checked checkboxes
+[x] Save the player data within the state
+[] Create a validator of the board state
 [] Implement the oponent
+[] Remove all unused imports
+[] Add bootstrap
+[] Implement unsubscribe service
+[] Add default error handling
