@@ -2,6 +2,7 @@
 
 exports[`MatchControlComponent should match the snapshot 1`] = `
 <app-match-control
+  checkboxElementRef={[Function ElementRef]}
   elementRef={[Function ElementRef]}
   formControlName={[Function String]}
   renderer={[Function DebugRenderer2]}

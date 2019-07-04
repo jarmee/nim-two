@@ -5,7 +5,8 @@ import {
   ElementRef,
   forwardRef,
   Renderer2,
-  Input
+  Input,
+  ViewChild
 } from "@angular/core";
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from "@angular/forms";
 import { templateJitUrl } from "@angular/compiler";
@@ -26,6 +27,9 @@ export class MatchControlComponent implements ControlValueAccessor {
   @Input()
   formControlName: string;
 
+  @ViewChild("matchCheckbox", { static: true })
+  checkboxElementRef: ElementRef;
+
   onChangeCallback: (value: boolean) => void;
 
   onTouchedCallback: () => void;
@@ -34,6 +38,11 @@ export class MatchControlComponent implements ControlValueAccessor {
 
   writeValue(value: boolean): void {
     this.renderer.setProperty(this.elementRef, "checked", value);
+    this.renderer.setProperty(
+      this.checkboxElementRef.nativeElement,
+      "disabled",
+      value
+    );
   }
 
   registerOnChange(callback: (value: boolean) => void): void {

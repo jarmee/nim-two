@@ -10,6 +10,7 @@ describe("MatchControlComponent", () => {
   let fixture: ComponentFixture<MatchControlComponent>;
   let renderer: Renderer2;
   let elementRef: ElementRef;
+  let checkboxElementRef: ElementRef;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -25,6 +26,7 @@ describe("MatchControlComponent", () => {
       Renderer2
     >);
     elementRef = fixture.elementRef;
+    checkboxElementRef = fixture.componentInstance.checkboxElementRef;
     fixture.detectChanges();
   });
 
@@ -55,17 +57,23 @@ describe("MatchControlComponent", () => {
   });
 
   describe("writeValue", () => {
-    it("it should call the setElementProperty method of the Renderer", () => {
+    it("should set the ckecked property of the elementRef", () => {
       const value = faker.random.boolean();
       renderer.setProperty = jest.fn();
 
       component.writeValue(value);
 
-      expect(renderer.setProperty).toHaveBeenCalledWith(
+      expect((renderer.setProperty as jest.Mock).mock.calls[0]).toEqual([
         elementRef,
         "checked",
         value
-      );
+      ]);
+
+      expect((renderer.setProperty as jest.Mock).mock.calls[1]).toEqual([
+        checkboxElementRef.nativeElement,
+        "disabled",
+        value
+      ]);
 
       (renderer.setProperty as jest.Mock).mockClear();
     });
