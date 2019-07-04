@@ -55,3 +55,4 @@ Implement a dynamic form. Each form control represents a stick.
 [] Add bootstrap
 [] Implement unsubscribe service
 [] Add default error handling
+[] Write Readme
