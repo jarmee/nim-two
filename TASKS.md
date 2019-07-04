@@ -4,6 +4,7 @@
 
 [x] npm start should start the application
 [x] npm test should run all tests
+[x] Create a GitHub repo
 [] Two player game (1 human & 1 PC)
 [] Playground should include 13 sticks
 [] In one turn a player could pick 1, 2 or 3 sticks, but max the amount of sticks which are one the board
@@ -44,7 +45,8 @@ Implement a dynamic form. Each form control represents a stick.
 [x] Create a board model (map within a map)
 [x] Create a board form component
 [x] Create a board form builder
-[x] Create a board factory
+[x] Create a board builder
 [] Create a validator of the form
 [] Save the player data within the state
+[] Add bootstrap
 [] Implement the oponent
