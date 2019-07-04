@@ -3,10 +3,13 @@
 exports[`MatchControlComponent should match the snapshot 1`] = `
 <app-match-control
   elementRef={[Function ElementRef]}
+  formControlName={[Function String]}
   renderer={[Function DebugRenderer2]}
 >
   <input
     data-test-id="match-checkbox"
+    id="match-control"
+    name="match-control"
     type="checkbox"
   />
 </app-match-control>
