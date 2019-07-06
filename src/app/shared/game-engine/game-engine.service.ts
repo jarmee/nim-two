@@ -1,4 +1,4 @@
-import { Inject, Injectable, OnDestroy } from "@angular/core";
+import { Inject, Injectable, OnDestroy, Optional } from "@angular/core";
 import { BehaviorSubject, Observable, Subscription } from "rxjs";
 import { map, skip, tap, withLatestFrom } from "rxjs/operators";
 import {
@@ -8,7 +8,13 @@ import {
   Column,
   Columns
 } from "../board/board.model";
-import { GameState, GAME_STATE_STORE } from "./game-engine.model";
+import {
+  GameRule,
+  GameRules,
+  GameState,
+  GAME_RULES,
+  GAME_STATE_STORE
+} from "./game-engine.model";
 import { GameEngineStore } from "./game-engine.store";
 
 const calculateAmount = (board: Board) => {
@@ -55,6 +61,28 @@ export const diff = (
     );
 };
 
+export const checkRules = (rules: GameRules) => (
+  newBoard: Board,
+  actualBoard: Board,
+  boardDifferences: BoardDifferences
+) => {
+  if (!rules || !rules.length) return newBoard;
+  return rules.reduce(
+    (state: Board, rule: GameRule) =>
+      rule(newBoard, actualBoard, boardDifferences)(state),
+    {}
+  );
+};
+
+const checkRulesAndMap = (rules: GameRules) =>
+  map(
+    ([newBoardState, actualBoardState, boardDifferences]: [
+      Board,
+      Board,
+      BoardDifferences
+    ]) => checkRules(rules)(newBoardState, actualBoardState, boardDifferences)
+  );
+
 @Injectable()
 export class GameEngineService implements OnDestroy {
   private subscriptions: Subscription[] = [];
@@ -69,7 +97,10 @@ export class GameEngineService implements OnDestroy {
     map((state: GameState) => state.board)
   );
 
-  constructor(@Inject(GAME_STATE_STORE) private store: GameEngineStore) {
+  constructor(
+    @Inject(GAME_STATE_STORE) private store: GameEngineStore,
+    @Optional() @Inject(GAME_RULES) private rules: GameRules = []
+  ) {
     this.subscriptions = [
       ...this.subscriptions,
       this.gameLoop$
@@ -81,19 +112,12 @@ export class GameEngineService implements OnDestroy {
               .asObservable()
               .pipe(map((state: GameState) => state.board))
           ),
-          //TODO Validation
-          map(([newBoardState, actualBoardState]) => {
-            if (
-              calculateAmount(actualBoardState) -
-                calculateAmount(newBoardState) >
-              3
-            ) {
-              return {
-                ...actualBoardState
-              };
-            }
-            return newBoardState;
-          }),
+          map(([newBoardState, actualBoardState]: [Board, Board]) => [
+            newBoardState,
+            actualBoardState,
+            diff(newBoardState, actualBoardState)
+          ]),
+          checkRulesAndMap(this.rules),
           tap((newBoardState: Board) =>
             this.store.next({
               board: newBoardState

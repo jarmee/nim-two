@@ -1,9 +1,9 @@
 import { TestBed } from "@angular/core/testing";
 import * as faker from "faker";
-import { Board } from "../board/board.model";
+import { Board, BoardDifferences } from "../board/board.model";
 import { boardFactory } from "../board/testing/board.mock";
 import { GameState, GAME_STATE_STORE } from "./game-engine.model";
-import { diff, GameEngineService } from "./game-engine.service";
+import { checkRules, diff, GameEngineService } from "./game-engine.service";
 import { GameEngineStore } from "./game-engine.store";
 import { gameStateFactory } from "./testing/game-engine.mock";
 
@@ -136,6 +136,57 @@ describe("GameEngineService", () => {
       const actual = diff(newBoard, currentBoard);
 
       expect(actual).toEqual([{ newColumn, currentColumn, path: ["0", "0"] }]);
+    });
+  });
+
+  describe("checkRules", () => {
+    const newColumn = {
+      value: false,
+      player: faker.name.firstName()
+    };
+    const newBoard: Board = {
+      0: {
+        0: newColumn
+      }
+    };
+    const currentColumn = {
+      value: true,
+      player: faker.name.firstName()
+    };
+    const currentBoard: Board = {
+      0: {
+        0: currentColumn
+      }
+    };
+    const boardDifferences: BoardDifferences = [
+      {
+        newColumn,
+        currentColumn,
+        path: ["0", "0"]
+      }
+    ];
+
+    it("should return the provided newBoard if no rules are given", () => {
+      const actual = checkRules([])(newBoard, currentBoard, boardDifferences);
+
+      expect(actual).toEqual(newBoard);
+    });
+
+    it("should call the provided rule", () => {
+      const rule = jest.fn().mockReturnValue(state => newBoard);
+
+      const actual = checkRules([rule])(
+        newBoard,
+        currentBoard,
+        boardDifferences
+      );
+
+      expect(actual).toEqual(newBoard);
+      expect(rule).toHaveBeenCalledWith(
+        newBoard,
+        currentBoard,
+        boardDifferences
+      );
     });
   });
 });
