@@ -39,7 +39,7 @@ describe("BoardBuilder", () => {
       expect(Object.keys(actual)).toStrictEqual(["0", "1", "2", "3", "4"]);
     });
 
-    it("should a column per given boolean parameter", () => {
+    it("should add a column per given boolean parameter", () => {
       const actual = BoardBuilder.create()
         .addRowWithColumns(true, false, true, false)
         .build();
@@ -47,10 +47,10 @@ describe("BoardBuilder", () => {
 
       expect(Object.keys(row)).toStrictEqual(["0", "1", "2", "3"]);
       expect(Object.values(row)).toStrictEqual([
-        { value: true, player: null },
-        { value: false, player: null },
-        { value: true, player: null },
-        { value: false, player: null }
+        { value: true, player: null, errorMessage: null },
+        { value: false, player: null, errorMessage: null },
+        { value: true, player: null, errorMessage: null },
+        { value: false, player: null, errorMessage: null }
       ]);
     });
   });

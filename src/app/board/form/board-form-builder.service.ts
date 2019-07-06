@@ -6,10 +6,11 @@ const initalFormGroup = new FormGroup({});
 
 function createFormGroupForRow(columns: Columns): FormGroup {
   return Object.keys(columns).reduce((rowFormGroup: FormGroup, columnKey) => {
-    const { value, player } = columns[columnKey];
+    const { value, player, errorMessage } = columns[columnKey];
     const columnFormGroup = new FormGroup({
       value: new FormControl(value),
-      player: new FormControl(player)
+      player: new FormControl(player),
+      errorMessage: new FormControl(errorMessage)
     });
     rowFormGroup.addControl(columnKey, columnFormGroup);
     return rowFormGroup;

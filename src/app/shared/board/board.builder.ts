@@ -12,7 +12,8 @@ export class BoardBuilder {
           .map((value: boolean, index: number) => ({
             [index]: {
               value,
-              player: null
+              player: null,
+              errorMessage: null
             }
           }))
           .reduce((row: any, column: any) => ({ ...row, ...column }), {})
