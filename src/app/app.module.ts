@@ -2,35 +2,16 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { AppComponent } from "./app.component";
 import { BoardModule } from "./board/board.module";
-import { BoardBuilder } from "./shared/board/board.builder";
 import { GameEngineModule } from "./shared/game-engine/game-engine.module";
-
-const initialGameState = {
-  board: BoardBuilder.create()
-    .addRowWithColumns(
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
-    )
-    .build()
-};
+import { NIM_GAME_BOARD } from "./shared/rules/nim/nim.board";
+import { NIM_RULES as NIM_GAME_RULES } from "./shared/rules/nim/nim.rules";
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     BoardModule,
-    GameEngineModule.forRoot(initialGameState)
+    GameEngineModule.forRoot(NIM_GAME_BOARD, NIM_GAME_RULES)
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,6 +5,7 @@ import { BoardFormBuilderService } from "./board/form/board-form-builder.service
 import { GameState } from "./shared/game-engine/game-engine.model";
 import { GameEngineModule } from "./shared/game-engine/game-engine.module";
 import { gameStateFactory } from "./shared/game-engine/testing/game-engine.mock";
+import { NIM_RULES } from "./shared/rules/nim/nim.rules";
 
 describe("AppComponent", () => {
   const initialGameState: GameState = gameStateFactory.build();
@@ -14,7 +15,10 @@ describe("AppComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AppComponent],
-      imports: [BoardModule, GameEngineModule.forRoot(initialGameState)],
+      imports: [
+        BoardModule,
+        GameEngineModule.forRoot(initialGameState, NIM_RULES)
+      ],
       providers: [BoardFormBuilderService]
     }).compileComponents();
   }));
