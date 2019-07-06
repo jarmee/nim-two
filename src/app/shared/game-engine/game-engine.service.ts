@@ -1,7 +1,13 @@
 import { Inject, Injectable, OnDestroy } from "@angular/core";
 import { BehaviorSubject, Observable, Subscription } from "rxjs";
 import { map, skip, tap, withLatestFrom } from "rxjs/operators";
-import { Board, Columns } from "../board/board.model";
+import {
+  Board,
+  BoardDifference,
+  BoardDifferences,
+  Column,
+  Columns
+} from "../board/board.model";
 import { GameState, GAME_STATE_STORE } from "./game-engine.model";
 import { GameEngineStore } from "./game-engine.store";
 
@@ -21,6 +27,33 @@ const calculateAmount = (board: Board) => {
 };
 
 const calculateAmountAndMap = map(calculateAmount);
+
+export const diff = (
+  newBoard: Board,
+  currentBoard: Board
+): BoardDifferences => {
+  if (!newBoard || !currentBoard) return [];
+
+  return Object.keys(newBoard)
+    .map(rowKey =>
+      Object.keys(newBoard[rowKey]).map((columnKey: string) => ({
+        newColumn: newBoard[rowKey][columnKey],
+        currentColumn: currentBoard[rowKey][columnKey],
+        path: [rowKey, columnKey]
+      }))
+    )
+    .reduce(
+      (flattenArray: [Column, Column][], columns: any) => [
+        ...flattenArray,
+        ...columns
+      ],
+      []
+    )
+    .filter(
+      (difference: BoardDifference) =>
+        difference.newColumn.value !== difference.currentColumn.value
+    );
+};
 
 @Injectable()
 export class GameEngineService implements OnDestroy {
