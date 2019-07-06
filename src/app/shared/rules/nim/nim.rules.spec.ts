@@ -1,9 +1,9 @@
 import { BoardBuilder } from "../../board/board.builder";
 import { Board, BoardDifferences } from "../../board/board.model";
-import { isPlayValid } from "./nim.rules";
+import { isMaximumOfMatchesExceeded } from "./nim.rules";
 
 describe("NimRules", () => {
-  describe("isPlayValid", () => {
+  describe("isMaximumOfMatchesExceeded", () => {
     it("should return the new board if the board differences is one", () => {
       const newBoard: Board = BoardBuilder.create()
         .addRowWithColumns(true, false, false, false)
@@ -18,7 +18,11 @@ describe("NimRules", () => {
           path: ["0", "0"]
         }
       ];
-      const actual = isPlayValid(newBoard, currentBoard, differences)({});
+      const actual = isMaximumOfMatchesExceeded(
+        newBoard,
+        currentBoard,
+        differences
+      )({});
 
       expect(actual).toEqual(newBoard);
     });
@@ -42,7 +46,11 @@ describe("NimRules", () => {
           path: ["0", "1"]
         }
       ];
-      const actual = isPlayValid(newBoard, currentBoard, differences)({});
+      const actual = isMaximumOfMatchesExceeded(
+        newBoard,
+        currentBoard,
+        differences
+      )({});
 
       expect(actual).toEqual(newBoard);
     });
@@ -71,7 +79,11 @@ describe("NimRules", () => {
           path: ["0", "2"]
         }
       ];
-      const actual = isPlayValid(newBoard, currentBoard, differences)({});
+      const actual = isMaximumOfMatchesExceeded(
+        newBoard,
+        currentBoard,
+        differences
+      )({});
 
       expect(actual).toEqual(newBoard);
     });
@@ -105,7 +117,11 @@ describe("NimRules", () => {
           path: ["0", "3"]
         }
       ];
-      const actual = isPlayValid(newBoard, currentBoard, differences)({});
+      const actual = isMaximumOfMatchesExceeded(
+        newBoard,
+        currentBoard,
+        differences
+      )({});
 
       expect(actual).toEqual(currentBoard);
     });

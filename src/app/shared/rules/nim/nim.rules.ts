@@ -3,15 +3,15 @@ import { GameRule, GameRules } from "../../game-engine/game-engine.model";
 
 const MAX_MATCHES = 3;
 
-export const isPlayValid: GameRule = (
+export const isMaximumOfMatchesExceeded: GameRule = (
   newBoard: Board,
   currentBoard: Board,
   boardDifferences: BoardDifferences
 ) => (board: Board) => {
   if (boardDifferences.length > MAX_MATCHES) {
-    return {...currentBoard};
+    return { ...currentBoard };
   }
   return newBoard;
 };
 
-export const NIM_RULES: GameRules = [isPlayValid];
+export const NIM_RULES: GameRules = [isMaximumOfMatchesExceeded];
