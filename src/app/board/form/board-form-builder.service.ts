@@ -9,9 +9,11 @@ function createFormGroupForRow(columns: Columns): FormGroup {
     const { value, player, errorMessage } = columns[columnKey];
     const columnFormGroup = new FormGroup({
       value: new FormControl(value),
-      player: new FormControl(player),
-      errorMessage: new FormControl(errorMessage)
+      player: new FormControl(player)
     });
+    if (errorMessage) {
+      columnFormGroup.setErrors(errorMessage, { emitEvent: false });
+    }
     rowFormGroup.addControl(columnKey, columnFormGroup);
     return rowFormGroup;
   }, new FormGroup({}));

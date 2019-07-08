@@ -1,18 +1,17 @@
 import {
+  ChangeDetectionStrategy,
   Component,
-  OnInit,
+  EventEmitter,
   Input,
   OnChanges,
-  SimpleChanges,
-  ChangeDetectionStrategy,
-  Output,
   OnDestroy,
-  EventEmitter
+  Output,
+  SimpleChanges
 } from "@angular/core";
-import { Board, Columns, Column } from "../../shared/board/board.model";
-import { BoardFormBuilderService } from "./board-form-builder.service";
 import { FormGroup } from "@angular/forms";
-import { Observable, Subscription, EMPTY } from "rxjs";
+import { Subscription } from "rxjs";
+import { Board, Column, Columns } from "../../shared/board/board.model";
+import { BoardFormBuilderService } from "./board-form-builder.service";
 
 const PLAYER_FORM_CONTROL_NAME = "player";
 const DEFAULT_PLAYER_NAME = "😎";

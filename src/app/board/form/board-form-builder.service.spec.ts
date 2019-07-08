@@ -1,6 +1,7 @@
 import { TestBed } from "@angular/core/testing";
 import { FormGroup, ReactiveFormsModule } from "@angular/forms";
 import * as faker from "faker";
+import { Column } from "src/app/shared/board/board.model";
 import { boardFactory } from "src/app/shared/board/testing/board.mock";
 import { BoardFormBuilderService } from "./board-form-builder.service";
 
@@ -61,9 +62,15 @@ describe("BoardFormBuilderService", () => {
     });
 
     it("should return a form group which value is equal ", () => {
+      const boardWithoutErrorMessages = { ...board };
+      Object.keys(boardWithoutErrorMessages).forEach((rowKey: string) =>
+        Object.values(boardWithoutErrorMessages[rowKey]).forEach(
+          (column: Column) => delete column.errorMessage
+        )
+      );
       const actual = service.of(board);
 
-      expect(actual.value).toEqual(board);
+      expect(actual.value).toEqual(boardWithoutErrorMessages);
     });
   });
 });
