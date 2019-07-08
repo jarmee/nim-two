@@ -52,7 +52,7 @@ Implement a dynamic form. Each form control represents a stick.
 [x] Create a validator of the board state
 [x] Remove all unused imports
 [x] Add column errorMessages to mark them as invalid
-[] Add board status
+[x] Add game status
 [] Add improved error messages
 [] Fix failing test in board-form component
 [] Change all boards in test to the board builder

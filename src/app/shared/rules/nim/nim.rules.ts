@@ -1,31 +1,52 @@
+import { BoardDifference, BoardDifferences } from "../../board/board.model";
 import {
-  Board,
-  BoardDifference,
-  BoardDifferences
-} from "../../board/board.model";
-import { GameRule, GameRules } from "../../game-engine/game-engine.model";
+  GameRule,
+  GameRules,
+  GameState,
+  GameStatus
+} from "../../game-engine/game-engine.model";
+import { calculateAmount } from "../../game-engine/game-engine.service";
 
 const MAX_MATCHES = 3;
+const MAXIMUM_OF_MATCHES_EXCEEDED_ERROR = "Maximum Matches Exceeded";
 
 export const isMaximumOfMatchesExceeded: GameRule = (
-  newBoard: Board,
-  currentBoard: Board,
+  newState: GameState,
+  actualState: GameState,
   boardDifferences: BoardDifferences
-) => (board: Board) => {
+) => (state: GameState) => {
+  if (state.status === GameStatus.Errornous) return state;
   if (boardDifferences.length > MAX_MATCHES) {
-    const errornousBoard = { ...currentBoard };
+    const errornousState = {
+      ...actualState,
+      status: GameStatus.Errornous,
+      board: {
+        ...actualState.board
+      }
+    };
     boardDifferences
       .map((difference: BoardDifference) => difference.path)
       .forEach((path: string[]) => {
         const column = path.reduce(
           (currentProperty, path) => currentProperty[path],
-          errornousBoard
+          errornousState.board
         );
-        column.errorMessage = "Error";
+        column.errorMessage = MAXIMUM_OF_MATCHES_EXCEEDED_ERROR;
       });
-    return errornousBoard;
+    return errornousState;
   }
-  return newBoard;
+  return state;
 };
 
-export const NIM_RULES: GameRules = [isMaximumOfMatchesExceeded];
+export const isGameOver: GameRule = (
+  newState: GameState,
+  actualState: GameState,
+  boardDifferences: BoardDifferences
+) => (state: GameState) => {
+  if (state.status === GameStatus.Errornous) return state;
+  if (calculateAmount(newState.board) === 0)
+    return { ...state, status: GameStatus.GameOver };
+  return state;
+};
+
+export const NIM_RULES: GameRules = [isMaximumOfMatchesExceeded, isGameOver];

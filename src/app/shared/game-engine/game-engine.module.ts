@@ -2,6 +2,7 @@ import { ModuleWithProviders, NgModule } from "@angular/core";
 import {
   GameRules,
   GameState,
+  GAME_AI_RULES,
   GAME_RULES,
   GAME_STATE_STORE
 } from "./game-engine.model";
@@ -12,7 +13,8 @@ import { GameEngineStore } from "./game-engine.store";
 export class GameEngineModule {
   static forRoot(
     initialState: GameState,
-    rules: GameRules
+    rules: GameRules,
+    aiRules: GameRules
   ): ModuleWithProviders {
     return {
       ngModule: GameEngineModule,
@@ -24,6 +26,10 @@ export class GameEngineModule {
         {
           provide: GAME_RULES,
           useValue: rules
+        },
+        {
+          provide: GAME_AI_RULES,
+          useValue: aiRules
         },
         GameEngineService
       ]

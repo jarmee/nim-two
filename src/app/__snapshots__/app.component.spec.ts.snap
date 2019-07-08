@@ -9,6 +9,9 @@ exports[`AppComponent should match the snapshot 1`] = `
     <span>
       
     </span>
+    <span>
+      
+    </span>
     <app-board-form
       data-test-id="board"
     >

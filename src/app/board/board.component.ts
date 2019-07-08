@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { Observable } from "rxjs";
 import { Board } from "../shared/board/board.model";
+import { GameStatus } from "../shared/game-engine/game-engine.model";
 import { GameEngineService } from "../shared/game-engine/game-engine.service";
 
 @Component({
@@ -12,6 +13,8 @@ export class BoardComponent {
   amount$: Observable<number> = this.gameEngine.amount$;
 
   board$: Observable<Board> = this.gameEngine.board$;
+
+  status$: Observable<GameStatus> = this.gameEngine.status$;
 
   constructor(private gameEngine: GameEngineService) {}
 

@@ -1,11 +1,25 @@
 import { Inject, Injectable, OnDestroy, Optional } from "@angular/core";
 import { BehaviorSubject, Observable, Subscription } from "rxjs";
 import { map, skip, tap, withLatestFrom } from "rxjs/operators";
-import { Board, BoardDifference, BoardDifferences, Column, Columns } from "../board/board.model";
-import { GameRule, GameRules, GameState, GAME_RULES, GAME_STATE_STORE } from "./game-engine.model";
+import {
+  Board,
+  BoardDifference,
+  BoardDifferences,
+  Column,
+  Columns
+} from "../board/board.model";
+import {
+  GameRule,
+  GameRules,
+  GameState,
+  GameStatus,
+  GAME_AI_RULES,
+  GAME_RULES,
+  GAME_STATE_STORE
+} from "./game-engine.model";
 import { GameEngineStore } from "./game-engine.store";
 
-const calculateAmount = (board: Board) => {
+export const calculateAmount = (board: Board) => {
   return Object.keys(board)
     .map((rowKey: string) => board[rowKey])
     .map(
@@ -50,31 +64,34 @@ export const diff = (
 };
 
 export const checkRules = (rules: GameRules) => (
-  newBoard: Board,
-  actualBoard: Board,
+  newState: GameState,
+  actualState: GameState,
   boardDifferences: BoardDifferences
 ) => {
-  if (!rules || !rules.length) return newBoard;
+  if (!rules || !rules.length) return newState;
   return rules.reduce(
-    (state: Board, rule: GameRule) =>
-      rule(newBoard, actualBoard, boardDifferences)(state),
-    {}
+    (state: GameState, rule: GameRule) =>
+      rule(newState, actualState, boardDifferences)(state),
+    newState
   );
 };
 
 const checkRulesAndMap = (rules: GameRules) =>
   map(
-    ([newBoardState, actualBoardState, boardDifferences]: [
-      Board,
-      Board,
+    ([newState, actualState, boardDifferences]: [
+      GameState,
+      GameState,
       BoardDifferences
-    ]) => checkRules(rules)(newBoardState, actualBoardState, boardDifferences)
+    ]) => checkRules(rules)(newState, actualState, boardDifferences)
   );
 
 @Injectable()
 export class GameEngineService implements OnDestroy {
   private subscriptions: Subscription[] = [];
-  private gameLoop$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+
+  private gameLoop$: BehaviorSubject<Partial<GameState>> = new BehaviorSubject<
+    Partial<GameState>
+  >(null);
 
   amount$: Observable<number> = this.store.pipe(
     map((state: GameState) => state.board),
@@ -85,9 +102,14 @@ export class GameEngineService implements OnDestroy {
     map((state: GameState) => state.board)
   );
 
+  status$: Observable<GameStatus> = this.store.pipe(
+    map((state: GameState) => state.status)
+  );
+
   constructor(
     @Inject(GAME_STATE_STORE) private store: GameEngineStore,
-    @Optional() @Inject(GAME_RULES) private rules: GameRules = []
+    @Optional() @Inject(GAME_RULES) private rules: GameRules = [],
+    @Optional() @Inject(GAME_AI_RULES) private aiRules: GameRules = []
   ) {
     this.subscriptions = [
       ...this.subscriptions,
@@ -95,30 +117,24 @@ export class GameEngineService implements OnDestroy {
         .asObservable()
         .pipe(
           skip(1),
-          withLatestFrom(
-            this.store
-              .asObservable()
-              .pipe(map((state: GameState) => state.board))
-          ),
-          map(([newBoardState, actualBoardState]: [Board, Board]) => [
-            newBoardState,
-            actualBoardState,
-            diff(newBoardState, actualBoardState)
+          withLatestFrom(this.store),
+          map(([newGameState, actualGameState]: [GameState, GameState]) => [
+            newGameState,
+            actualGameState,
+            diff(newGameState.board, actualGameState.board)
           ]),
           checkRulesAndMap(this.rules),
-          tap((newBoardState: Board) =>
-            this.store.next({
-              board: newBoardState
-            })
-          )
-          // TODO AI
+          tap((newState: GameState) => this.store.next(newState))
         )
         .subscribe()
     ];
   }
 
   executePlay(newBoardState: Board) {
-    this.gameLoop$.next(newBoardState);
+    this.gameLoop$.next({
+      status: GameStatus.InProgress,
+      board: newBoardState
+    });
   }
 
   ngOnDestroy() {
