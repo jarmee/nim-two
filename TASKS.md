@@ -54,6 +54,7 @@ Implement a dynamic form. Each form control represents a stick.
 [x] Add column errorMessages to mark them as invalid
 [] Add board status
 [] Add improved error messages
+[] Fix failing test in board-form component
 [] Change all boards in test to the board builder
 [] Implement the oponent
 [] Add bootstrap
