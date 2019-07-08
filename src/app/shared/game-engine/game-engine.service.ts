@@ -1,20 +1,8 @@
 import { Inject, Injectable, OnDestroy, Optional } from "@angular/core";
 import { BehaviorSubject, Observable, Subscription } from "rxjs";
 import { map, skip, tap, withLatestFrom } from "rxjs/operators";
-import {
-  Board,
-  BoardDifference,
-  BoardDifferences,
-  Column,
-  Columns
-} from "../board/board.model";
-import {
-  GameRule,
-  GameRules,
-  GameState,
-  GAME_RULES,
-  GAME_STATE_STORE
-} from "./game-engine.model";
+import { Board, BoardDifference, BoardDifferences, Column, Columns } from "../board/board.model";
+import { GameRule, GameRules, GameState, GAME_RULES, GAME_STATE_STORE } from "./game-engine.model";
 import { GameEngineStore } from "./game-engine.store";
 
 const calculateAmount = (board: Board) => {
