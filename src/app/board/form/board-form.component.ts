@@ -15,6 +15,7 @@ import { BoardFormBuilderService } from "./board-form-builder.service";
 
 const PLAYER_FORM_CONTROL_NAME = "player";
 const DEFAULT_PLAYER_NAME = "😎";
+const DEFAULT_ERROR_CODE = "errorMessage";
 
 function areRowsDifferent(currentValue: Board, previousValue: Board): boolean {
   return Object.keys(currentValue).length != Object.keys(previousValue).length;
@@ -72,6 +73,30 @@ export function andSetPlayerIfCheckedTo(playerName: string) {
       .patchValue(!!column.value ? playerName : null, { emitEvent: false });
 }
 
+export function patchValueOf<T>(
+  formGroup: FormGroup,
+  value: T,
+  afterPatchValue: (formGroup: FormGroup, value: T) => void
+): void {
+  formGroup.patchValue(value, { emitEvent: false });
+  afterPatchValue(formGroup, value);
+}
+
+export function andSetErrors() {
+  return (formGroup: FormGroup, value: Board) => {
+    Object.keys(value).forEach((rowKey: string) => {
+      const rowFormGroup = formGroup.get(rowKey) as FormGroup;
+      Object.keys(value[rowKey]).forEach((columnKey: string) => {
+        const columnFormGroup = rowFormGroup.get(columnKey);
+        const { errorMessage }: Column = value[rowKey][columnKey];
+        if (errorMessage) {
+          columnFormGroup.setErrors({ errorMessage }, { emitEvent: false });
+        }
+      });
+    });
+  };
+}
+
 @Component({
   selector: "app-board-form",
   templateUrl: "./board-form.component.html",
@@ -105,10 +130,37 @@ export class BoardFormComponent implements OnChanges, OnDestroy {
     return Object.keys(rowFormGroup.controls);
   }
 
-  playerName(formGroupName: string, columnFormGroupName: string) {
+  columnFormGroup(
+    formGroupName: string,
+    columnFormGroupName: string
+  ): FormGroup {
     const rowFormGroup = this.formGroup.get(formGroupName);
-    const columnFormGroup = rowFormGroup.get(columnFormGroupName);
-    return (columnFormGroup.value as Column).player || "";
+    return rowFormGroup.get(columnFormGroupName) as FormGroup;
+  }
+
+  playerName(formGroupName: string, columnFormGroupName: string): string {
+    return (
+      (this.columnFormGroup(formGroupName, columnFormGroupName).value as Column)
+        .player || ""
+    );
+  }
+
+  isColumnErrornous(
+    formGroupName: string,
+    columnFormGroupName: string
+  ): boolean {
+    return this.columnFormGroup(formGroupName, columnFormGroupName).hasError(
+      DEFAULT_ERROR_CODE
+    );
+  }
+
+  columnErrorMessage(
+    formGroupName: string,
+    columnFormGroupName: string
+  ): string {
+    return this.columnFormGroup(formGroupName, columnFormGroupName).getError(
+      DEFAULT_ERROR_CODE
+    );
   }
 
   onExecutePlay() {
@@ -126,9 +178,7 @@ export class BoardFormComponent implements OnChanges, OnDestroy {
           andSetPlayerIfCheckedTo(DEFAULT_PLAYER_NAME)
         );
       }
-      this.formGroup.patchValue(currentValue || {}, {
-        emitEvent: false
-      });
+      patchValueOf<Board>(this.formGroup, currentValue, andSetErrors());
     }
   }
 

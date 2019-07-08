@@ -1,20 +1,14 @@
+import { ChangeDetectionStrategy, SimpleChange, SimpleChanges } from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-
-import {
-  BoardFormComponent,
-  hasChanged,
-  andSetPlayerIfCheckedTo,
-  watchColumnValueChangesOf
-} from "./board-form.component";
-import { BoardFormBuilderService } from "./board-form-builder.service";
-import { ReactiveFormsModule, FormGroup, FormControl } from "@angular/forms";
-import { boardFactory } from "../../shared/board/testing/board.mock";
-import { SimpleChange, SimpleChanges } from "@angular/core";
-import { Board, Column } from "../../shared/board/board.model";
+import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
-import { MatchControlComponent } from "./match-control/match-control.component";
-import { BoardBuilder } from "../../shared/board/board.builder";
 import * as faker from "faker";
+import { BoardBuilder } from "../../shared/board/board.builder";
+import { Board, Column } from "../../shared/board/board.model";
+import { boardFactory } from "../../shared/board/testing/board.mock";
+import { BoardFormBuilderService } from "./board-form-builder.service";
+import { andSetErrors, andSetPlayerIfCheckedTo, BoardFormComponent, hasChanged, patchValueOf, watchColumnValueChangesOf } from "./board-form.component";
+import { MatchControlComponent } from "./match-control/match-control.component";
 
 describe("BoardFormComponent", () => {
   const board: Board = boardFactory();
@@ -27,6 +21,11 @@ describe("BoardFormComponent", () => {
       imports: [ReactiveFormsModule],
       providers: [BoardFormBuilderService]
     }).compileComponents();
+    TestBed.overrideComponent(BoardFormComponent, {
+      set: {
+        changeDetection: ChangeDetectionStrategy.Default
+      }
+    });
   }));
 
   beforeEach(() => {
@@ -167,6 +166,154 @@ describe("BoardFormComponent", () => {
     });
   });
 
+  describe("patchValueOf", () => {
+    it("should call the patchValue method of the formGroup", () => {
+      const fakeCallback = jest.fn();
+      const value = {};
+      const formGroup = new FormGroup({});
+      formGroup.patchValue = jest.fn();
+
+      patchValueOf<any>(formGroup, value, fakeCallback);
+
+      expect(formGroup.patchValue).toHaveBeenCalledWith(value, {
+        emitEvent: false
+      });
+    });
+
+    it("should call the given callback", () => {
+      const fakeCallback = jest.fn();
+      const value = {};
+      const formGroup = new FormGroup({});
+      formGroup.patchValue = jest.fn();
+
+      patchValueOf<any>(formGroup, value, fakeCallback);
+
+      expect(fakeCallback).toHaveBeenCalledWith(formGroup, value);
+    });
+  });
+
+  describe("andSetErrors", () => {
+    it("should set the error", () => {
+      const errorMessage = faker.random.words();
+      const boardWithErrors: Board = {
+        0: {
+          0: {
+            value: false,
+            player: faker.name.firstName(),
+            errorMessage
+          }
+        }
+      };
+      const formGroup = new FormGroup({
+        0: new FormGroup({
+          0: new FormGroup({
+            value: new FormControl(false),
+            player: new FormControl(null)
+          })
+        })
+      });
+      andSetErrors()(formGroup, boardWithErrors);
+
+      expect(formGroup.hasError("errorMessage", ["0", "0"]));
+      expect(formGroup.getError("errorMessage", ["0", "0"])).toEqual(
+        errorMessage
+      );
+    });
+  });
+
+  describe("columnFormGroup", () => {
+    it("should return the form group of the column", () => {
+      const columnFormGroup: FormGroup = new FormGroup({
+        value: new FormControl(false),
+        player: new FormControl(null)
+      });
+      const formGroup: FormGroup = new FormGroup({
+        0: new FormGroup({
+          0: columnFormGroup
+        })
+      });
+      component.formGroup = formGroup;
+
+      const actualFormGroup = component.columnFormGroup("0", "0");
+
+      expect(actualFormGroup).toBe(columnFormGroup);
+    });
+  });
+
+  describe("isColumnErrornous", () => {
+    it("should return true if the column form group is errornous", () => {
+      const errorMessage = faker.random.words();
+      const columnFormGroup: FormGroup = new FormGroup({
+        value: new FormControl(false),
+        player: new FormControl(null)
+      });
+      columnFormGroup.setErrors({
+        errorMessage
+      });
+      const formGroup: FormGroup = new FormGroup({
+        0: new FormGroup({
+          0: columnFormGroup
+        })
+      });
+      component.formGroup = formGroup;
+
+      expect(component.isColumnErrornous("0", "0")).toBe(true);
+    });
+
+    it("should return false if the column form group is valid", () => {
+      const columnFormGroup: FormGroup = new FormGroup({
+        value: new FormControl(false),
+        player: new FormControl(null)
+      });
+      const formGroup: FormGroup = new FormGroup({
+        0: new FormGroup({
+          0: columnFormGroup
+        })
+      });
+      component.formGroup = formGroup;
+
+      expect(component.isColumnErrornous("0", "0")).toBe(false);
+    });
+
+    xit("should display the error message", async(() => {
+      const errorMessage = faker.random.words();
+      component.board = BoardBuilder.create()
+        .addRowWithColumns(false, false)
+        .addRowWithColumns(false, false)
+        .build();
+
+      fixture.detectChanges();
+
+      const errorElement = fixture.debugElement.query(
+        By.css("[data-test-id='column-error']")
+      );
+
+      expect(errorElement).toBeTruthy();
+      expect(errorElement.nativeElement.innerText).toBe(errorMessage);
+    }));
+  });
+
+  describe("columnErrorMessage", () => {
+    it("should return an error message if the form group is errornous", () => {
+      const errorMessage = faker.random.words();
+      const columnFormGroup: FormGroup = new FormGroup({
+        value: new FormControl(false),
+        player: new FormControl(null)
+      });
+      columnFormGroup.setErrors({
+        errorMessage
+      });
+      const formGroup: FormGroup = new FormGroup({
+        0: new FormGroup({
+          0: columnFormGroup
+        })
+      });
+      component.formGroup = formGroup;
+
+      expect(component.columnErrorMessage("0", "0")).toBe(errorMessage);
+    });
+  });
+
   describe("onExecutePlay", () => {
     it("should call the emit method of the executePlay event handler", () => {
       component.executePlay.emit = jest.fn();
@@ -196,7 +343,7 @@ describe("BoardFormComponent", () => {
   });
 
   describe("watchColumnValueChangesOf", () => {
-    it("", done => {
+    it("should call the callback on valueChange", done => {
       const formGroup = new FormGroup({
         0: new FormGroup({
           0: new FormGroup({

@@ -47,6 +47,7 @@ exports[`BoardComponent should match the snapshot 1`] = `
           <span>
               
           </span>
+          
         </div>
         <div
           class="ng-untouched ng-pristine ng-valid"
@@ -68,6 +69,7 @@ exports[`BoardComponent should match the snapshot 1`] = `
           <span>
               
           </span>
+          
         </div>
         <div
           class="ng-untouched ng-pristine ng-valid"
@@ -89,6 +91,7 @@ exports[`BoardComponent should match the snapshot 1`] = `
           <span>
               
           </span>
+          
         </div>
         <div
           class="ng-untouched ng-pristine ng-valid"
@@ -110,6 +113,7 @@ exports[`BoardComponent should match the snapshot 1`] = `
           <span>
               
           </span>
+          
         </div>
         <div
           class="ng-untouched ng-pristine ng-valid"
@@ -131,6 +135,7 @@ exports[`BoardComponent should match the snapshot 1`] = `
           <span>
               
           </span>
+          
         </div>
         <div
           class="ng-untouched ng-pristine ng-valid"
@@ -152,6 +157,7 @@ exports[`BoardComponent should match the snapshot 1`] = `
           <span>
               
           </span>
+          
         </div>
         <div
           class="ng-untouched ng-pristine ng-valid"
@@ -173,6 +179,7 @@ exports[`BoardComponent should match the snapshot 1`] = `
           <span>
               
           </span>
+          
         </div>
         <div
           class="ng-untouched ng-pristine ng-valid"
@@ -194,6 +201,7 @@ exports[`BoardComponent should match the snapshot 1`] = `
           <span>
               
           </span>
+          
         </div>
         <div
           class="ng-untouched ng-pristine ng-valid"
@@ -215,6 +223,7 @@ exports[`BoardComponent should match the snapshot 1`] = `
           <span>
               
           </span>
+          
         </div>
         <div
           class="ng-untouched ng-pristine ng-valid"
@@ -236,6 +245,7 @@ exports[`BoardComponent should match the snapshot 1`] = `
           <span>
               
           </span>
+          
         </div>
         <div
           class="ng-untouched ng-pristine ng-valid"
@@ -257,6 +267,7 @@ exports[`BoardComponent should match the snapshot 1`] = `
           <span>
               
           </span>
+          
         </div>
         <div
           class="ng-untouched ng-pristine ng-valid"
@@ -278,6 +289,7 @@ exports[`BoardComponent should match the snapshot 1`] = `
           <span>
               
           </span>
+          
         </div>
         <div
           class="ng-untouched ng-pristine ng-valid"
@@ -299,6 +311,7 @@ exports[`BoardComponent should match the snapshot 1`] = `
           <span>
               
           </span>
+          
         </div>
       </div>
       <div />
