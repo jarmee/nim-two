@@ -51,8 +51,9 @@ Implement a dynamic form. Each form control represents a stick.
 [x] Save the player data within the state
 [x] Create a validator of the board state
 [x] Remove all unused imports
+[x] Add column errorMessages to mark them as invalid
 [] Add board status
-[] Add column errorMessages to mark them as invalid
+[] Add improved error messages
 [] Change all boards in test to the board builder
 [] Implement the oponent
 [] Add bootstrap
