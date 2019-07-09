@@ -1,5 +1,6 @@
 import { ModuleWithProviders, NgModule } from "@angular/core";
 import {
+  AiRules,
   GameRules,
   GameState,
   GAME_AI_RULES,
@@ -14,7 +15,7 @@ export class GameEngineModule {
   static forRoot(
     initialState: GameState,
     rules: GameRules,
-    aiRules: GameRules
+    aiRules: AiRules
   ): ModuleWithProviders {
     return {
       ngModule: GameEngineModule,

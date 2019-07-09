@@ -4,9 +4,11 @@ import { GameEngineStore } from "./game-engine.store";
 
 export enum GameStatus {
   Fresh = "Fresh",
-  InProgress = "In Progress",
   Errornous = "Errornous",
-  GameOver = "Game Over"
+  GameOverPlayerOne = "Game Over Player One",
+  GameOverPlayerTwo = "Game Over Player Two",
+  HumanPlay = "Human Play",
+  AiPlay = "Ai Play"
 }
 
 export interface GameState {
@@ -18,9 +20,15 @@ export type GameRule = (
   newBoard: GameState,
   currentBoard: GameState,
   differences: BoardDifferences
-) => (board: Partial<GameState>) => GameState;
+) => (calculatedGameState: Partial<GameState>) => GameState;
 
 export type GameRules = GameRule[];
+
+export type AiRule = (
+  state: GameState
+) => (calculatedGameState: Partial<GameState>) => GameState;
+
+export type AiRules = AiRule[];
 
 export const GAME_STATE_STORE: InjectionToken<GameState> = new InjectionToken<
   GameEngineStore
@@ -30,6 +38,6 @@ export const GAME_RULES: InjectionToken<GameRules> = new InjectionToken<
   GameRules
 >("GAME_RULES");
 
-export const GAME_AI_RULES: InjectionToken<GameRules> = new InjectionToken<
-  GameRules
+export const GAME_AI_RULES: InjectionToken<AiRules> = new InjectionToken<
+  AiRules
 >("GAME_AI_RULES");

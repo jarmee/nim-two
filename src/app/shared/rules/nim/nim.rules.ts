@@ -1,10 +1,5 @@
 import { BoardDifference, BoardDifferences } from "../../board/board.model";
-import {
-  GameRule,
-  GameRules,
-  GameState,
-  GameStatus
-} from "../../game-engine/game-engine.model";
+import { GameRule, GameRules, GameState, GameStatus } from "../../game-engine/game-engine.model";
 import { calculateAmount } from "../../game-engine/game-engine.service";
 
 const MAX_MATCHES = 3;
@@ -44,8 +39,13 @@ export const isGameOver: GameRule = (
   boardDifferences: BoardDifferences
 ) => (state: GameState) => {
   if (state.status === GameStatus.Errornous) return state;
-  if (calculateAmount(newState.board) === 0)
-    return { ...state, status: GameStatus.GameOver };
+  if (calculateAmount(newState.board) === 0) {
+    const player = boardDifferences[0].newColumn.player;
+    const status =
+      player === "🤖" ? GameStatus.GameOverPlayerTwo : GameStatus.GameOverPlayerOne;
+    return { ...state, status };
+  }
+
   return state;
 };
 

@@ -55,6 +55,7 @@ Implement a dynamic form. Each form control represents a stick.
 [x] Add game status
 [x] Implement unsubscribe service
 [] Implement the oponent
+[] Get rid of the valueChanges handler
 [] Add missing test for gameLoop
 [] Add improved error messages
 [] Fix failing test in board-form component

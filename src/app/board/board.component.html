@@ -1,8 +1,8 @@
 <h1>Nim 2</h1>
-<span>{{ amount$ | async }}</span>
 <span>{{ status$ | async }}</span>
 <app-board-form
   data-test-id="board"
   [board]="board$ | async"
   (executePlay)="onExecutePlay($event)"
+  (reset)="onReset()"
 ></app-board-form>

@@ -4,7 +4,11 @@ import { BoardBuilder } from "../board/board.builder";
 import { Board, BoardDifferences } from "../board/board.model";
 import { boardFactory } from "../board/testing/board.mock";
 import { GameState, GameStatus, GAME_STATE_STORE } from "./game-engine.model";
-import { checkRules, diff, GameEngineService } from "./game-engine.service";
+import {
+  applyRules,
+  diff,
+  GameEngineService
+} from "./game-engine.service";
 import { GameEngineStore } from "./game-engine.store";
 import { gameStateFactory } from "./testing/game-engine.mock";
 
@@ -139,7 +143,7 @@ describe("GameEngineService", () => {
     });
   });
 
-  describe("checkRules", () => {
+  describe("applyRules", () => {
     const newState: GameState = gameStateFactory
       .extend({
         board: BoardBuilder.create()
@@ -163,7 +167,7 @@ describe("GameEngineService", () => {
     ];
 
     it("should return the provided newState if no rules are given", () => {
-      const actual = checkRules([])(newState, actualState, boardDifferences);
+      const actual = applyRules([])(newState, actualState, boardDifferences);
 
       expect(actual).toEqual(newState);
     });
@@ -171,7 +175,7 @@ describe("GameEngineService", () => {
     it("should call the provided rule", () => {
       const rule = jest.fn().mockReturnValue(state => newState);
 
-      const actual = checkRules([rule])(
+      const actual = applyRules([rule])(
         newState,
         actualState,
         boardDifferences

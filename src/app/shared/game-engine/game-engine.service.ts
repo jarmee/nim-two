@@ -1,6 +1,7 @@
 import { Inject, Injectable, OnDestroy, Optional } from "@angular/core";
+import { cloneDeep } from "lodash";
 import { BehaviorSubject, Observable } from "rxjs";
-import { map, skip, tap, withLatestFrom } from "rxjs/operators";
+import { filter, map, skip, tap, withLatestFrom } from "rxjs/operators";
 import {
   Board,
   BoardDifference,
@@ -10,6 +11,8 @@ import {
 } from "../board/board.model";
 import { SubscriptionService } from "../subscription.service";
 import {
+  AiRule,
+  AiRules,
   GameRule,
   GameRules,
   GameState,
@@ -64,7 +67,7 @@ export const diff = (
     );
 };
 
-export const checkRules = (rules: GameRules) => (
+export const applyRules = (rules: GameRules) => (
   newState: GameState,
   actualState: GameState,
   boardDifferences: BoardDifferences
@@ -73,23 +76,37 @@ export const checkRules = (rules: GameRules) => (
   return rules.reduce(
     (state: GameState, rule: GameRule) =>
       rule(newState, actualState, boardDifferences)(state),
-    newState
+    cloneDeep(newState)
   );
 };
 
-const checkRulesAndMap = (rules: GameRules) =>
+const applyRulesAndMap = (rules: GameRules) =>
   map(
     ([newState, actualState, boardDifferences]: [
       GameState,
       GameState,
       BoardDifferences
-    ]) => checkRules(rules)(newState, actualState, boardDifferences)
+    ]) => applyRules(rules)(newState, actualState, boardDifferences)
   );
+
+export const calculateState = (rules: AiRules) => (state: GameState) => {
+  if (!rules || !rules.length) return state;
+  return rules.reduce(
+    (calculateState: GameState, rule: AiRule) => rule(state)(calculateState),
+    cloneDeep(state)
+  );
+};
+
+const calculateStateAndMap = (rules: AiRules) =>
+  map((state: GameState) => calculateState(rules)(state));
 
 @Injectable()
 export class GameEngineService extends SubscriptionService
   implements OnDestroy {
   private gameLoop$: BehaviorSubject<Partial<GameState>> = new BehaviorSubject<
+    Partial<GameState>
+  >(null);
+  private aiLoop$: BehaviorSubject<Partial<GameState>> = new BehaviorSubject<
     Partial<GameState>
   >(null);
 
@@ -109,11 +126,11 @@ export class GameEngineService extends SubscriptionService
   constructor(
     @Inject(GAME_STATE_STORE) private store: GameEngineStore,
     @Optional() @Inject(GAME_RULES) private rules: GameRules = [],
-    @Optional() @Inject(GAME_AI_RULES) private aiRules: GameRules = []
+    @Optional() @Inject(GAME_AI_RULES) private aiRules: AiRules = []
   ) {
     super();
     this.subscribeTo(
-      this.gameLoop$.asObservable().pipe(
+      this.gameLoop$.pipe(
         skip(1),
         withLatestFrom(this.store),
         map(([newGameState, actualGameState]: [GameState, GameState]) => [
@@ -121,16 +138,35 @@ export class GameEngineService extends SubscriptionService
           actualGameState,
           diff(newGameState.board, actualGameState.board)
         ]),
-        checkRulesAndMap(this.rules),
-        tap((newState: GameState) => this.store.next(newState))
+        applyRulesAndMap(this.rules),
+        tap((newState: GameState) => this.store.next(newState)),
+        tap((newState: GameState) => this.aiLoop$.next(newState))
+      )
+    );
+    this.subscribeTo(
+      this.aiLoop$.pipe(
+        skip(1),
+        filter((state: GameState) => state.status === GameStatus.HumanPlay),
+        map((state: GameState) => ({
+          ...state,
+          status: GameStatus.AiPlay
+        })),
+        calculateStateAndMap(this.aiRules),
+        tap((newState: GameState) => {
+          this.gameLoop$.next(newState);
+        })
       )
     );
   }
 
   executePlay(newBoardState: Board) {
     this.gameLoop$.next({
-      status: GameStatus.InProgress,
+      status: GameStatus.HumanPlay,
       board: newBoardState
     });
+  }
+
+  reset() {
+    this.store.reset();
   }
 }
