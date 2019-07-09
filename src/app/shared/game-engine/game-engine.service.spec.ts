@@ -83,6 +83,10 @@ describe("GameEngineService", () => {
     });
   });
 
+  describe("gameLoop$", () => {
+    //TODO: Add missing test
+  });
+
   describe("diff", () => {
     it("should return an empty array if both Board objects have the same values", () => {
       const newBoard: Board = BoardBuilder.create()
