@@ -59,6 +59,7 @@ Implement a dynamic form. Each form control represents a stick.
 [x] Change all boards in test to the board builder
 [] Fix failing tests
 [] Add missing tests
+[] fix imports
 [] Move helper functions of game-engine.service to game-engine.helpers
 [] Improve isGameOver rule
 [] Review all components of the game

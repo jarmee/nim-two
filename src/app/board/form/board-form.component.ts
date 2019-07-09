@@ -10,8 +10,8 @@ import {
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { Subscription } from "rxjs";
-import { SubscriptionService } from "src/app/shared/subscription.service";
 import { Board, Column, Columns } from "../../shared/board/board.model";
+import { SubscriptionService } from "../../shared/subscription.service";
 import { BoardFormBuilderService } from "./board-form-builder.service";
 
 const PLAYER_FORM_CONTROL_NAME = "player";
