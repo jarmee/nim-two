@@ -10,6 +10,7 @@ import {
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { Subscription } from "rxjs";
+import { SubscriptionService } from "src/app/shared/subscription.service";
 import { Board, Column, Columns } from "../../shared/board/board.model";
 import { BoardFormBuilderService } from "./board-form-builder.service";
 
@@ -103,9 +104,8 @@ export function andSetErrors() {
   styleUrls: ["./board-form.component.scss"],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BoardFormComponent implements OnChanges, OnDestroy {
-  private subscriptions: Subscription[] = [];
-
+export class BoardFormComponent extends SubscriptionService
+  implements OnChanges, OnDestroy {
   @Input()
   board: Board;
 
@@ -114,7 +114,9 @@ export class BoardFormComponent implements OnChanges, OnDestroy {
 
   formGroup: FormGroup = this.formBuilder.initial();
 
-  constructor(private formBuilder: BoardFormBuilderService) {}
+  constructor(private formBuilder: BoardFormBuilderService) {
+    super();
+  }
 
   get formGroupControlNames(): string[] {
     return Object.keys(this.formGroup.controls);
@@ -180,11 +182,5 @@ export class BoardFormComponent implements OnChanges, OnDestroy {
       }
       patchValueOf<Board>(this.formGroup, currentValue, andSetErrors());
     }
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.forEach((subscription: Subscription) =>
-      subscription.unsubscribe()
-    );
   }
 }

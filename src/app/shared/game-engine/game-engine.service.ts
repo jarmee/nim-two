@@ -1,5 +1,5 @@
 import { Inject, Injectable, OnDestroy, Optional } from "@angular/core";
-import { BehaviorSubject, Observable, Subscription } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { map, skip, tap, withLatestFrom } from "rxjs/operators";
 import {
   Board,
@@ -8,6 +8,7 @@ import {
   Column,
   Columns
 } from "../board/board.model";
+import { SubscriptionService } from "../subscription.service";
 import {
   GameRule,
   GameRules,
@@ -86,9 +87,8 @@ const checkRulesAndMap = (rules: GameRules) =>
   );
 
 @Injectable()
-export class GameEngineService implements OnDestroy {
-  private subscriptions: Subscription[] = [];
-
+export class GameEngineService extends SubscriptionService
+  implements OnDestroy {
   private gameLoop$: BehaviorSubject<Partial<GameState>> = new BehaviorSubject<
     Partial<GameState>
   >(null);
@@ -111,23 +111,20 @@ export class GameEngineService implements OnDestroy {
     @Optional() @Inject(GAME_RULES) private rules: GameRules = [],
     @Optional() @Inject(GAME_AI_RULES) private aiRules: GameRules = []
   ) {
-    this.subscriptions = [
-      ...this.subscriptions,
-      this.gameLoop$
-        .asObservable()
-        .pipe(
-          skip(1),
-          withLatestFrom(this.store),
-          map(([newGameState, actualGameState]: [GameState, GameState]) => [
-            newGameState,
-            actualGameState,
-            diff(newGameState.board, actualGameState.board)
-          ]),
-          checkRulesAndMap(this.rules),
-          tap((newState: GameState) => this.store.next(newState))
-        )
-        .subscribe()
-    ];
+    super();
+    this.subscribeTo(
+      this.gameLoop$.asObservable().pipe(
+        skip(1),
+        withLatestFrom(this.store),
+        map(([newGameState, actualGameState]: [GameState, GameState]) => [
+          newGameState,
+          actualGameState,
+          diff(newGameState.board, actualGameState.board)
+        ]),
+        checkRulesAndMap(this.rules),
+        tap((newState: GameState) => this.store.next(newState))
+      )
+    );
   }
 
   executePlay(newBoardState: Board) {
@@ -135,11 +132,5 @@ export class GameEngineService implements OnDestroy {
       status: GameStatus.InProgress,
       board: newBoardState
     });
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.forEach((subscription: Subscription) =>
-      subscription.unsubscribe()
-    );
   }
 }
