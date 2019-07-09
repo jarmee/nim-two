@@ -71,3 +71,11 @@ Implement a dynamic form. Each form control represents a stick.
 [] Add default error handling
 [] Write Readme
 [] Implement [smarter oponent](http://www.imn.htwk-leipzig.de/~jahn/Cprog/Alg_Inf_Jahr_pdf/streichholzspiel.pdf)
+
+### Pre-Release
+
+[] Is the prod build working
+[] Is a clean setup of the project possible
+[] Are all tests green
+[] Is the application working in different browsers
+[] Is the demo working
