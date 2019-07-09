@@ -69,6 +69,7 @@ Implement a dynamic form. Each form control represents a stick.
 [] Add improved error messages
 [] Fix failing test in board-form component
 [] Add default error handling
+[] Add rules of the game to the ui
 [] Write Readme
 [] Implement [smarter oponent](http://www.imn.htwk-leipzig.de/~jahn/Cprog/Alg_Inf_Jahr_pdf/streichholzspiel.pdf)
 
