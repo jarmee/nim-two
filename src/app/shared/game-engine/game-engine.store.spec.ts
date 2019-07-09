@@ -31,4 +31,8 @@ describe("GameEngineStore", () => {
       expect(store.snapshot).toEqual(updatedState);
     });
   });
+
+  describe("reset", () => {
+    //TODO: Write test
+  });
 });

@@ -1,3 +1,4 @@
+import { cloneDeep } from "lodash";
 import { BehaviorSubject } from "rxjs";
 import { GameState } from "./game-engine.model";
 
@@ -7,8 +8,8 @@ export class GameEngineStore extends BehaviorSubject<GameState> {
 
   constructor(gameState: GameState) {
     super(gameState);
-    this.snapshot = gameState;
-    this.initialState = gameState;
+    this.snapshot = cloneDeep(gameState);
+    this.initialState = cloneDeep(gameState);
   }
 
   next(partialState: Partial<GameState>) {
@@ -16,7 +17,7 @@ export class GameEngineStore extends BehaviorSubject<GameState> {
       ...this.snapshot,
       ...partialState
     };
-    this.snapshot = newState;
+    this.snapshot = cloneDeep(newState);
     super.next(newState);
   }
 

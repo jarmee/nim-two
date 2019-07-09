@@ -54,12 +54,19 @@ Implement a dynamic form. Each form control represents a stick.
 [x] Add column errorMessages to mark them as invalid
 [x] Add game status
 [x] Implement unsubscribe service
-[] Implement the oponent
+[x] Implement the oponent
+[x] Add bootstrap
+[x] Change all boards in test to the board builder
+[] Fix failing tests
+[] Add missing tests
+[] Move helper functions of game-engine.service to game-engine.helpers
+[] Improve isGameOver rule
+[] Review all components of the game
+[] Think of better game status
+[] Improve match control
 [] Get rid of the valueChanges handler
-[] Add missing test for gameLoop
 [] Add improved error messages
 [] Fix failing test in board-form component
-[] Change all boards in test to the board builder
-[] Add bootstrap
 [] Add default error handling
 [] Write Readme
+[] Implement [smarter oponent](http://www.imn.htwk-leipzig.de/~jahn/Cprog/Alg_Inf_Jahr_pdf/streichholzspiel.pdf)

@@ -225,7 +225,11 @@ describe("NimRules", () => {
 
       const actual = isGameOver(newState, actualState, differences)(newState);
 
-      expect(actual.status).toBe(GameStatus.GameOver);
+      expect(actual.status).toBe(GameStatus.GameOverPlayerOne);
     });
+  });
+
+  describe("hasChanged", () => {
+    //TODO: write tests
   });
 });

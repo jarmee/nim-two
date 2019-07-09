@@ -1,7 +1,7 @@
 import { Inject, Injectable, OnDestroy, Optional } from "@angular/core";
 import { cloneDeep } from "lodash";
 import { BehaviorSubject, Observable } from "rxjs";
-import { filter, map, skip, tap, withLatestFrom } from "rxjs/operators";
+import { delay, filter, map, skip, tap, withLatestFrom } from "rxjs/operators";
 import {
   Board,
   BoardDifference,
@@ -44,7 +44,9 @@ export const diff = (
   newBoard: Board,
   currentBoard: Board
 ): BoardDifferences => {
-  if (!newBoard || !currentBoard) return [];
+  if (!newBoard && !currentBoard) return [];
+  //TODO: newBoard && !currentBoard
+  //TODO: !newBoard && currentBoard
 
   return Object.keys(newBoard)
     .map(rowKey =>
@@ -121,8 +123,7 @@ export class GameEngineService extends SubscriptionService
   );
 
   board$: Observable<Board> = this.store.pipe(
-    map((state: GameState) => state.board),
-    tap(console.log)
+    map((state: GameState) => state.board)
   );
 
   status$: Observable<GameStatus> = this.store.pipe(
@@ -153,6 +154,7 @@ export class GameEngineService extends SubscriptionService
       this.aiLoop$.pipe(
         skip(1),
         filter((state: GameState) => state.status === GameStatus.HumanPlay),
+        delay(1000),
         map((state: GameState) => ({
           ...state,
           status: GameStatus.AiPlay

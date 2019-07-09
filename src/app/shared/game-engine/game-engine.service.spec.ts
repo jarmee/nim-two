@@ -4,11 +4,7 @@ import { BoardBuilder } from "../board/board.builder";
 import { Board, BoardDifferences } from "../board/board.model";
 import { boardFactory } from "../board/testing/board.mock";
 import { GameState, GameStatus, GAME_STATE_STORE } from "./game-engine.model";
-import {
-  applyRules,
-  diff,
-  GameEngineService
-} from "./game-engine.service";
+import { applyRules, diff, GameEngineService } from "./game-engine.service";
 import { GameEngineStore } from "./game-engine.store";
 import { gameStateFactory } from "./testing/game-engine.mock";
 
@@ -50,7 +46,7 @@ describe("GameEngineService", () => {
       service.executePlay(expectedBoard);
 
       expect(store.next).toHaveBeenCalledWith({
-        status: GameStatus.InProgress,
+        status: GameStatus.HumanPlay,
         board: expectedBoard
       });
     });
@@ -88,7 +84,15 @@ describe("GameEngineService", () => {
   });
 
   describe("gameLoop$", () => {
-    //TODO: Add missing test
+    //TODO: Add missing tests
+  });
+
+  describe("aiLoop$", () => {
+    //TODO: Add missing tests
+  });
+
+  describe("calculateState", () => {
+    //TODO: Add missing tests
   });
 
   describe("diff", () => {

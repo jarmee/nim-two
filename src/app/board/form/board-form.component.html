@@ -1,10 +1,12 @@
 <form [formGroup]="formGroup">
   <ng-container *ngIf="hasControls; else noData">
     <div
+      class="row"
       [formGroupName]="formGroupControlName"
       *ngFor="let formGroupControlName of formGroupControlNames"
     >
       <div
+        class="col-1"
         [formGroupName]="columnFormGroupControlName"
         *ngFor="
           let columnFormGroupControlName of columnFormGroupControlNamesOf(
@@ -33,18 +35,22 @@
   <ng-template #noData>
     No data :(
   </ng-template>
-  <button
-    data-test-id="execute-play-button"
-    type="button"
-    (click)="onExecutePlay()"
-  >
-    Finish Play
-  </button>
-  <button
-    data-test-id="execute-play-button"
-    type="button"
-    (click)="onReset()"
-  >
-    Reset Game
-  </button>
+  <div class="row mt-5">
+    <button
+      data-test-id="execute-play-button"
+      type="button"
+      class="btn btn-primary"
+      (click)="onExecutePlay()"
+    >
+      Finish Play
+    </button>
+    <button
+      data-test-id="execute-play-button"
+      type="button"
+      class="btn btn-danger"
+      (click)="onReset()"
+    >
+      Reset Game
+    </button>
+  </div>
 </form>
