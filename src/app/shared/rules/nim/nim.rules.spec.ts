@@ -1,10 +1,39 @@
 import { BoardBuilder } from "../../board/board.builder";
 import { BoardDifferences } from "../../board/board.model";
 import { GameState, GameStatus } from "../../game-engine/game-engine.model";
-import { isMaximumOfMatchesExceeded } from "./nim.rules";
+import { isGameOver, isMaximumOfMatchesExceeded } from "./nim.rules";
 
 describe("NimRules", () => {
   describe("isMaximumOfMatchesExceeded", () => {
+    it("should return the given game state if the game status is errornous", () => {
+      const errornousState: GameState = {
+        status: GameStatus.Errornous,
+        board: BoardBuilder.create()
+          .addRowWithColumns(true, false, false, false)
+          .build()
+      };
+      const actualState: GameState = {
+        board: BoardBuilder.create()
+          .addRowWithColumns(false, false, false, false)
+          .build()
+      };
+      const differences: BoardDifferences = [
+        {
+          newColumn: { value: true, player: null },
+          currentColumn: { value: false, player: null },
+          path: ["0", "0"]
+        }
+      ];
+
+      const actual = isMaximumOfMatchesExceeded(
+        errornousState,
+        actualState,
+        differences
+      )(errornousState);
+
+      expect(actual).toEqual(errornousState);
+    });
+
     it("should return the new board if the board differences is one", () => {
       const newState: GameState = {
         board: BoardBuilder.create()
@@ -147,5 +176,56 @@ describe("NimRules", () => {
     });
   });
 
-  describe("isGameOver", () => {});
+  describe("isGameOver", () => {
+    it("should return the given state if the game status is errornous", () => {
+      const errornousState: GameState = {
+        status: GameStatus.Errornous,
+        board: BoardBuilder.create()
+          .addRowWithColumns(true, false, false, false)
+          .build()
+      };
+      const actualState: GameState = {
+        board: BoardBuilder.create()
+          .addRowWithColumns(false, false, false, false)
+          .build()
+      };
+      const differences: BoardDifferences = [
+        {
+          newColumn: { value: true, player: null },
+          currentColumn: { value: false, player: null },
+          path: ["0", "0"]
+        }
+      ];
+
+      const actual = isGameOver(errornousState, actualState, differences)(
+        errornousState
+      );
+
+      expect(actual).toBe(errornousState);
+    });
+
+    it("should set the game status to game over if the all columns of the new state are set to true", () => {
+      const newState: GameState = {
+        board: BoardBuilder.create()
+          .addRowWithColumns(true, true, true, true)
+          .build()
+      };
+      const actualState: GameState = {
+        board: BoardBuilder.create()
+          .addRowWithColumns(false, false, false, false)
+          .build()
+      };
+      const differences: BoardDifferences = [
+        {
+          newColumn: { value: true, player: null },
+          currentColumn: { value: false, player: null },
+          path: ["0", "0"]
+        }
+      ];
+
+      const actual = isGameOver(newState, actualState, differences)(newState);
+
+      expect(actual.status).toBe(GameStatus.GameOver);
+    });
+  });
 });
