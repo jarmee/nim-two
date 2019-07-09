@@ -1,5 +1,11 @@
+import { cloneDeep } from "lodash";
 import { BoardDifference, BoardDifferences } from "../../board/board.model";
-import { GameRule, GameRules, GameState, GameStatus } from "../../game-engine/game-engine.model";
+import {
+  GameRule,
+  GameRules,
+  GameState,
+  GameStatus
+} from "../../game-engine/game-engine.model";
 import { calculateAmount } from "../../game-engine/game-engine.service";
 
 const MAX_MATCHES = 3;
@@ -13,12 +19,10 @@ export const isMaximumOfMatchesExceeded: GameRule = (
   if (state.status === GameStatus.Errornous) return state;
   if (boardDifferences.length > MAX_MATCHES) {
     const errornousState = {
-      ...actualState,
-      status: GameStatus.Errornous,
-      board: {
-        ...actualState.board
-      }
+      ...cloneDeep(actualState),
+      status: GameStatus.Errornous
     };
+
     boardDifferences
       .map((difference: BoardDifference) => difference.path)
       .forEach((path: string[]) => {
@@ -28,6 +32,7 @@ export const isMaximumOfMatchesExceeded: GameRule = (
         );
         column.errorMessage = MAXIMUM_OF_MATCHES_EXCEEDED_ERROR;
       });
+
     return errornousState;
   }
   return state;
@@ -42,7 +47,9 @@ export const isGameOver: GameRule = (
   if (calculateAmount(newState.board) === 0) {
     const player = boardDifferences[0].newColumn.player;
     const status =
-      player === "🤖" ? GameStatus.GameOverPlayerTwo : GameStatus.GameOverPlayerOne;
+      player === "🤖"
+        ? GameStatus.GameOverPlayerTwo
+        : GameStatus.GameOverPlayerOne;
     return { ...state, status };
   }
 

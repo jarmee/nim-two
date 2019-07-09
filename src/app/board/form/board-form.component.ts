@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  Output,
+  SimpleChanges
+} from "@angular/core";
 import { FormGroup } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { SubscriptionService } from "src/app/shared/subscription.service";
@@ -164,7 +173,6 @@ export class BoardFormComponent extends SubscriptionService
   }
 
   onReset() {
-    this.formGroup.reset();
     this.reset.emit();
   }
 

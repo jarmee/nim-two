@@ -86,7 +86,12 @@ const applyRulesAndMap = (rules: GameRules) =>
       GameState,
       GameState,
       BoardDifferences
-    ]) => applyRules(rules)(newState, actualState, boardDifferences)
+    ]) =>
+      applyRules(rules)(
+        Object.freeze(newState),
+        Object.freeze(actualState),
+        boardDifferences
+      )
   );
 
 export const calculateState = (rules: AiRules) => (state: GameState) => {
@@ -98,7 +103,7 @@ export const calculateState = (rules: AiRules) => (state: GameState) => {
 };
 
 const calculateStateAndMap = (rules: AiRules) =>
-  map((state: GameState) => calculateState(rules)(state));
+  map((state: GameState) => calculateState(rules)(Object.freeze(state)));
 
 @Injectable()
 export class GameEngineService extends SubscriptionService
@@ -116,7 +121,8 @@ export class GameEngineService extends SubscriptionService
   );
 
   board$: Observable<Board> = this.store.pipe(
-    map((state: GameState) => state.board)
+    map((state: GameState) => state.board),
+    tap(console.log)
   );
 
   status$: Observable<GameStatus> = this.store.pipe(
