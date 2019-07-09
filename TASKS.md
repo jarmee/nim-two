@@ -53,12 +53,12 @@ Implement a dynamic form. Each form control represents a stick.
 [x] Remove all unused imports
 [x] Add column errorMessages to mark them as invalid
 [x] Add game status
+[x] Implement unsubscribe service
 [] Implement the oponent
 [] Add missing test for gameLoop
 [] Add improved error messages
 [] Fix failing test in board-form component
 [] Change all boards in test to the board builder
 [] Add bootstrap
-[] Implement unsubscribe service
 [] Add default error handling
 [] Write Readme
