@@ -1,12 +1,11 @@
 <form [formGroup]="formGroup">
   <ng-container *ngIf="hasControls; else noData">
     <div
-      class="row"
+      class="d-flex justify-content-around"
       [formGroupName]="formGroupControlName"
       *ngFor="let formGroupControlName of formGroupControlNames"
     >
       <div
-        class="col-1"
         [formGroupName]="columnFormGroupControlName"
         *ngFor="
           let columnFormGroupControlName of columnFormGroupControlNamesOf(
