@@ -5,7 +5,7 @@ import { BoardModule } from "./board/board.module";
 import { GameEngineModule } from "./shared/game-engine/game-engine.module";
 import { NIM_GAME_STATE } from "./shared/rules/nim/nim.state";
 import { NIM_RULES as NIM_GAME_RULES } from "./shared/rules/nim/nim.rules";
-import { NIM_KI_RULES } from './shared/rules/nim/nim.ki';
+import { NIM_KI_RULES } from './shared/rules/nim/nim.ai';
 
 @NgModule({
   declarations: [AppComponent],
