@@ -3,31 +3,44 @@
 exports[`AppComponent should match the snapshot 1`] = `
 <app-root>
   <app-board>
-    <h1>
-      Nim 2
-    </h1>
-    <span>
-      
-    </span>
-    <span>
-      
-    </span>
-    <app-board-form
-      data-test-id="board"
+    <div
+      class="container"
     >
-      <form
-        novalidate=""
+      <h1>
+        Nim 2
+      </h1>
+      <span>
+        
+      </span>
+      <app-board-form
+        data-test-id="board"
       >
-        
-        
-        <button
-          data-test-id="execute-play-button"
-          type="button"
+        <form
+          novalidate=""
         >
-           Finish Play 
-        </button>
-      </form>
-    </app-board-form>
+          
+          
+          <div
+            class="row mt-5"
+          >
+            <button
+              class="btn btn-primary"
+              data-test-id="execute-play-button"
+              type="button"
+            >
+               Finish Play 
+            </button>
+            <button
+              class="btn btn-danger"
+              data-test-id="execute-play-button"
+              type="button"
+            >
+               Reset Game 
+            </button>
+          </div>
+        </form>
+      </app-board-form>
+    </div>
   </app-board>
 </app-root>
 `;

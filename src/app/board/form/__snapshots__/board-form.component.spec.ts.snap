@@ -6,6 +6,7 @@ exports[`BoardFormComponent should match the snapshot 1`] = `
   executePlay={[Function EventEmitter]}
   formBuilder={[Function BoardFormBuilderService]}
   formGroup={[Function FormGroup]}
+  reset={[Function EventEmitter]}
   subscriptions={[Function Array]}
 >
   <form
@@ -16,12 +17,24 @@ exports[`BoardFormComponent should match the snapshot 1`] = `
     
      No data :( 
     
-    <button
-      data-test-id="execute-play-button"
-      type="button"
+    <div
+      class="row mt-5"
     >
-       Finish Play 
-    </button>
+      <button
+        class="btn btn-primary"
+        data-test-id="execute-play-button"
+        type="button"
+      >
+         Finish Play 
+      </button>
+      <button
+        class="btn btn-danger"
+        data-test-id="execute-play-button"
+        type="button"
+      >
+         Reset Game 
+      </button>
+    </div>
   </form>
 </app-board-form>
 `;
