@@ -31,6 +31,7 @@ describe("BoardComponent", () => {
   beforeEach(() => {
     gameEngine = TestBed.get(GameEngineService);
     gameEngine.executePlay = jest.fn();
+    gameEngine.reset = jest.fn();
     fixture = TestBed.createComponent(BoardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -67,14 +68,35 @@ describe("BoardComponent", () => {
 
         expect(component.onExecutePlay).toHaveBeenCalledWith(board);
       });
+    });
+  });
 
-      afterEach(() => {
-        (component.onExecutePlay as jest.Mock).mockClear();
+  describe("onReset", () => {
+    it("should call the reset method of the GameEngine", () => {
+      component.onReset();
+
+      expect(gameEngine.reset).toHaveBeenCalled();
+    });
+
+    describe("UI Interaction", () => {
+      beforeEach(() => {
+        component.onReset = jest.fn();
+      });
+
+      it("should call the onExecutePlay event handler on board change", () => {
+        const boardElement = fixture.debugElement.query(
+          By.css("[data-test-id='board']")
+        );
+
+        boardElement.triggerEventHandler("reset", null);
+
+        expect(component.onReset).toHaveBeenCalled();
       });
     });
   });
 
   afterEach(() => {
-    (gameEngine.executePlay as jest.Mock).mockClear();
+    (gameEngine.executePlay as jest.Mock).mockReset();
+    (gameEngine.reset as jest.Mock).mockReset();
   });
 });
