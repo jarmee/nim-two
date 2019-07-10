@@ -1,8 +1,8 @@
 import { TestBed } from "@angular/core/testing";
 import { BoardBuilder } from "../board/board.builder";
-import { Board, BoardDifferences } from "../board/board.model";
+import { Board } from "../board/board.model";
 import { GameState, GameStatus, GAME_STATE_STORE } from "./game-engine.model";
-import { applyRules, GameEngineService } from "./game-engine.service";
+import { GameEngineService } from "./game-engine.service";
 import { GameEngineStore } from "./game-engine.store";
 import { gameStateFactory } from "./testing/game-engine.mock";
 
@@ -119,56 +119,5 @@ describe("GameEngineService", () => {
 
   describe("aiLoop$", () => {
     //TODO: Add missing tests
-  });
-
-  describe("calculateState", () => {
-    //TODO: Add missing tests
-  });
-
-  describe("applyRules", () => {
-    const newState: GameState = gameStateFactory
-      .extend({
-        board: BoardBuilder.create()
-          .addRowWithColumns(true)
-          .build()
-      })
-      .build();
-    const actualState: GameState = gameStateFactory
-      .extend({
-        board: BoardBuilder.create()
-          .addRowWithColumns(false)
-          .build()
-      })
-      .build();
-    const boardDifferences: BoardDifferences = [
-      {
-        newColumn: newState.board[0][0],
-        currentColumn: actualState.board[0][0],
-        path: ["0", "0"]
-      }
-    ];
-
-    it("should return the provided newState if no rules are given", () => {
-      const actual = applyRules([])(newState, actualState, boardDifferences);
-
-      expect(actual).toEqual(newState);
-    });
-
-    it("should call the provided rule", () => {
-      const rule = jest.fn().mockReturnValue(state => newState);
-
-      const actual = applyRules([rule])(
-        newState,
-        actualState,
-        boardDifferences
-      );
-
-      expect(actual).toEqual(newState);
-      expect(rule).toHaveBeenCalledWith(
-        newState,
-        actualState,
-        boardDifferences
-      );
-    });
   });
 });

@@ -1,5 +1,4 @@
 import { Inject, Injectable, OnDestroy, Optional } from "@angular/core";
-import { cloneDeep } from "lodash";
 import { BehaviorSubject, Observable } from "rxjs";
 import { delay, filter, map, skip, tap, withLatestFrom } from "rxjs/operators";
 import {
@@ -9,10 +8,9 @@ import {
 } from "../board/board.helpers";
 import { Board, BoardDifferences } from "../board/board.model";
 import { SubscriptionService } from "../subscription.service";
+import { applyRules, calculateState } from "./game-engine.helpers";
 import {
-  AiRule,
   AiRules,
-  GameRule,
   GameRules,
   GameState,
   GameStatus,
@@ -21,44 +19,6 @@ import {
   GAME_STATE_STORE
 } from "./game-engine.model";
 import { GameEngineStore } from "./game-engine.store";
-
-export const applyRules = (rules: GameRules) => (
-  newState: GameState,
-  actualState: GameState,
-  boardDifferences: BoardDifferences
-) => {
-  if (!rules || !rules.length) return newState;
-  return rules.reduce(
-    (state: GameState, rule: GameRule) =>
-      rule(newState, actualState, boardDifferences)(state),
-    cloneDeep(newState)
-  );
-};
-
-const applyRulesAndMap = (rules: GameRules) =>
-  map(
-    ([newState, actualState, boardDifferences]: [
-      GameState,
-      GameState,
-      BoardDifferences
-    ]) =>
-      applyRules(rules)(
-        Object.freeze(newState),
-        Object.freeze(actualState),
-        boardDifferences
-      )
-  );
-
-export const calculateState = (rules: AiRules) => (state: GameState) => {
-  if (!rules || !rules.length) return state;
-  return rules.reduce(
-    (calculateState: GameState, rule: AiRule) => rule(state)(calculateState),
-    cloneDeep(state)
-  );
-};
-
-const calculateStateAndMap = (rules: AiRules) =>
-  map((state: GameState) => calculateState(rules)(Object.freeze(state)));
 
 @Injectable()
 export class GameEngineService extends SubscriptionService
@@ -99,7 +59,18 @@ export class GameEngineService extends SubscriptionService
           actualGameState,
           differenceOf(newGameState.board, actualGameState.board)
         ]),
-        applyRulesAndMap(this.rules),
+        map(
+          ([newState, actualState, boardDifferences]: [
+            GameState,
+            GameState,
+            BoardDifferences
+          ]) =>
+            applyRules(this.rules)(
+              Object.freeze(newState),
+              Object.freeze(actualState),
+              boardDifferences
+            )
+        ),
         tap((newState: GameState) => this.store.next(newState)),
         tap((newState: GameState) => this.aiLoop$.next(newState))
       )
@@ -113,7 +84,9 @@ export class GameEngineService extends SubscriptionService
           ...state,
           status: GameStatus.AiPlay
         })),
-        calculateStateAndMap(this.aiRules),
+        map((state: GameState) =>
+          calculateState(this.aiRules)(Object.freeze(state))
+        ),
         tap((newState: GameState) => {
           this.gameLoop$.next(newState);
         })
