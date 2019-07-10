@@ -23,9 +23,9 @@
             )
           "
         ></app-match-control>
-        <span>
-          {{ playerName(formGroupControlName, columnFormGroupControlName) }}
-        </span>
+        <app-player-batch
+          [name]="playerName(formGroupControlName, columnFormGroupControlName)"
+        ></app-player-batch>
         <span
           data-test-id="column-error"
           *ngIf="

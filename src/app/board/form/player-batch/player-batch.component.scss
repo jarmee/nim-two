@@ -1,0 +1,16 @@
+:host {
+  .player-batch {
+    display: inline-block;
+    background: #f2f2f2;
+    padding: 0.25em;
+    margin-top: 1em;
+
+    &:after {
+      content: "▲";
+      position: absolute;
+      margin-top: -1em;
+      margin-left: -1em;
+      color: #f2f2f2;
+    }
+  }
+}
