@@ -54,10 +54,10 @@ export class GameEngineService extends SubscriptionService
       this.gameLoop$.pipe(
         skip(1),
         withLatestFrom(this.store),
-        map(([newGameState, actualGameState]: [GameState, GameState]) => [
+        map(([newGameState, andActualGameState]: [GameState, GameState]) => [
           newGameState,
-          actualGameState,
-          differenceOf(newGameState.board, actualGameState.board)
+          andActualGameState,
+          differenceOf(newGameState.board, andActualGameState.board)
         ]),
         map(
           ([newState, actualState, boardDifferences]: [

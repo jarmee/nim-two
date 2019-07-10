@@ -132,6 +132,7 @@ export class BoardFormComponent extends SubscriptionService
   columnFormGroupControlNamesOf(formGroupName: string): string[] {
     const rowFormGroup = this.formGroup.get(formGroupName) as FormGroup;
     if (!rowFormGroup) return [];
+
     return Object.keys(rowFormGroup.controls);
   }
 
