@@ -5,9 +5,10 @@ import { BoardComponent } from "./board.component";
 import { BoardFormBuilderService } from "./form/board-form-builder.service";
 import { BoardFormComponent } from "./form/board-form.component";
 import { MatchControlComponent } from "./form/match-control/match-control.component";
+import { PlayerBatchComponent } from './form/player-batch/player-batch.component';
 
 @NgModule({
-  declarations: [BoardComponent, BoardFormComponent, MatchControlComponent],
+  declarations: [BoardComponent, BoardFormComponent, MatchControlComponent, PlayerBatchComponent],
   imports: [CommonModule, ReactiveFormsModule],
   exports: [BoardComponent],
   providers: [BoardFormBuilderService]
