@@ -55,6 +55,22 @@ describe("GameEngineService", () => {
     });
   });
 
+  describe("reset", () => {
+    beforeEach(() => {
+      store.reset = jest.fn();
+    });
+
+    it("should call the reset method of the store", () => {
+      service.reset();
+
+      expect(store.reset).toHaveBeenCalled();
+    });
+
+    afterEach(() => {
+      (store.reset as jest.Mock).mockClear();
+    });
+  });
+
   describe("amount$", () => {
     it("should emit the current amount", done => {
       service.amount$.subscribe((actualAmount: number) => {
