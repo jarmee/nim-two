@@ -7,50 +7,52 @@ exports[`AppComponent should match the snapshot 1`] = `
       class="container"
     >
       <div
-        class="card mt-5"
+        class="row mt-5"
       >
         <div
-          class="card-body"
+          class="col-12 text-center"
         >
-          <div
-            class="text-center"
+          <h1
+            class="col-12"
           >
-            <h1>
-              You vs 🤖
-            </h1>
-          </div>
-          <div
-            class="mt-5"
+            You vs 🤖
+          </h1>
+        </div>
+      </div>
+      <div
+        class="row mt-5"
+      >
+        <div
+          class="col-12"
+        >
+          <app-board-form
+            data-test-id="board"
           >
-            <app-board-form
-              data-test-id="board"
+            <form
+              novalidate=""
             >
-              <form
-                novalidate=""
+              
+              
+              <div
+                class="row mt-5"
               >
-                
-                
-                <div
-                  class="row mt-5"
+                <button
+                  class="btn btn-primary"
+                  data-test-id="execute-play-button"
+                  type="button"
                 >
-                  <button
-                    class="btn btn-primary"
-                    data-test-id="execute-play-button"
-                    type="button"
-                  >
-                     Finish Play 
-                  </button>
-                  <button
-                    class="btn btn-danger"
-                    data-test-id="reset-button"
-                    type="button"
-                  >
-                     Reset Game 
-                  </button>
-                </div>
-              </form>
-            </app-board-form>
-          </div>
+                   Finish Play 
+                </button>
+                <button
+                  class="btn btn-danger"
+                  data-test-id="reset-button"
+                  type="button"
+                >
+                   Reset Game 
+                </button>
+              </div>
+            </form>
+          </app-board-form>
         </div>
       </div>
     </div>
