@@ -1,4 +1,8 @@
-import { ChangeDetectionStrategy, SimpleChange, SimpleChanges } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  SimpleChange,
+  SimpleChanges
+} from "@angular/core";
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
@@ -7,7 +11,14 @@ import { BoardBuilder } from "../../shared/board/board.builder";
 import { Board, Column } from "../../shared/board/board.model";
 import { boardFactory } from "../../shared/board/testing/board.mock";
 import { BoardFormBuilderService } from "./board-form-builder.service";
-import { andSetErrors, andSetPlayerIfCheckedTo, BoardFormComponent, hasChanged, patchValueOf, watchColumnValueChangesOf } from "./board-form.component";
+import {
+  andSetErrors,
+  andSetPlayerIfCheckedTo,
+  BoardFormComponent,
+  hasChanged,
+  patchValueOf,
+  watchColumnValueChangesOf
+} from "./board-form.component";
 import { MatchControlComponent } from "./match-control/match-control.component";
 
 describe("BoardFormComponent", () => {
@@ -339,6 +350,27 @@ describe("BoardFormComponent", () => {
       expect(component.executePlay.emit).toHaveBeenCalledWith(
         component.formGroup.value
       );
+    });
+  });
+
+  describe("onReset", () => {
+    it("should call the emit method of the reset event handler", () => {
+      component.reset.emit = jest.fn();
+
+      component.onReset();
+
+      expect(component.reset.emit).toHaveBeenCalledWith();
+    });
+
+    it("should call the emit method of the reset event handler", () => {
+      component.reset.emit = jest.fn();
+
+      const buttonElement = fixture.debugElement.query(
+        By.css("[data-test-id='reset-button']")
+      );
+      buttonElement.triggerEventHandler("click", {});
+
+      expect(component.reset.emit).toHaveBeenCalledWith();
     });
   });
 

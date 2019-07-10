@@ -32,7 +32,7 @@ exports[`AppComponent should match the snapshot 1`] = `
             </button>
             <button
               class="btn btn-danger"
-              data-test-id="execute-play-button"
+              data-test-id="reset-button"
               type="button"
             >
                Reset Game 
