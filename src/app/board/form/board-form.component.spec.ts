@@ -336,20 +336,22 @@ describe("BoardFormComponent", () => {
       );
     });
 
-    it("should call the emit method of the executePlay event handler", () => {
-      component.board = board;
-      fixture.detectChanges();
+    describe("UI Interaction", () => {
+      it("should call the emit method of the executePlay event handler", () => {
+        component.board = board;
+        fixture.detectChanges();
 
-      component.executePlay.emit = jest.fn();
+        component.executePlay.emit = jest.fn();
 
-      const buttonElement = fixture.debugElement.query(
-        By.css("[data-test-id='execute-play-button']")
-      );
-      buttonElement.triggerEventHandler("click", {});
+        const buttonElement = fixture.debugElement.query(
+          By.css("[data-test-id='execute-play-button']")
+        );
+        buttonElement.triggerEventHandler("click", {});
 
-      expect(component.executePlay.emit).toHaveBeenCalledWith(
-        component.formGroup.value
-      );
+        expect(component.executePlay.emit).toHaveBeenCalledWith(
+          component.formGroup.value
+        );
+      });
     });
   });
 
@@ -362,15 +364,17 @@ describe("BoardFormComponent", () => {
       expect(component.reset.emit).toHaveBeenCalledWith();
     });
 
-    it("should call the emit method of the reset event handler", () => {
-      component.reset.emit = jest.fn();
+    describe("UI Interaction", () => {
+      it("should call the emit method of the reset event handler", () => {
+        component.reset.emit = jest.fn();
 
-      const buttonElement = fixture.debugElement.query(
-        By.css("[data-test-id='reset-button']")
-      );
-      buttonElement.triggerEventHandler("click", {});
+        const buttonElement = fixture.debugElement.query(
+          By.css("[data-test-id='reset-button']")
+        );
+        buttonElement.triggerEventHandler("click", {});
 
-      expect(component.reset.emit).toHaveBeenCalledWith();
+        expect(component.reset.emit).toHaveBeenCalledWith();
+      });
     });
   });
 
