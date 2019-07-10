@@ -38,6 +38,10 @@ describe("GameEngineStore", () => {
     it("should set the snapshot", () => {
       expect(store.snapshot).toEqual(initialGameState);
     });
+
+    it("should set the initialState", () => {
+      expect(store.initialState).toEqual(initialGameState);
+    });
   });
 
   describe("next", () => {
