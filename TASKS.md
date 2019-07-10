@@ -57,7 +57,7 @@ Implement a dynamic form. Each form control represents a stick.
 [x] Implement the oponent
 [x] Add bootstrap
 [x] Change all boards in test to the board builder
-[] Fix failing tests
+[x] Fix failing tests
 [] Add missing tests
 [] fix imports
 [] Move helper functions of game-engine.service to game-engine.helpers
