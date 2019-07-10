@@ -1,4 +1,8 @@
 import { cloneDeep } from "lodash";
+import {
+  countColumnsOf,
+  withColumnValueFalseFilter
+} from "../../board/board.helpers";
 import { BoardDifference, BoardDifferences } from "../../board/board.model";
 import {
   GameRule,
@@ -6,10 +10,9 @@ import {
   GameState,
   GameStatus
 } from "../../game-engine/game-engine.model";
-import { calculateAmount } from "../../game-engine/game-engine.service";
 
 const MAX_MATCHES = 3;
-const MAXIMUM_OF_MATCHES_EXCEEDED_ERROR = "Maximum Matches Exceeded";
+export const MAXIMUM_OF_MATCHES_EXCEEDED_ERROR = "Maximum Matches Exceeded";
 
 export const isMaximumOfMatchesExceeded: GameRule = (
   newState: GameState,
@@ -17,6 +20,7 @@ export const isMaximumOfMatchesExceeded: GameRule = (
   boardDifferences: BoardDifferences
 ) => (state: GameState) => {
   if (state.status === GameStatus.Errornous) return state;
+
   if (boardDifferences.length > MAX_MATCHES) {
     const errornousState = {
       ...cloneDeep(actualState),
@@ -60,7 +64,8 @@ export const isGameOver: GameRule = (
   boardDifferences: BoardDifferences
 ) => (state: GameState) => {
   if (state.status === GameStatus.Errornous) return state;
-  if (calculateAmount(newState.board) === 0) {
+
+  if (countColumnsOf(newState.board, withColumnValueFalseFilter) === 0) {
     const player = boardDifferences[0].newColumn.player;
     const status =
       player === "🤖"

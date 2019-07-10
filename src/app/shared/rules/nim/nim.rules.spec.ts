@@ -1,7 +1,11 @@
 import { BoardBuilder } from "../../board/board.builder";
 import { BoardDifferences } from "../../board/board.model";
 import { GameState, GameStatus } from "../../game-engine/game-engine.model";
-import { isGameOver, isMaximumOfMatchesExceeded } from "./nim.rules";
+import {
+  isGameOver,
+  isMaximumOfMatchesExceeded,
+  MAXIMUM_OF_MATCHES_EXCEEDED_ERROR
+} from "./nim.rules";
 
 describe("NimRules", () => {
   describe("isMaximumOfMatchesExceeded", () => {
@@ -130,48 +134,94 @@ describe("NimRules", () => {
       expect(actual).toEqual(newState);
     });
 
-    it("should return the actual board if the board differences is greater three", () => {
-      const newState: GameState = {
-        board: BoardBuilder.create()
-          .addRowWithColumns(true, true, true, true)
-          .build()
-      };
-      const actualState: GameState = {
-        board: BoardBuilder.create()
-          .addRowWithColumns(false, false, false, false)
-          .build()
-      };
-      const differences: BoardDifferences = [
-        {
-          newColumn: { value: true, player: null },
-          currentColumn: { value: false, player: null },
-          path: ["0", "0"]
-        },
-        {
-          newColumn: { value: true, player: null },
-          currentColumn: { value: false, player: null },
-          path: ["0", "1"]
-        },
-        {
-          newColumn: { value: true, player: null },
-          currentColumn: { value: false, player: null },
-          path: ["0", "2"]
-        },
-        {
-          newColumn: { value: true, player: null },
-          currentColumn: { value: false, player: null },
-          path: ["0", "3"]
-        }
-      ];
-      const actual = isMaximumOfMatchesExceeded(
-        newState,
-        actualState,
-        differences
-      )(newState);
+    describe("match count exceedes maximum", () => {
+      let newState: GameState;
+      let actualState: GameState;
+      let differences: BoardDifferences;
 
-      expect(actual).toEqual({
-        ...actualState,
-        status: GameStatus.Errornous
+      beforeEach(() => {
+        newState = {
+          board: BoardBuilder.create()
+            .addRowWithColumns(true, true, true, true)
+            .build()
+        };
+
+        actualState = {
+          board: BoardBuilder.create()
+            .addRowWithColumns(false, false, false, false)
+            .build()
+        };
+
+        differences = [
+          {
+            newColumn: { value: true, player: null },
+            currentColumn: { value: false, player: null },
+            path: ["0", "0"]
+          },
+          {
+            newColumn: { value: true, player: null },
+            currentColumn: { value: false, player: null },
+            path: ["0", "1"]
+          },
+          {
+            newColumn: { value: true, player: null },
+            currentColumn: { value: false, player: null },
+            path: ["0", "2"]
+          },
+          {
+            newColumn: { value: true, player: null },
+            currentColumn: { value: false, player: null },
+            path: ["0", "3"]
+          }
+        ];
+      });
+
+      it("should set the game status as errornous", () => {
+        const actual = isMaximumOfMatchesExceeded(
+          newState,
+          actualState,
+          differences
+        )(newState);
+
+        expect(actual.status).toEqual(GameStatus.Errornous);
+      });
+
+      it("should return the expected state", () => {
+        const expectedState: GameState = {
+          board: {
+            0: {
+              0: {
+                value: false,
+                player: null,
+                errorMessage: MAXIMUM_OF_MATCHES_EXCEEDED_ERROR
+              },
+              1: {
+                value: false,
+                player: null,
+                errorMessage: MAXIMUM_OF_MATCHES_EXCEEDED_ERROR
+              },
+              2: {
+                value: false,
+                player: null,
+                errorMessage: MAXIMUM_OF_MATCHES_EXCEEDED_ERROR
+              },
+              3: {
+                value: false,
+                player: null,
+                errorMessage: MAXIMUM_OF_MATCHES_EXCEEDED_ERROR
+              }
+            }
+          },
+          status: GameStatus.Errornous
+        };
+
+        const actual = isMaximumOfMatchesExceeded(
+          newState,
+          actualState,
+          differences
+        )(newState);
+
+        expect(actual).toEqual(expectedState);
       });
     });
   });
