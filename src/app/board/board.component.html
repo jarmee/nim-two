@@ -1,17 +1,15 @@
 <div class="container">
-  <div class="card mt-5">
-    <div class="card-body">
-      <div class="text-center">
-        <h1>You vs 🤖</h1>
-      </div>
-      <div class="mt-5">
-        <app-board-form
-          data-test-id="board"
-          [board]="board$ | async"
-          (executePlay)="onExecutePlay($event)"
-          (reset)="onReset()"
-        ></app-board-form>
-      </div>
+  <div class="row mt-5">
+    <div class="col-12 text-center"><h1 class="col-12">You vs 🤖</h1></div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-12">
+      <app-board-form
+        data-test-id="board"
+        [board]="board$ | async"
+        (executePlay)="onExecutePlay($event)"
+        (reset)="onReset()"
+      ></app-board-form>
     </div>
   </div>
 </div>
