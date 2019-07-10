@@ -6,10 +6,10 @@
 [x] npm test should run all tests
 [x] Create a GitHub repo
 [x] Ci/Cd pipeline
-[] Two player game (1 human & 1 PC)
-[] Playground should include 13 sticks
-[] In one turn a player could pick 1, 2 or 3 sticks, but max the amount of matches which are one the board
-[] The artificial player should be replaceable
+[x] Two player game (1 human & 1 PC)
+[x] Playground should include 13 sticks
+[x] In one turn a player could pick 1, 2 or 3 sticks, but max the amount of matches which are one the board
+[x] The artificial player should be replaceable
 
 ## Notes on states
 
@@ -58,9 +58,9 @@ Implement a dynamic form. Each form control represents a stick.
 [x] Add bootstrap
 [x] Change all boards in test to the board builder
 [x] Fix failing tests
+[x] fix imports
+[x] Move helper functions of game-engine.service to game-engine.helpers
 [] Add missing tests
-[] fix imports
-[] Move helper functions of game-engine.service to game-engine.helpers
 [] Improve isGameOver rule
 [] Review all components of the game
 [] Think of better game status
