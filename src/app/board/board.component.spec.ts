@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { ReactiveFormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
-import { boardFactory } from "../shared/board/testing/board.mock";
+import { BoardBuilder } from "../shared/board/board.builder";
 import { GameEngineModule } from "../shared/game-engine/game-engine.module";
 import { GameEngineService } from "../shared/game-engine/game-engine.service";
 import { NIM_KI_RULES } from "../shared/rules/nim/nim.ai";
@@ -46,7 +46,23 @@ describe("BoardComponent", () => {
   });
 
   describe("onExecutePlay", () => {
-    const board = boardFactory();
+    const board = BoardBuilder.create()
+      .addRowWithColumns(
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      )
+      .build();
 
     it("should call the executePlay method of the GameEngine", () => {
       component.onExecutePlay(board);

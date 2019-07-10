@@ -1,8 +1,8 @@
 import { TestBed } from "@angular/core/testing";
 import { FormGroup, ReactiveFormsModule } from "@angular/forms";
 import * as faker from "faker";
+import { BoardBuilder } from "src/app/shared/board/board.builder";
 import { Column } from "src/app/shared/board/board.model";
-import { boardFactory } from "src/app/shared/board/testing/board.mock";
 import { BoardFormBuilderService } from "./board-form-builder.service";
 
 describe("BoardFormBuilderService", () => {
@@ -32,7 +32,23 @@ describe("BoardFormBuilderService", () => {
   });
 
   describe("of", () => {
-    const board = boardFactory();
+    const board = BoardBuilder.create()
+      .addRowWithColumns(
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      )
+      .build();
 
     it("should return a form group", () => {
       const actual: FormGroup = service.of(board);

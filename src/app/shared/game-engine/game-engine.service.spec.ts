@@ -1,7 +1,6 @@
 import { TestBed } from "@angular/core/testing";
 import { BoardBuilder } from "../board/board.builder";
 import { Board, BoardDifferences } from "../board/board.model";
-import { boardFactory } from "../board/testing/board.mock";
 import { GameState, GameStatus, GAME_STATE_STORE } from "./game-engine.model";
 import { applyRules, GameEngineService } from "./game-engine.service";
 import { GameEngineStore } from "./game-engine.store";
@@ -40,7 +39,23 @@ describe("GameEngineService", () => {
     });
 
     it("should call the next method of the store", () => {
-      const expectedBoard = boardFactory();
+      const expectedBoard = BoardBuilder.create()
+        .addRowWithColumns(
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        )
+        .build();
 
       service.executePlay(expectedBoard);
 

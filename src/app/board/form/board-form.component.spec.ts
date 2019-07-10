@@ -9,7 +9,6 @@ import { By } from "@angular/platform-browser";
 import * as faker from "faker";
 import { BoardBuilder } from "../../shared/board/board.builder";
 import { Board, Column } from "../../shared/board/board.model";
-import { boardFactory } from "../../shared/board/testing/board.mock";
 import { BoardFormBuilderService } from "./board-form-builder.service";
 import {
   andSetErrors,
@@ -22,7 +21,23 @@ import {
 import { MatchControlComponent } from "./match-control/match-control.component";
 
 describe("BoardFormComponent", () => {
-  const board: Board = boardFactory();
+  const board: Board = BoardBuilder.create()
+    .addRowWithColumns(
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    )
+    .build();
   let component: BoardFormComponent;
   let fixture: ComponentFixture<BoardFormComponent>;
 
