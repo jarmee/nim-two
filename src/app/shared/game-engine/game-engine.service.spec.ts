@@ -1,10 +1,9 @@
 import { TestBed } from "@angular/core/testing";
-import * as faker from "faker";
 import { BoardBuilder } from "../board/board.builder";
 import { Board, BoardDifferences } from "../board/board.model";
 import { boardFactory } from "../board/testing/board.mock";
 import { GameState, GameStatus, GAME_STATE_STORE } from "./game-engine.model";
-import { applyRules, diff, GameEngineService } from "./game-engine.service";
+import { applyRules, GameEngineService } from "./game-engine.service";
 import { GameEngineStore } from "./game-engine.store";
 import { gameStateFactory } from "./testing/game-engine.mock";
 
@@ -93,58 +92,6 @@ describe("GameEngineService", () => {
 
   describe("calculateState", () => {
     //TODO: Add missing tests
-  });
-
-  describe("diff", () => {
-    it("should return an empty array if both Board objects have the same values", () => {
-      const newBoard: Board = BoardBuilder.create()
-        .addRowWithColumns(false)
-        .build();
-
-      const currentBoard: Board = BoardBuilder.create()
-        .addRowWithColumns(false)
-        .build();
-
-      const actual = diff(newBoard, currentBoard);
-
-      expect(actual).toEqual([]);
-    });
-
-    it("should return an emptry array if one of the parameter is null", () => {
-      const newBoard = BoardBuilder.create()
-        .addRowWithColumns(true)
-        .build();
-      const currentBoard = null;
-
-      const actual = diff(newBoard, currentBoard);
-
-      expect(actual).toEqual([]);
-    });
-
-    it("should return an array which contains all the columns that are not equal", () => {
-      const newColumn = {
-        value: false,
-        player: faker.name.firstName()
-      };
-      const newBoard: Board = {
-        0: {
-          0: newColumn
-        }
-      };
-      const currentColumn = {
-        value: true,
-        player: faker.name.firstName()
-      };
-      const currentBoard: Board = {
-        0: {
-          0: currentColumn
-        }
-      };
-
-      const actual = diff(newBoard, currentBoard);
-
-      expect(actual).toEqual([{ newColumn, currentColumn, path: ["0", "0"] }]);
-    });
   });
 
   describe("applyRules", () => {
