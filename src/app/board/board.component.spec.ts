@@ -11,6 +11,7 @@ import { BoardComponent } from "./board.component";
 import { BoardFormBuilderService } from "./form/board-form-builder.service";
 import { BoardFormComponent } from "./form/board-form.component";
 import { MatchControlComponent } from "./form/match-control/match-control.component";
+import { PlayerBatchComponent } from "./form/player-batch/player-batch.component";
 
 describe("BoardComponent", () => {
   let component: BoardComponent;
@@ -19,7 +20,12 @@ describe("BoardComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [BoardComponent, BoardFormComponent, MatchControlComponent],
+      declarations: [
+        BoardComponent,
+        BoardFormComponent,
+        MatchControlComponent,
+        PlayerBatchComponent
+      ],
       imports: [
         GameEngineModule.forRoot(NIM_GAME_STATE, NIM_RULES, NIM_KI_RULES),
         ReactiveFormsModule

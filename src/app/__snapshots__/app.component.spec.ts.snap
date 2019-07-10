@@ -6,40 +6,53 @@ exports[`AppComponent should match the snapshot 1`] = `
     <div
       class="container"
     >
-      <h1>
-        Nim 2
-      </h1>
-      <span>
-        
-      </span>
-      <app-board-form
-        data-test-id="board"
+      <div
+        class="card mt-5"
       >
-        <form
-          novalidate=""
+        <div
+          class="card-body"
         >
-          
-          
           <div
-            class="row mt-5"
+            class="text-center"
           >
-            <button
-              class="btn btn-primary"
-              data-test-id="execute-play-button"
-              type="button"
-            >
-               Finish Play 
-            </button>
-            <button
-              class="btn btn-danger"
-              data-test-id="reset-button"
-              type="button"
-            >
-               Reset Game 
-            </button>
+            <h1>
+              You vs 🤖
+            </h1>
           </div>
-        </form>
-      </app-board-form>
+          <div
+            class="mt-5"
+          >
+            <app-board-form
+              data-test-id="board"
+            >
+              <form
+                novalidate=""
+              >
+                
+                
+                <div
+                  class="row mt-5"
+                >
+                  <button
+                    class="btn btn-primary"
+                    data-test-id="execute-play-button"
+                    type="button"
+                  >
+                     Finish Play 
+                  </button>
+                  <button
+                    class="btn btn-danger"
+                    data-test-id="reset-button"
+                    type="button"
+                  >
+                     Reset Game 
+                  </button>
+                </div>
+              </form>
+            </app-board-form>
+          </div>
+        </div>
+      </div>
     </div>
   </app-board>
 </app-root>

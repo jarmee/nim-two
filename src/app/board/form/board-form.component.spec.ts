@@ -19,6 +19,7 @@ import {
   watchColumnValueChangesOf
 } from "./board-form.component";
 import { MatchControlComponent } from "./match-control/match-control.component";
+import { PlayerBatchComponent } from "./player-batch/player-batch.component";
 
 describe("BoardFormComponent", () => {
   const board: Board = BoardBuilder.create()
@@ -43,7 +44,11 @@ describe("BoardFormComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [BoardFormComponent, MatchControlComponent],
+      declarations: [
+        BoardFormComponent,
+        MatchControlComponent,
+        PlayerBatchComponent
+      ],
       imports: [ReactiveFormsModule],
       providers: [BoardFormBuilderService]
     }).compileComponents();

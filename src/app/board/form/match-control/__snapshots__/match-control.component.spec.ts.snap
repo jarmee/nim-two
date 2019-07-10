@@ -7,11 +7,20 @@ exports[`MatchControlComponent should match the snapshot 1`] = `
   formControlName={[Function String]}
   renderer={[Function DebugRenderer2]}
 >
-  <input
-    data-test-id="match-checkbox"
-    id="match-control"
-    name="match-control"
-    type="checkbox"
-  />
+  <div
+    class="custom-control custom-checkbox"
+  >
+    <input
+      class="custom-control-input"
+      data-test-id="match-checkbox"
+      id="match-control-undefined"
+      name="match-control"
+      type="checkbox"
+    />
+    <label
+      class="custom-control-label"
+      for="match-control-undefined"
+    />
+  </div>
 </app-match-control>
 `;
