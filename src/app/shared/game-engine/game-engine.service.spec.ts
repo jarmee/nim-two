@@ -68,7 +68,7 @@ describe("GameEngineService", () => {
   describe("board$", () => {
     it("should emit the current board", done => {
       service.board$.subscribe((actualBoard: Board) => {
-        expect(actualBoard).toBe(store.snapshot.board);
+        expect(actualBoard).toEqual(store.snapshot.board);
         done();
       });
     });
