@@ -60,13 +60,14 @@ Implement a dynamic form. Each form control represents a stick.
 [x] Fix failing tests
 [x] fix imports
 [x] Move helper functions of game-engine.service to game-engine.helpers
-[] Add missing tests
+[] Add missing tests for nim.ai and nim.rules
+[] Get rid of the valueChanges handler and move the player logic elsewhere
 [] Improve isGameOver rule
+[] Improve match control
+[] Build the magic button
+[] Add improved error messages
 [] Review all components of the game
 [] Think of better game status
-[] Improve match control
-[] Get rid of the valueChanges handler
-[] Add improved error messages
 [] Fix failing test in board-form component
 [] Add default error handling
 [] Add rules of the game to the ui
