@@ -24,12 +24,19 @@ export class MatchControlComponent implements ControlValueAccessor {
   @Input()
   formControlName: string;
 
+  @Input()
+  id: string;
+
   @ViewChild("matchCheckbox", { static: true })
   checkboxElementRef: ElementRef;
 
   onChangeCallback: (value: boolean) => void;
 
   onTouchedCallback: () => void;
+
+  get uniqueFormControlId() {
+    return `${this.formControlName}-${this.id}`
+  }
 
   constructor(private renderer: Renderer2, private elementRef: ElementRef) {}
 

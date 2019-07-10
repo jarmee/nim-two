@@ -14,7 +14,15 @@
           )
         "
       >
-        <app-match-control formControlName="value"></app-match-control>
+        <app-match-control
+          formControlName="value"
+          [id]="
+            uniqueFormControlId(
+              formGroupControlName,
+              columnFormGroupControlName
+            )
+          "
+        ></app-match-control>
         <span>
           {{ playerName(formGroupControlName, columnFormGroupControlName) }}
         </span>

@@ -169,6 +169,13 @@ export class BoardFormComponent extends SubscriptionService
     );
   }
 
+  uniqueFormControlId(
+    formGroupName: string,
+    columnFormGroupName: string
+  ): string {
+    return `${formGroupName}-${columnFormGroupName}`;
+  }
+
   onExecutePlay() {
     this.executePlay.emit(this.formGroup.value);
   }

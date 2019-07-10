@@ -37,6 +37,17 @@ describe("MatchControlComponent", () => {
     expect(fixture).toMatchSnapshot();
   });
 
+  describe("uniqueFormControlId", () => {
+    it("should return a id containing the formControlName and the given id", () => {
+      component.formControlName = faker.random.word();
+      component.id = faker.random.uuid();
+
+      expect(component.uniqueFormControlId).toBe(
+        `${component.formControlName}-${component.id}`
+      );
+    });
+  });
+
   describe("registerOnChange", () => {
     it("should set the onChangeCallback", () => {
       const fakeCallback = jest.fn();

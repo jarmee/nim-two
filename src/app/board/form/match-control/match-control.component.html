@@ -1,9 +1,13 @@
-<input
-  #matchCheckbox
-  data-test-id="match-checkbox"
-  type="checkbox"
-  (change)="onChange($event.target.checked)"
-  (blur)="onTouched()"
-  [name]="formControlName"
-  [attr.id]="formControlName"
-/>
+<div class="custom-control custom-checkbox">
+  <input
+    class="custom-control-input"
+    #matchCheckbox
+    data-test-id="match-checkbox"
+    type="checkbox"
+    (change)="onChange($event.target.checked)"
+    (blur)="onTouched()"
+    [name]="formControlName"
+    [attr.id]="uniqueFormControlId"
+  />
+  <label class="custom-control-label" [attr.for]="uniqueFormControlId"></label>
+</div>

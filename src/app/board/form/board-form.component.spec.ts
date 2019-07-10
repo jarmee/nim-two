@@ -441,4 +441,15 @@ describe("BoardFormComponent", () => {
       expect(columnFormGroup.value.player).toBe(playerName);
     });
   });
+
+  describe("uniqueFormControlId", () => {
+    it("should return a string consisting of the given parameters", () => {
+      const rowFormGroupName = faker.random.word();
+      const columnFormGroupName = faker.random.word();
+
+      expect(
+        component.uniqueFormControlId(rowFormGroupName, columnFormGroupName)
+      ).toBe(`${rowFormGroupName}-${columnFormGroupName}`);
+    });
+  });
 });

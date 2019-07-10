@@ -1,10 +1,17 @@
 <div class="container">
-  <h1>Nim 2</h1>
-  <span>{{ status$ | async }}</span>
-  <app-board-form
-    data-test-id="board"
-    [board]="board$ | async"
-    (executePlay)="onExecutePlay($event)"
-    (reset)="onReset()"
-  ></app-board-form>
+  <div class="card mt-5">
+    <div class="card-body">
+      <div class="text-center">
+        <h1>You vs 🤖</h1>
+      </div>
+      <div class="mt-5">
+        <app-board-form
+          data-test-id="board"
+          [board]="board$ | async"
+          (executePlay)="onExecutePlay($event)"
+          (reset)="onReset()"
+        ></app-board-form>
+      </div>
+    </div>
+  </div>
 </div>
