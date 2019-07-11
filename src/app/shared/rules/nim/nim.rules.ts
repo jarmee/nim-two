@@ -14,7 +14,7 @@ import {
 const MAX_MATCHES = 3;
 export const MAXIMUM_OF_MATCHES_EXCEEDED_ERROR = "Maximum Matches Exceeded";
 
-export const isMaximumOfMatchesExceeded: GameRule = (
+export const isMaximumOfMatchesExceededRule: GameRule = (
   newState: GameState,
   actualState: GameState,
   boardDifferences: BoardDifferences
@@ -42,12 +42,13 @@ export const isMaximumOfMatchesExceeded: GameRule = (
   return state;
 };
 
-export const hasChanged: GameRule = (
+export const preventBoardHasNoChangesRule: GameRule = (
   newState: GameState,
   actualState: GameState,
   boardDifferences: BoardDifferences
 ) => (state: GameState) => {
   if (state.status === GameStatus.Errornous) return state;
+
   if (boardDifferences.length === 0) {
     const errornousState = {
       ...cloneDeep(actualState),
@@ -58,7 +59,7 @@ export const hasChanged: GameRule = (
   return state;
 };
 
-export const isGameOver: GameRule = (
+export const isGameOverRule: GameRule = (
   newState: GameState,
   actualState: GameState,
   boardDifferences: BoardDifferences
@@ -78,7 +79,7 @@ export const isGameOver: GameRule = (
 };
 
 export const NIM_RULES: GameRules = [
-  hasChanged,
-  isMaximumOfMatchesExceeded,
-  isGameOver
+  preventBoardHasNoChangesRule,
+  isMaximumOfMatchesExceededRule,
+  isGameOverRule
 ];

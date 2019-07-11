@@ -30,7 +30,7 @@ export function ifValueIsPlayable(amountOfMatches: number) {
   };
 }
 
-export const calculatePlay: (amountOfMatches: number) => AiRule = (
+export const calculatePlayRule: (amountOfMatches: number) => AiRule = (
   amountOfMatches: number
 ) => (state: GameState) => {
   return (calculatedState: GameState) => {
@@ -45,5 +45,5 @@ export const calculatePlay: (amountOfMatches: number) => AiRule = (
 };
 
 export const NIM_KI_RULES: AiRules = [
-  calculatePlay(randomNumberOfMatchesToPick(MIN_MATCHES, MAX_MATCHES))
+  calculatePlayRule(randomNumberOfMatchesToPick(MIN_MATCHES, MAX_MATCHES))
 ];

@@ -3,7 +3,7 @@ import { Board } from "../../board/board.model";
 import { GameState } from "../../game-engine/game-engine.model";
 import { gameStateFactory } from "../../game-engine/testing/game-engine.mock";
 import {
-  calculatePlay,
+  calculatePlayRule,
   isPlayable,
   randomNumberOfMatchesToPick
 } from "./nim.ai";
@@ -70,7 +70,7 @@ describe("NimAi", () => {
           })
           .build();
 
-        const actual = calculatePlay(MAX_MATCHES)(Object.freeze(gameState))(
+        const actual = calculatePlayRule(MAX_MATCHES)(Object.freeze(gameState))(
           gameState
         );
 
@@ -132,7 +132,7 @@ describe("NimAi", () => {
           board
         };
 
-        const actual = calculatePlay(MAX_MATCHES)(Object.freeze(gameState))(
+        const actual = calculatePlayRule(MAX_MATCHES)(Object.freeze(gameState))(
           gameState
         );
 

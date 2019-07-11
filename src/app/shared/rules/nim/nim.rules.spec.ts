@@ -1,14 +1,16 @@
+import { cloneDeep } from "lodash";
 import { BoardBuilder } from "../../board/board.builder";
 import { BoardDifferences } from "../../board/board.model";
 import { GameState, GameStatus } from "../../game-engine/game-engine.model";
 import {
-  isGameOver,
-  isMaximumOfMatchesExceeded,
-  MAXIMUM_OF_MATCHES_EXCEEDED_ERROR
+  isGameOverRule,
+  isMaximumOfMatchesExceededRule,
+  MAXIMUM_OF_MATCHES_EXCEEDED_ERROR,
+  preventBoardHasNoChangesRule
 } from "./nim.rules";
 
 describe("NimRules", () => {
-  describe("isMaximumOfMatchesExceeded", () => {
+  describe("isMaximumOfMatchesExceededRule", () => {
     it("should return the given game state if the game status is errornous", () => {
       const errornousState: GameState = {
         status: GameStatus.Errornous,
@@ -29,7 +31,7 @@ describe("NimRules", () => {
         }
       ];
 
-      const actual = isMaximumOfMatchesExceeded(
+      const actual = isMaximumOfMatchesExceededRule(
         errornousState,
         actualState,
         differences
@@ -56,7 +58,7 @@ describe("NimRules", () => {
           path: ["0", "0"]
         }
       ];
-      const actual = isMaximumOfMatchesExceeded(
+      const actual = isMaximumOfMatchesExceededRule(
         newState,
         actualState,
         differences
@@ -88,7 +90,7 @@ describe("NimRules", () => {
           path: ["0", "1"]
         }
       ];
-      const actual = isMaximumOfMatchesExceeded(
+      const actual = isMaximumOfMatchesExceededRule(
         newState,
         currentBoard,
         differences
@@ -125,7 +127,7 @@ describe("NimRules", () => {
           path: ["0", "2"]
         }
       ];
-      const actual = isMaximumOfMatchesExceeded(
+      const actual = isMaximumOfMatchesExceededRule(
         newState,
         actualState,
         differences
@@ -177,7 +179,7 @@ describe("NimRules", () => {
       });
 
       it("should set the game status as errornous", () => {
-        const actual = isMaximumOfMatchesExceeded(
+        const actual = isMaximumOfMatchesExceededRule(
           newState,
           actualState,
           differences
@@ -215,7 +217,7 @@ describe("NimRules", () => {
           status: GameStatus.Errornous
         };
 
-        const actual = isMaximumOfMatchesExceeded(
+        const actual = isMaximumOfMatchesExceededRule(
           newState,
           actualState,
           differences
@@ -226,7 +228,7 @@ describe("NimRules", () => {
     });
   });
 
-  describe("isGameOver", () => {
+  describe("isGameOverRule", () => {
     it("should return the given state if the game status is errornous", () => {
       const errornousState: GameState = {
         status: GameStatus.Errornous,
@@ -247,7 +249,7 @@ describe("NimRules", () => {
         }
       ];
 
-      const actual = isGameOver(errornousState, actualState, differences)(
+      const actual = isGameOverRule(errornousState, actualState, differences)(
         errornousState
       );
 
@@ -273,13 +275,68 @@ describe("NimRules", () => {
         }
       ];
 
-      const actual = isGameOver(newState, actualState, differences)(newState);
+      const actual = isGameOverRule(newState, actualState, differences)(
+        newState
+      );
 
       expect(actual.status).toBe(GameStatus.GameOverPlayerOne);
     });
   });
 
-  describe("hasChanged", () => {
-    //TODO: write tests
+  describe("preventBoardHasNoChangesRule", () => {
+    it("should return the given state if the state is errornous", () => {
+      const errornousState: GameState = {
+        status: GameStatus.Errornous,
+        board: BoardBuilder.create()
+          .addRowWithColumns(true, true, true, true)
+          .build()
+      };
+      const actualState: GameState = {
+        board: BoardBuilder.create()
+          .addRowWithColumns(false, false, false, false)
+          .build()
+      };
+      const differences: BoardDifferences = [
+        {
+          newColumn: { value: true, player: null },
+          currentColumn: { value: false, player: null },
+          path: ["0", "0"]
+        }
+      ];
+
+      const actual = preventBoardHasNoChangesRule(
+        errornousState,
+        actualState,
+        differences
+      )(errornousState);
+
+      expect(actual).toBe(errornousState);
+    });
+
+    it("should return the actual state marked as errornous if the board did not change", () => {
+      const newState: GameState = {
+        board: BoardBuilder.create()
+          .addRowWithColumns(true, true, true, true)
+          .build()
+      };
+      const actualState: GameState = {
+        board: BoardBuilder.create()
+          .addRowWithColumns(true, true, true, true)
+          .build()
+      };
+      const errornousState = {
+        ...cloneDeep(actualState),
+        status: GameStatus.Errornous
+      };
+      const differences: BoardDifferences = [];
+
+      const actual = preventBoardHasNoChangesRule(
+        newState,
+        actualState,
+        differences
+      )(newState);
+
+      expect(actual).toEqual(errornousState);
+    });
   });
 });
