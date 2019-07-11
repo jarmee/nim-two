@@ -5,7 +5,6 @@ import {
   AiRules,
   GameState
 } from "../../game-engine/game-engine.model";
-import { MAX_MATCHES, MIN_MATCHES } from "./nim.model";
 
 export function randomNumberOfMatchesToPick(min: number, max: number): number {
   return Math.round(Math.random() * max) || min;
@@ -30,10 +29,11 @@ export function ifValueIsPlayable(amountOfMatches: number) {
   };
 }
 
-export const calculatePlayRule: (amountOfMatches: number) => AiRule = (
-  amountOfMatches: number
+export const calculatePlayRule: (amountOfMatches: () => number) => AiRule = (
+  amountOfMatchesProducer: () => number
 ) => (state: GameState) => {
   return (calculatedState: GameState) => {
+    let amountOfMatches = amountOfMatchesProducer();
     return {
       ...calculatedState,
       board: exchangeColumnsOf(
@@ -45,5 +45,5 @@ export const calculatePlayRule: (amountOfMatches: number) => AiRule = (
 };
 
 export const NIM_KI_RULES: AiRules = [
-  calculatePlayRule(randomNumberOfMatchesToPick(MIN_MATCHES, MAX_MATCHES))
+  calculatePlayRule(() => randomNumberOfMatchesToPick(1, 3))
 ];

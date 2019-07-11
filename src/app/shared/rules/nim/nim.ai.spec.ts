@@ -70,9 +70,9 @@ describe("NimAi", () => {
           })
           .build();
 
-        const actual = calculatePlayRule(MAX_MATCHES)(Object.freeze(gameState))(
-          gameState
-        );
+        const actual = calculatePlayRule(() => MAX_MATCHES)(
+          Object.freeze(gameState)
+        )(gameState);
 
         expect(actual.board).toEqual(board);
       });
@@ -132,9 +132,9 @@ describe("NimAi", () => {
           board
         };
 
-        const actual = calculatePlayRule(MAX_MATCHES)(Object.freeze(gameState))(
-          gameState
-        );
+        const actual = calculatePlayRule(() => MAX_MATCHES)(
+          Object.freeze(gameState)
+        )(gameState);
 
         expect(actual.board).toEqual(expectedBoard);
       });
