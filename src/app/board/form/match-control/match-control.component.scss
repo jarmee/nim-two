@@ -1,0 +1,22 @@
+:host {
+  .custom-control-label {
+    cursor: pointer;
+    &:before {
+      content: "💣";
+      border: 0px solid transparent;
+      background: transparent;
+    }
+  }
+  .custom-control-input:checked ~ {
+    .custom-control-label {
+      &:before {
+        content: "💥";
+        border: 0px solid transparent;
+        background: transparent;
+      }
+      &:after {
+        background: transparent;
+      }
+    }
+  }
+}

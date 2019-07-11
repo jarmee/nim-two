@@ -8,7 +8,7 @@ exports[`MatchControlComponent should match the snapshot 1`] = `
   renderer={[Function DebugRenderer2]}
 >
   <div
-    class="custom-control custom-checkbox"
+    class="custom-control custom-checkbox mx-2"
   >
     <input
       class="custom-control-input"
