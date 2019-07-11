@@ -70,3 +70,22 @@ export function countColumnsOf(
       0
     );
 }
+
+export function exchangeColumnsOf(
+  board: Board,
+  exchangeColumnCallback: (column: Column) => Column
+): Board {
+  if (!board) return null;
+
+  return Object.keys(board)
+    .map(rowKey => ({
+      [rowKey]: Object.keys(board[rowKey])
+        .map(columnKey => ({
+          [columnKey]: exchangeColumnCallback
+            ? exchangeColumnCallback(board[rowKey][columnKey])
+            : { ...board[rowKey][columnKey] }
+        }))
+        .reduce((newRow, column) => ({ ...newRow, ...column }))
+    }))
+    .reduce((newBoard, row) => ({ ...newBoard, ...row }), {});
+}

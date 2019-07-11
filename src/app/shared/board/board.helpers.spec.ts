@@ -2,6 +2,7 @@ import { BoardBuilder } from "./board.builder";
 import {
   countColumnsOf,
   differenceOf,
+  exchangeColumnsOf,
   findColumnOf,
   withColumnValueFalseFilter
 } from "./board.helpers";
@@ -164,6 +165,31 @@ describe("BoardHelpers", () => {
       const actual = withColumnValueFalseFilter(column);
 
       expect(actual).toBe(true);
+    });
+  });
+
+  describe("exchangeColumnsOf", () => {
+    const fakeCallback = jest.fn((column: Column) => column);
+    const board = BoardBuilder.create()
+      .addRowWithColumns(false, false, false)
+      .build();
+
+    it("should return null if the board is not set", () => {
+      expect(exchangeColumnsOf(null, fakeCallback)).toBeNull();
+    });
+
+    it("should create a copy of the board if the callback is not set", () => {
+      expect(exchangeColumnsOf(board, null)).toEqual(board);
+    });
+
+    it("should call the callback for each column of the board", () => {
+      exchangeColumnsOf(board, fakeCallback);
+
+      expect(fakeCallback).toHaveBeenCalledTimes(3);
+    });
+
+    afterEach(() => {
+      (fakeCallback as jest.Mock).mockClear();
     });
   });
 });
