@@ -1,10 +1,10 @@
 import { skip } from "rxjs/operators";
 import { BoardBuilder } from "../board/board.builder";
-import { GameState, GameStatus } from "./game-engine.model";
-import { GameEngineStore } from "./game-engine.store";
-import { gameStateFactory } from "./testing/game-engine.mock";
+import { GameState, GameStatus } from "../game-engine/game-engine.model";
+import { gameStateFactory } from "../game-engine/testing/game-engine.mock";
+import { Store } from "./store";
 
-describe("GameEngineStore", () => {
+describe("Store", () => {
   const initialGameState: GameState = gameStateFactory.build();
   const updatedState = gameStateFactory
     .extend({
@@ -28,10 +28,10 @@ describe("GameEngineStore", () => {
       status: GameStatus.HumanPlay
     })
     .build();
-  let store: GameEngineStore;
+  let store: Store<any>;
 
   beforeEach(() => {
-    store = new GameEngineStore(initialGameState);
+    store = new Store(initialGameState);
   });
 
   describe("Instantiation", () => {
