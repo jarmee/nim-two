@@ -1,6 +1,7 @@
 import { TestBed } from "@angular/core/testing";
-import { playerFactory, PLAYERS, PlayerType } from "./turn.model";
+import { playerFactory, PlayerType, TURN_STATE_STORE } from "./turn.model";
 import { TurnService } from "./turn.service";
+import { TurnStore } from "./turn.store";
 
 describe("TurnServiceService", () => {
   const player1 = playerFactory("Player 1", PlayerType.Human);
@@ -11,8 +12,8 @@ describe("TurnServiceService", () => {
       providers: [
         TurnService,
         {
-          provide: PLAYERS,
-          useValue: [player1, player2]
+          provide: TURN_STATE_STORE,
+          useFactory: () => new TurnStore([player1, player2])
         }
       ]
     })
