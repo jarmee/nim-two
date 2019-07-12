@@ -7,7 +7,7 @@ import {
   withColumnValueFalseFilter
 } from "../board/board.helpers";
 import { Board, BoardDifferences } from "../board/board.model";
-import { SubscriptionService } from "../subscription.service";
+import { SubscriptionService } from "../state/subscription.service";
 import { applyRules, calculateState } from "./game-engine.helpers";
 import {
   AiRules,

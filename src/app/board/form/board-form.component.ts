@@ -11,7 +11,7 @@ import {
 import { FormGroup } from "@angular/forms";
 import { Subscription } from "rxjs";
 import { Board, Column, Columns } from "../../shared/board/board.model";
-import { SubscriptionService } from "../../shared/subscription.service";
+import { SubscriptionService } from "../../shared/state/subscription.service";
 import { BoardFormBuilderService } from "./board-form-builder.service";
 
 const PLAYER_FORM_CONTROL_NAME = "player";
