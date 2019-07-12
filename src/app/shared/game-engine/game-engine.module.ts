@@ -9,11 +9,14 @@ import {
 } from "./game-engine.model";
 import { GameEngineService } from "./game-engine.service";
 import { GameEngineStore } from "./game-engine.store";
+import { TurnService } from "./turn/turn.service";
+import { Players, PLAYERS } from "./turn/turn.model";
 
 @NgModule({})
 export class GameEngineModule {
   static forRoot(
     initialState: GameState,
+    players: Players,
     rules: GameRules,
     aiRules: AiRules
   ): ModuleWithProviders {
@@ -25,6 +28,10 @@ export class GameEngineModule {
           useFactory: () => new GameEngineStore(initialState)
         },
         {
+          provide: PLAYERS,
+          useValue: players
+        },
+        {
           provide: GAME_RULES,
           useValue: rules
         },
@@ -32,6 +39,7 @@ export class GameEngineModule {
           provide: GAME_AI_RULES,
           useValue: aiRules
         },
+        TurnService,
         GameEngineService
       ]
     };
