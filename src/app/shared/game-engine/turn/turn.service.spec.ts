@@ -47,21 +47,31 @@ describe("TurnServiceService", () => {
     });
   });
 
-  describe("nextAvailableIndexOf", () => {
-    describe("should return the next available index", () => {
-      it("should return 1", () => {
-        const selected = 0;
-        expect(nextAvailableIndexOf(players, selected)).toBe(1);
-      });
-
-      it("should return 0", () => {
-        const selected = 1;
-        expect(nextAvailableIndexOf(players, selected)).toBe(0);
+  describe("selectedPlayer$", () => {
+    it("should return the selected player", done => {
+      const selectedPlayer = players[0];
+      service.selectedPlayer$.subscribe((player: Player) => {
+        expect(player).toEqual(selectedPlayer);
+        done();
       });
     });
   });
 
   describe("switchPlayers", () => {
+    describe("nextAvailableIndexOf", () => {
+      describe("should return the next available index", () => {
+        it("should return 1", () => {
+          const selected = 0;
+          expect(nextAvailableIndexOf(players, selected)).toBe(1);
+        });
+
+        it("should return 0", () => {
+          const selected = 1;
+          expect(nextAvailableIndexOf(players, selected)).toBe(0);
+        });
+      });
+    });
+
     it("it should call the next method of the store with the switched player", () => {
       store.next = jest.fn();
 

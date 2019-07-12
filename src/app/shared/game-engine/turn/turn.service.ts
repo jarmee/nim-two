@@ -1,7 +1,7 @@
 import { Inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { Players, TurnState, TURN_STATE_STORE } from "./turn.model";
+import { Player, Players, TurnState, TURN_STATE_STORE } from "./turn.model";
 import { TurnStore } from "./turn.store";
 
 export function nextAvailableIndexOf(players: Players, currentIndex): number {
@@ -12,6 +12,10 @@ export function nextAvailableIndexOf(players: Players, currentIndex): number {
 export class TurnService {
   players$: Observable<Players> = this.store.pipe(
     map((state: TurnState) => state.players)
+  );
+
+  selectedPlayer$: Observable<Player> = this.store.pipe(
+    map((state: TurnState) => state.players[state.selected])
   );
 
   constructor(@Inject(TURN_STATE_STORE) private store: TurnStore) {}
