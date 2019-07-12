@@ -37,10 +37,10 @@ export const TURN_STATE_STORE: InjectionToken<TurnStore> = new InjectionToken<
 
 export interface TurnState {
   players: Players;
-  selectPlayer: number;
+  selected: number;
 }
 
-export const initialTurnState = {
+export const initialTurnState: TurnState = {
   players: [],
-  selectPlayer: 0
+  selected: 0
 };
