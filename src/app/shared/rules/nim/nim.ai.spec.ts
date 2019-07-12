@@ -77,7 +77,7 @@ describe("NimAi", () => {
         expect(actual.board).toEqual(board);
       });
 
-      fit("should set amount of columns to true", () => {
+      it("should set amount of columns to true", () => {
         const oponent = faker.name.firstName();
         const board: Board = {
           0: {
