@@ -2,11 +2,11 @@ import { ModuleWithProviders, NgModule } from "@angular/core";
 import { Board } from "./board/board.model";
 import { AiRules, GAME_AI_RULES } from "./bot/bot.model";
 import { BotService } from "./bot/bot.service";
-import { GameEngineService } from "./game-engine.service";
+import { GameEngineFacade } from "./game-engine.facade";
 import { GameRules, GAME_RULES } from "./rule/rule.model";
 import { RuleService } from "./rule/rule.service";
 import { STATE_STORE } from "./state/state.model";
-import { StateService } from './state/state.service';
+import { StateService } from "./state/state.service";
 import { GameStateStore } from "./state/state.store";
 import { Players, TURN_STATE_STORE } from "./turn/turn.model";
 import { TurnService } from "./turn/turn.service";
@@ -43,7 +43,7 @@ export class GameEngineModule {
         RuleService,
         TurnService,
         StateService,
-        GameEngineService
+        GameEngineFacade
       ]
     };
   }

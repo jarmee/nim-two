@@ -1,31 +1,37 @@
 import { TestBed } from "@angular/core/testing";
+import { GameEngineFacade } from ".";
 import { NIM_BOARD } from "../games/nim/nim.board";
 import { BoardBuilder } from "./board/board.builder";
 import { Board } from "./board/board.model";
-import { GameEngineService } from "./game-engine.service";
+import { BotService } from "./bot/bot.service";
 import { RuleService } from "./rule/rule.service";
 import { GameStatus, STATE_STORE } from "./state/state.model";
-import { StateService } from './state/state.service';
+import { StateService } from "./state/state.service";
 import { GameStateStore } from "./state/state.store";
-import { Player, playerFactory, Players, PlayerType, TURN_STATE_STORE } from "./turn/turn.model";
+import {
+  Player,
+  playerFactory,
+  Players,
+  PlayerType,
+  TURN_STATE_STORE
+} from "./turn/turn.model";
 import { TurnService } from "./turn/turn.service";
 import { TurnStore } from "./turn/turn.store";
-import { BotService } from './bot/bot.service';
 
-describe("GameEngineService", () => {
+describe("GameEngineFacade", () => {
   const player1: Player = playerFactory("Player 1", PlayerType.Human);
   const player2: Player = playerFactory("Player 2", PlayerType.Artificial);
   const players: Players = [player1, player2];
 
-  let service: GameEngineService;
+  let service: GameEngineFacade;
   let store: GameStateStore;
-  let turnService: TurnService;
+  let stateService: StateService;
   let ruleService: RuleService;
 
   beforeEach(() =>
     TestBed.configureTestingModule({
       providers: [
-        GameEngineService,
+        GameEngineFacade,
         {
           provide: STATE_STORE,
           useFactory: () => new GameStateStore(NIM_BOARD)
@@ -43,9 +49,9 @@ describe("GameEngineService", () => {
   );
 
   beforeEach(() => {
-    service = TestBed.get(GameEngineService);
+    service = TestBed.get(GameEngineFacade);
     store = TestBed.get(STATE_STORE);
-    turnService = TestBed.get(TurnService);
+    stateService = TestBed.get(StateService);
     ruleService = TestBed.get(RuleService);
   });
 
@@ -87,17 +93,13 @@ describe("GameEngineService", () => {
 
   describe("reset", () => {
     beforeEach(() => {
-      store.reset = jest.fn();
+      stateService.resetState = jest.fn();
     });
 
-    it("should call the reset method of the store", () => {
+    it("should call the resetState method of the stateService", () => {
       service.reset();
 
-      expect(store.reset).toHaveBeenCalled();
-    });
-
-    afterEach(() => {
-      (store.reset as jest.Mock).mockClear();
+      expect(stateService.resetState).toHaveBeenCalled();
     });
   });
 

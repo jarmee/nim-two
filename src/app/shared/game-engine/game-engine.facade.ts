@@ -1,12 +1,12 @@
 import { Injectable, OnDestroy } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map, tap } from "rxjs/operators";
+import { SubscriptionService } from "../state/subscription.service";
 import {
   countColumnsOf,
   withColumnValueFalseFilter
 } from "./board/board.helpers";
 import { Board } from "./board/board.model";
-import { SubscriptionService } from "../state/subscription.service";
 import { BotService } from "./bot/bot.service";
 import { RuleService } from "./rule/rule.service";
 import { GameState, GameStatus } from "./state/state.model";
@@ -14,8 +14,7 @@ import { StateService } from "./state/state.service";
 import { TurnService } from "./turn/turn.service";
 
 @Injectable()
-export class GameEngineService extends SubscriptionService
-  implements OnDestroy {
+export class GameEngineFacade extends SubscriptionService implements OnDestroy {
   gameLoop$: BehaviorSubject<Partial<GameState>> = new BehaviorSubject<
     Partial<GameState>
   >(null);

@@ -1,10 +1,14 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { ReactiveFormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
+import { GameEngineFacade } from "../shared/game-engine";
 import { BoardBuilder } from "../shared/game-engine/board/board.builder";
 import { GameEngineModule } from "../shared/game-engine/game-engine.module";
 import { GameEngineService } from "../shared/game-engine/game-engine.service";
-import { playerFactory, PlayerType } from "../shared/game-engine/turn/turn.model";
+import {
+  playerFactory,
+  PlayerType
+} from "../shared/game-engine/turn/turn.model";
 import { NIM_KI_RULES } from "../shared/games/nim/nim.ai";
 import { NIM_BOARD } from "../shared/games/nim/nim.board";
 import { NIM_GAME_RULES } from "../shared/games/nim/nim.rules";
@@ -45,7 +49,7 @@ describe("BoardComponent", () => {
   }));
 
   beforeEach(() => {
-    gameEngine = TestBed.get(GameEngineService);
+    gameEngine = TestBed.get(GameEngineFacade);
     gameEngine.executePlay = jest.fn();
     gameEngine.reset = jest.fn();
     fixture = TestBed.createComponent(BoardComponent);
