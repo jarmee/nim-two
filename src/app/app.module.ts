@@ -7,9 +7,9 @@ import {
   playerFactory,
   PlayerType
 } from "./shared/game-engine/turn/turn.model";
-import { NIM_KI_RULES } from "./shared/rules/nim/nim.ai";
-import { NIM_BOARD } from "./shared/rules/nim/nim.board";
-import { NIM_GAME_RULES } from "./shared/rules/nim/nim.rules";
+import { NIM_KI_RULES } from "./shared/games/nim/nim.ai";
+import { NIM_BOARD } from "./shared/games/nim/nim.board";
+import { NIM_GAME_RULES } from "./shared/games/nim/nim.rules";
 
 const PLAYERS = [
   playerFactory("😎", PlayerType.Human),

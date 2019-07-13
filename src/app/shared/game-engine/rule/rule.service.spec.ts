@@ -1,5 +1,5 @@
 import { TestBed } from "@angular/core/testing";
-import { NIM_BOARD } from "../../rules/nim/nim.board";
+import { NIM_BOARD } from "../../games/nim/nim.board";
 import { GameStateStore } from "../state/state.store";
 import { STATE_STORE } from "../state/state.model";
 import {

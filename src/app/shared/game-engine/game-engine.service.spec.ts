@@ -1,7 +1,7 @@
 import { TestBed } from "@angular/core/testing";
 import { BoardBuilder } from "../board/board.builder";
 import { Board } from "../board/board.model";
-import { NIM_BOARD } from "../rules/nim/nim.board";
+import { NIM_BOARD } from "../games/nim/nim.board";
 import { GameEngineService } from "./game-engine.service";
 import { RuleService } from "./rule/rule.service";
 import { GameStateStore } from "./state/state.store";
