@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { Observable } from "rxjs";
 import { Board } from "../shared/board/board.model";
+import { BotService } from "../shared/game-engine/bot/bot.service";
 import { GameStatus } from "../shared/game-engine/game-engine.model";
 import { GameEngineService } from "../shared/game-engine/game-engine.service";
 
@@ -16,13 +17,16 @@ export class BoardComponent {
 
   status$: Observable<GameStatus> = this.gameEngine.status$;
 
-  constructor(private gameEngine: GameEngineService) {}
+  constructor(
+    private gameEngine: GameEngineService,
+    private botService: BotService
+  ) {}
 
   onExecutePlay(board: Board) {
     this.gameEngine.executePlay(board);
   }
 
-    onReset() {
+  onReset() {
     this.gameEngine.reset();
   }
 }

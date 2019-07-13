@@ -1,7 +1,11 @@
 import { cloneDeep } from "lodash";
-import { areColumnsDifferentByValue as areColumnsDifferentByValue, exchangeColumnsOf, findColumnOf } from "../board/board.helpers";
+import {
+  areColumnsDifferentByValue,
+  exchangeColumnsOf,
+  findColumnOf
+} from "../board/board.helpers";
 import { Board, BoardDifferences, Column, Path } from "../board/board.model";
-import { AiRule, AiRules, GameRule, GameRules, GameState } from "./game-engine.model";
+import { GameRule, GameRules, GameState } from "./game-engine.model";
 import { Player } from "./turn/turn.model";
 
 export const applyRules = (rules: GameRules) => (
@@ -15,15 +19,6 @@ export const applyRules = (rules: GameRules) => (
     (state: GameState, rule: GameRule) =>
       rule(newState, actualState, boardDifferences)(state),
     cloneDeep(newState)
-  );
-};
-
-export const calculateState = (rules: AiRules) => (state: GameState) => {
-  if (!rules || !rules.length) return state;
-
-  return rules.reduce(
-    (calculateState: GameState, rule: AiRule) => rule(state)(calculateState),
-    cloneDeep(state)
   );
 };
 

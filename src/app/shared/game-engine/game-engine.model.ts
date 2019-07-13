@@ -29,12 +29,6 @@ export type GameRule = (
 
 export type GameRules = GameRule[];
 
-export type AiRule = (
-  state: GameState
-) => (calculatedGameState: Partial<GameState>) => GameState;
-
-export type AiRules = AiRule[];
-
 export const GAME_STATE_STORE: InjectionToken<GameState> = new InjectionToken<
   GameEngineStore
 >("GAME_STATE_STORE");
@@ -42,7 +36,3 @@ export const GAME_STATE_STORE: InjectionToken<GameState> = new InjectionToken<
 export const GAME_RULES: InjectionToken<GameRules> = new InjectionToken<
   GameRules
 >("GAME_RULES");
-
-export const GAME_AI_RULES: InjectionToken<AiRules> = new InjectionToken<
-  AiRules
->("GAME_AI_RULES");

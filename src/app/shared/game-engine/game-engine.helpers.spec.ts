@@ -1,7 +1,7 @@
 import * as faker from "faker";
 import { BoardBuilder } from "../board/board.builder";
 import { BoardDifferences } from "../board/board.model";
-import { applyRules, calculateState, setPlayerForBoardIn } from "./game-engine.helpers";
+import { applyRules, setPlayerForBoardIn } from "./game-engine.helpers";
 import { GameState } from "./game-engine.model";
 import { gameStateFactory } from "./testing/game-engine.mock";
 import { Player, playerFactory, PlayerType } from "./turn/turn.model";
@@ -51,46 +51,6 @@ describe("GameEngineHelpers", () => {
         actualState,
         boardDifferences
       );
-    });
-  });
-
-  describe("calculateState", () => {
-    const gameState = gameStateFactory.build();
-
-    it("should return the given state if no rule is provided", () => {
-      const actual = calculateState([])(gameState);
-
-      expect(actual).toEqual(gameState);
-    });
-
-    it("should call the provided rule", () => {
-      const calculatedState = gameStateFactory
-        .extend({
-          board: BoardBuilder.create()
-            .addRowWithColumns(
-              true,
-              true,
-              true,
-              true,
-              true,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false,
-              false
-            )
-            .build()
-        })
-        .build();
-      const rule = jest.fn().mockReturnValue(state => calculatedState);
-
-      const actual = calculateState([rule])(gameState);
-
-      expect(actual).toEqual(calculatedState);
-      expect(rule).toHaveBeenCalledWith(gameState);
     });
   });
 
