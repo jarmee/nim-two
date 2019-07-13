@@ -4,7 +4,6 @@ exports[`BoardComponent should match the snapshot 1`] = `
 <app-board
   amount$={[Function AnonymousSubject]}
   board$={[Function AnonymousSubject]}
-  botService={[Function BotService]}
   gameEngine={[Function GameEngineService]}
   status$={[Function AnonymousSubject]}
 >

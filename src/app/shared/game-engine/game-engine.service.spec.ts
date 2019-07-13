@@ -1,20 +1,16 @@
 import { TestBed } from "@angular/core/testing";
+import { NIM_BOARD } from "../games/nim/nim.board";
 import { BoardBuilder } from "./board/board.builder";
 import { Board } from "./board/board.model";
-import { NIM_BOARD } from "../games/nim/nim.board";
 import { GameEngineService } from "./game-engine.service";
 import { RuleService } from "./rule/rule.service";
-import { GameStateStore } from "./state/state.store";
 import { GameStatus, STATE_STORE } from "./state/state.model";
-import {
-  Player,
-  playerFactory,
-  Players,
-  PlayerType,
-  TURN_STATE_STORE
-} from "./turn/turn.model";
+import { StateService } from './state/state.service';
+import { GameStateStore } from "./state/state.store";
+import { Player, playerFactory, Players, PlayerType, TURN_STATE_STORE } from "./turn/turn.model";
 import { TurnService } from "./turn/turn.service";
 import { TurnStore } from "./turn/turn.store";
+import { BotService } from './bot/bot.service';
 
 describe("GameEngineService", () => {
   const player1: Player = playerFactory("Player 1", PlayerType.Human);
@@ -39,7 +35,9 @@ describe("GameEngineService", () => {
           useFactory: () => new TurnStore(players)
         },
         TurnService,
-        RuleService
+        RuleService,
+        StateService,
+        BotService
       ]
     })
   );
