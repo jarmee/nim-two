@@ -20,8 +20,7 @@ export function ifValueIsPlayable(amountOfMatches: number) {
       amountOfMatches--;
       return {
         ...column,
-        value: true,
-        player: "🤖"
+        value: true
       };
     } else {
       return column;

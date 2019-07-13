@@ -8,15 +8,13 @@ import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
 import * as faker from "faker";
 import { BoardBuilder } from "../../shared/board/board.builder";
-import { Board, Column } from "../../shared/board/board.model";
+import { Board } from "../../shared/board/board.model";
 import { BoardFormBuilderService } from "./board-form-builder.service";
 import {
   andSetErrors,
-  andSetPlayerIfCheckedTo,
   BoardFormComponent,
   hasChanged,
-  patchValueOf,
-  watchColumnValueChangesOf
+  patchValueOf
 } from "./board-form.component";
 import { MatchControlComponent } from "./match-control/match-control.component";
 import { PlayerBatchComponent } from "./player-batch/player-batch.component";
@@ -395,55 +393,6 @@ describe("BoardFormComponent", () => {
 
         expect(component.reset.emit).toHaveBeenCalledWith();
       });
-    });
-  });
-
-  describe("watchColumnValueChangesOf", () => {
-    it("should call the callback on valueChange", done => {
-      const formGroup = new FormGroup({
-        0: new FormGroup({
-          0: new FormGroup({
-            value: new FormControl(false),
-            player: new FormControl(null)
-          })
-        })
-      });
-      const fakeCallback = jest.fn();
-
-      watchColumnValueChangesOf(formGroup, fakeCallback);
-
-      formGroup.valueChanges.subscribe(() => {
-        expect(fakeCallback).toHaveBeenCalled();
-        done();
-      });
-
-      formGroup.patchValue({
-        0: {
-          0: {
-            value: true,
-            player: faker.name.firstName()
-          }
-        }
-      });
-    });
-  });
-
-  describe("andSetPlayerIfCheckedTo", () => {
-    it("should set the player form control if the column is checked", () => {
-      const column: Column = {
-        value: true,
-        player: null
-      };
-      const columnFormGroup = new FormGroup({
-        value: new FormControl(false),
-        player: new FormControl(null)
-      });
-      const playerName = faker.name.firstName();
-
-      andSetPlayerIfCheckedTo(playerName)(column, columnFormGroup);
-
-      expect(columnFormGroup.value.player).not.toBeNull();
-      expect(columnFormGroup.value.player).toBe(playerName);
     });
   });
 

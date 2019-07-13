@@ -1,12 +1,8 @@
 import { cloneDeep } from "lodash";
-import { BoardDifferences } from "../board/board.model";
-import {
-  AiRule,
-  AiRules,
-  GameRule,
-  GameRules,
-  GameState
-} from "./game-engine.model";
+import { areColumnsDifferentByValue as areColumnsDifferentByValue, exchangeColumnsOf, findColumnOf } from "../board/board.helpers";
+import { Board, BoardDifferences, Column, Path } from "../board/board.model";
+import { AiRule, AiRules, GameRule, GameRules, GameState } from "./game-engine.model";
+import { Player } from "./turn/turn.model";
 
 export const applyRules = (rules: GameRules) => (
   newState: GameState,
@@ -30,3 +26,39 @@ export const calculateState = (rules: AiRules) => (state: GameState) => {
     cloneDeep(state)
   );
 };
+
+function setPlayerWhereColumnIsDifferent(
+  compareToBoard: Board,
+  toPlayer: Player
+): (column: Column, path: Path) => Column {
+  return (column: Column, path: Path) => {
+    if (
+      areColumnsDifferentByValue(column, findColumnOf(compareToBoard, path))
+    ) {
+      return {
+        ...column,
+        player: toPlayer.name
+      };
+    }
+    return column;
+  };
+}
+
+export function setPlayerForBoardIn(
+  state: GameState,
+  onlyToTheChangedColumnsOfState: GameState,
+  toPlayer: Player
+): GameState {
+  if (!state) return null;
+
+  const compareToBoard = onlyToTheChangedColumnsOfState
+    ? onlyToTheChangedColumnsOfState.board
+    : null;
+  return {
+    ...state,
+    board: exchangeColumnsOf(
+      state.board,
+      setPlayerWhereColumnIsDifferent(compareToBoard, toPlayer)
+    )
+  };
+}

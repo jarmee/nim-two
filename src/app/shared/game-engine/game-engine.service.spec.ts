@@ -23,6 +23,7 @@ describe("GameEngineService", () => {
 
   let service: GameEngineService;
   let store: GameEngineStore;
+  let turnService: TurnService;
 
   beforeEach(() =>
     TestBed.configureTestingModule({
@@ -44,6 +45,7 @@ describe("GameEngineService", () => {
   beforeEach(() => {
     service = TestBed.get(GameEngineService);
     store = TestBed.get(GAME_STATE_STORE);
+    turnService = TestBed.get(TurnService);
   });
 
   it("should be created", () => {
@@ -128,13 +130,5 @@ describe("GameEngineService", () => {
         done();
       });
     });
-  });
-
-  describe("gameLoop$", () => {
-    //TODO: Add missing tests
-  });
-
-  describe("aiLoop$", () => {
-    //TODO: Add missing tests
   });
 });

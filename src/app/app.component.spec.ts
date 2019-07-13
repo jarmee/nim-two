@@ -6,7 +6,7 @@ import { GameState } from "./shared/game-engine/game-engine.model";
 import { GameEngineModule } from "./shared/game-engine/game-engine.module";
 import { gameStateFactory } from "./shared/game-engine/testing/game-engine.mock";
 import { NIM_KI_RULES } from "./shared/rules/nim/nim.ai";
-import { NIM_RULES } from "./shared/rules/nim/nim.rules";
+import { NIM_GAME_RULES } from "./shared/rules/nim/nim.rules";
 
 describe("AppComponent", () => {
   const initialGameState: GameState = gameStateFactory.build();
@@ -18,7 +18,7 @@ describe("AppComponent", () => {
       declarations: [AppComponent],
       imports: [
         BoardModule,
-        GameEngineModule.forRoot(initialGameState, NIM_RULES, NIM_KI_RULES)
+        GameEngineModule.forRoot(initialGameState, NIM_GAME_RULES, NIM_KI_RULES)
       ],
       providers: [BoardFormBuilderService]
     }).compileComponents();

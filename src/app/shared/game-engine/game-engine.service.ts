@@ -8,7 +8,11 @@ import {
 } from "../board/board.helpers";
 import { Board, BoardDifferences } from "../board/board.model";
 import { SubscriptionService } from "../state/subscription.service";
-import { applyRules, calculateState } from "./game-engine.helpers";
+import {
+  applyRules,
+  calculateState,
+  setPlayerForBoardIn
+} from "./game-engine.helpers";
 import {
   AiRules,
   GameRules,
@@ -19,12 +23,13 @@ import {
   GAME_STATE_STORE
 } from "./game-engine.model";
 import { GameEngineStore } from "./game-engine.store";
-import { TurnService } from './turn/turn.service';
+import { Player } from "./turn/turn.model";
+import { TurnService } from "./turn/turn.service";
 
 @Injectable()
 export class GameEngineService extends SubscriptionService
   implements OnDestroy {
-  private gameLoop$: BehaviorSubject<Partial<GameState>> = new BehaviorSubject<
+  gameLoop$: BehaviorSubject<Partial<GameState>> = new BehaviorSubject<
     Partial<GameState>
   >(null);
 
@@ -55,17 +60,48 @@ export class GameEngineService extends SubscriptionService
     this.subscribeTo(
       this.gameLoop$.pipe(
         skip(1),
-        withLatestFrom(this.store),
-        map(([newGameState, andActualGameState]: [GameState, GameState]) => [
-          newGameState,
-          andActualGameState,
-          differenceOf(newGameState.board, andActualGameState.board)
-        ]),
+        withLatestFrom(this.store, this.turnSerivce.selectedPlayer$),
         map(
-          ([newState, actualState, boardDifferences]: [
+          ([newGameState, onlyToTheChangedColumnsOfActualState, toPlayer]: [
             GameState,
             GameState,
-            BoardDifferences
+            Player
+          ]) => [
+            setPlayerForBoardIn(
+              newGameState,
+              onlyToTheChangedColumnsOfActualState,
+              toPlayer
+            ),
+            onlyToTheChangedColumnsOfActualState,
+            toPlayer
+          ]
+        ),
+        map(
+          ([newGameState, andActualGameState, player]: [
+            GameState,
+            GameState,
+            Player
+          ]) => [
+            newGameState,
+            andActualGameState,
+            differenceOf(newGameState.board, andActualGameState.board),
+            player
+          ]
+        ),
+        map(
+          ([newState, actualState, boardDifferences, player]: [
+            GameState,
+            GameState,
+            BoardDifferences,
+            Player
+          ]) => [newState, actualState, boardDifferences, player]
+        ),
+        map(
+          ([newState, actualState, boardDifferences, player]: [
+            GameState,
+            GameState,
+            BoardDifferences,
+            Player
           ]) =>
             applyRules(this.rules)(
               Object.freeze(newState),
@@ -73,6 +109,7 @@ export class GameEngineService extends SubscriptionService
               boardDifferences
             )
         ),
+        tap(() => this.turnSerivce.switchPlayer()),
         tap((newState: GameState) => this.store.next(newState)),
         tap((newState: GameState) => this.aiLoop$.next(newState))
       )

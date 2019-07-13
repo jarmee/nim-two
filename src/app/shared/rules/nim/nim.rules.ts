@@ -78,7 +78,7 @@ export const isGameOverRule: GameRule = (
   return state;
 };
 
-export const NIM_RULES: GameRules = [
+export const NIM_GAME_RULES: GameRules = [
   preventBoardHasNoChangesRule,
   isMaximumOfMatchesExceededRule,
   isGameOverRule

@@ -9,7 +9,6 @@ import {
   SimpleChanges
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { Subscription } from "rxjs";
 import { Board, Column, Columns } from "../../shared/board/board.model";
 import { SubscriptionService } from "../../shared/state/subscription.service";
 import { BoardFormBuilderService } from "./board-form-builder.service";
@@ -44,34 +43,6 @@ export function hasChanged(currentValue: Board, previousValue: Board): boolean {
   if (areColumnsDifferent(currentValue, previousValue)) return true;
 
   return false;
-}
-
-export function watchColumnValueChangesOf(
-  formGroup: FormGroup,
-  colummWatcher: (column: Column, columnFormGroup: FormGroup) => void
-): Subscription[] {
-  return Object.values(formGroup.controls)
-    .map((rowFormGroup: FormGroup) =>
-      Object.values(rowFormGroup.controls).map((columnFormGroup: FormGroup) =>
-        columnFormGroup.valueChanges.subscribe((column: Column) =>
-          colummWatcher(column, columnFormGroup)
-        )
-      )
-    )
-    .reduce(
-      (subscriptions: Subscription[], innerSubscriptions: Subscription[]) => [
-        ...subscriptions,
-        ...innerSubscriptions
-      ],
-      []
-    );
-}
-
-export function andSetPlayerIfCheckedTo(playerName: string) {
-  return (column: Column, columnFormGroup: FormGroup) =>
-    columnFormGroup
-      .get(PLAYER_FORM_CONTROL_NAME)
-      .patchValue(!!column.value ? playerName : null, { emitEvent: false });
 }
 
 export function patchValueOf<T>(
@@ -190,10 +161,6 @@ export class BoardFormComponent extends SubscriptionService
       this.board = currentValue;
       if (hasChanged(currentValue, previousValue)) {
         this.formGroup = this.formBuilder.of(currentValue);
-        this.subscriptions = watchColumnValueChangesOf(
-          this.formGroup,
-          andSetPlayerIfCheckedTo(DEFAULT_PLAYER_NAME)
-        );
       }
       patchValueOf<Board>(this.formGroup, currentValue, andSetErrors());
     }

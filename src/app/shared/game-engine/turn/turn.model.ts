@@ -9,6 +9,7 @@ export enum PlayerType {
 export type PlayerTypeDescriptionMap = Record<PlayerType, string>;
 
 export interface Player {
+  name: string;
   type: PlayerType;
 }
 

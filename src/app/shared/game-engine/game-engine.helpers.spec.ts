@@ -1,8 +1,10 @@
+import * as faker from "faker";
 import { BoardBuilder } from "../board/board.builder";
 import { BoardDifferences } from "../board/board.model";
-import { applyRules, calculateState } from "./game-engine.helpers";
+import { applyRules, calculateState, setPlayerForBoardIn } from "./game-engine.helpers";
 import { GameState } from "./game-engine.model";
 import { gameStateFactory } from "./testing/game-engine.mock";
+import { Player, playerFactory, PlayerType } from "./turn/turn.model";
 
 describe("GameEngineHelpers", () => {
   describe("applyRules", () => {
@@ -89,6 +91,92 @@ describe("GameEngineHelpers", () => {
 
       expect(actual).toEqual(calculatedState);
       expect(rule).toHaveBeenCalledWith(gameState);
+    });
+  });
+
+  describe("setPlayerForBoardIn", () => {
+    const state: GameState = gameStateFactory
+      .extend({
+        board: BoardBuilder.create()
+          .addRowWithColumns(true, true, true, true)
+          .build()
+      })
+      .build();
+    const actualState: GameState = gameStateFactory
+      .extend({
+        board: BoardBuilder.create()
+          .addRowWithColumns(false, false, false, true)
+          .build()
+      })
+      .build();
+    const boardDifferences: BoardDifferences = [];
+    const player: Player = playerFactory(
+      faker.name.firstName(),
+      PlayerType.Human
+    );
+
+    it("should return null if the game state is null", () => {
+      expect(setPlayerForBoardIn(null, actualState, player)).toBeNull();
+    });
+
+    it("should return a game state", () => {
+      expect(setPlayerForBoardIn(state, null, player)).toEqual({
+        ...state,
+        board: {
+          0: {
+            0: {
+              errorMessage: null,
+              value: true,
+              player: player.name
+            },
+            1: {
+              errorMessage: null,
+              value: true,
+              player: player.name
+            },
+            2: {
+              errorMessage: null,
+              value: true,
+              player: player.name
+            },
+            3: {
+              errorMessage: null,
+              value: true,
+              player: player.name
+            }
+          }
+        }
+      });
+    });
+
+    it("should set the player name to the changed columns", () => {
+      expect(setPlayerForBoardIn(state, actualState, player)).toEqual({
+        ...state,
+        board: {
+          0: {
+            0: {
+              errorMessage: null,
+              value: true,
+              player: player.name
+            },
+            1: {
+              errorMessage: null,
+              value: true,
+              player: player.name
+            },
+            2: {
+              errorMessage: null,
+              value: true,
+              player: player.name
+            },
+            3: {
+              errorMessage: null,
+              value: true,
+              player: null
+            }
+          }
+        }
+      });
     });
   });
 });

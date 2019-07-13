@@ -26,12 +26,13 @@ function createBoardDifferencesOf(
     );
 }
 
-function columnsWithEqualValues(difference: BoardDifference): boolean {
-  return (
-    !difference.newColumn ||
-    !difference.currentColumn ||
-    difference.newColumn.value !== difference.currentColumn.value
-  );
+export function areColumnsDifferentByValue(
+  newColumn: Column,
+  currentColumn: Column
+): boolean {
+  if (!newColumn && !currentColumn) return false;
+  if (!newColumn || !currentColumn) return true;
+  return newColumn.value !== currentColumn.value;
 }
 
 export function findColumnOf(board: Board, path: Path): Column | null {
@@ -51,7 +52,8 @@ export function differenceOf(
   if (!boardA && !andBoardB) return [];
 
   return createBoardDifferencesOf(boardA, andBoardB).filter(
-    columnsWithEqualValues
+    ({ newColumn, currentColumn }: BoardDifference) =>
+      areColumnsDifferentByValue(newColumn, currentColumn)
   );
 }
 
@@ -73,7 +75,7 @@ export function countColumnsOf(
 
 export function exchangeColumnsOf(
   board: Board,
-  exchangeColumnCallback: (column: Column) => Column
+  exchangeColumnCallback: (column: Column, path?: Path) => Column
 ): Board {
   if (!board) return null;
 
@@ -82,7 +84,10 @@ export function exchangeColumnsOf(
       [rowKey]: Object.keys(board[rowKey])
         .map(columnKey => ({
           [columnKey]: exchangeColumnCallback
-            ? exchangeColumnCallback(board[rowKey][columnKey])
+            ? exchangeColumnCallback(board[rowKey][columnKey], [
+                rowKey,
+                columnKey
+              ])
             : { ...board[rowKey][columnKey] }
         }))
         .reduce((newRow, column) => ({ ...newRow, ...column }))

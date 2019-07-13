@@ -1,5 +1,6 @@
 import { BoardBuilder } from "./board.builder";
 import {
+  areColumnsDifferentByValue,
   countColumnsOf,
   differenceOf,
   exchangeColumnsOf,
@@ -190,6 +191,67 @@ describe("BoardHelpers", () => {
 
     afterEach(() => {
       (fakeCallback as jest.Mock).mockClear();
+    });
+  });
+
+  describe("areColumnsDifferentByValue", () => {
+    it("should return false if columnA is falsy and columnB is falsy", () => {
+      const columnA: Column = null;
+      const columnB: Column = null;
+
+      expect(areColumnsDifferentByValue(columnA, columnB)).toBe(false);
+    });
+
+    it("should return false if columnA and columnB have the same value", () => {
+      const columnA: Column = {
+        value: false,
+        player: null,
+        errorMessage: null
+      };
+      const columnB: Column = {
+        value: false,
+        player: null,
+        errorMessage: null
+      };
+
+      expect(areColumnsDifferentByValue(columnA, columnB)).toBe(false);
+    });
+
+    it("should return true if columnA is falsy", () => {
+      const columnA: Column = null;
+      const columnB: Column = {
+        value: false,
+        player: null,
+        errorMessage: null
+      };
+
+      expect(areColumnsDifferentByValue(columnA, columnB)).toBe(true);
+    });
+
+    it("should return true if columnB is falsy", () => {
+      const columnA: Column = {
+        value: false,
+        player: null,
+        errorMessage: null
+      };
+      const columnB: Column = null;
+
+      expect(areColumnsDifferentByValue(columnA, columnB)).toBe(true);
+    });
+
+    it("should return true if columnA and columnB have different values", () => {
+      const columnA: Column = {
+        value: false,
+        player: null,
+        errorMessage: null
+      };
+      const columnB: Column = {
+        value: true,
+        player: null,
+        errorMessage: null
+      };
+
+      expect(areColumnsDifferentByValue(columnA, columnB)).toBe(true);
     });
   });
 });

@@ -113,17 +113,17 @@ describe("NimAi", () => {
             },
             1: {
               value: true,
-              player: "🤖",
+              player: null,
               errorMessage: null
             },
             2: {
               value: true,
-              player: "🤖",
+              player: null,
               errorMessage: null
             },
             3: {
               value: true,
-              player: "🤖",
+              player: null,
               errorMessage: null
             }
           }
