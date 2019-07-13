@@ -1,8 +1,12 @@
+import { Board } from "../board/board.model";
 import { Store } from "../state/store";
-import { GameState } from "./game-engine.model";
+import { GameState, initialGameState } from "./game-engine.model";
 
 export class GameEngineStore extends Store<GameState> {
-  constructor(gameState: GameState) {
-    super(gameState);
+  constructor(board: Board) {
+    super({
+      ...initialGameState,
+      board
+    });
   }
 }

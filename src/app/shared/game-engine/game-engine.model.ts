@@ -16,6 +16,11 @@ export interface GameState {
   board: Board;
 }
 
+export const initialGameState: GameState = {
+  status: GameStatus.Fresh,
+  board: null
+};
+
 export type GameRule = (
   newBoard: GameState,
   currentBoard: GameState,

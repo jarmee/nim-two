@@ -4,9 +4,13 @@ import { By } from "@angular/platform-browser";
 import { BoardBuilder } from "../shared/board/board.builder";
 import { GameEngineModule } from "../shared/game-engine/game-engine.module";
 import { GameEngineService } from "../shared/game-engine/game-engine.service";
+import {
+  playerFactory,
+  PlayerType
+} from "../shared/game-engine/turn/turn.model";
 import { NIM_KI_RULES } from "../shared/rules/nim/nim.ai";
+import { NIM_BOARD } from "../shared/rules/nim/nim.board";
 import { NIM_GAME_RULES } from "../shared/rules/nim/nim.rules";
-import { NIM_GAME_STATE } from "../shared/rules/nim/nim.state";
 import { BoardComponent } from "./board.component";
 import { BoardFormBuilderService } from "./form/board-form-builder.service";
 import { BoardFormComponent } from "./form/board-form.component";
@@ -14,6 +18,10 @@ import { MatchControlComponent } from "./form/match-control/match-control.compon
 import { PlayerBatchComponent } from "./form/player-batch/player-batch.component";
 
 describe("BoardComponent", () => {
+  const PLAYERS = [
+    playerFactory("😎", PlayerType.Human),
+    playerFactory("🤖", PlayerType.Artificial)
+  ];
   let component: BoardComponent;
   let fixture: ComponentFixture<BoardComponent>;
   let gameEngine: GameEngineService;
@@ -27,7 +35,12 @@ describe("BoardComponent", () => {
         PlayerBatchComponent
       ],
       imports: [
-        GameEngineModule.forRoot(NIM_GAME_STATE, NIM_GAME_RULES, NIM_KI_RULES),
+        GameEngineModule.forRoot(
+          NIM_BOARD,
+          PLAYERS,
+          NIM_GAME_RULES,
+          NIM_KI_RULES
+        ),
         ReactiveFormsModule
       ],
       providers: [BoardFormBuilderService]
