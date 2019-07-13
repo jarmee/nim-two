@@ -1,10 +1,17 @@
 import { ModuleWithProviders, NgModule } from "@angular/core";
-import { AiRules, GameRules, GameState, GAME_AI_RULES, GAME_RULES, GAME_STATE_STORE } from "./game-engine.model";
+import {
+  AiRules,
+  GameRules,
+  GameState,
+  GAME_AI_RULES,
+  GAME_RULES,
+  GAME_STATE_STORE
+} from "./game-engine.model";
 import { GameEngineService } from "./game-engine.service";
 import { GameEngineStore } from "./game-engine.store";
-import { Players, PLAYERS, TURN_STATE_STORE } from "./turn/turn.model";
+import { Players, TURN_STATE_STORE } from "./turn/turn.model";
 import { TurnService } from "./turn/turn.service";
-import { TurnStore } from './turn/turn.store';
+import { TurnStore } from "./turn/turn.store";
 
 @NgModule({})
 export class GameEngineModule {
@@ -23,11 +30,7 @@ export class GameEngineModule {
         },
         {
           provide: TURN_STATE_STORE,
-          useFactory: () => new TurnStore({})
-        },
-        {
-          provide: PLAYERS,
-          useValue: players
+          useFactory: () => new TurnStore(players)
         },
         {
           provide: GAME_RULES,

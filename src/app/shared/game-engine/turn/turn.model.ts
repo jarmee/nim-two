@@ -27,10 +27,6 @@ export const playerTypeIconMap: PlayerTypeDescriptionMap = {
   [PlayerType.Human]: "😎"
 };
 
-export const PLAYERS: InjectionToken<Players> = new InjectionToken<Players>(
-  "PLAYERS"
-);
-
 export const TURN_STATE_STORE: InjectionToken<TurnStore> = new InjectionToken<
   TurnStore
 >("TURN_STATE_STORE");
