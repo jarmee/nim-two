@@ -1,6 +1,6 @@
 import { InjectionToken } from "@angular/core";
 import { BoardDifferences } from "../../board/board.model";
-import { GameState } from "../game-engine.model";
+import { GameState } from "../state/state.model";
 
 export type GameRule = (
   newBoard: GameState,

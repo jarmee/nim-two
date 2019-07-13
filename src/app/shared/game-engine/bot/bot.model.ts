@@ -1,5 +1,5 @@
 import { InjectionToken } from "@angular/core";
-import { GameState } from "../game-engine.model";
+import { GameState } from "../state/state.model";
 
 export type AiRule = (
   state: GameState

@@ -1,9 +1,8 @@
 import { Component } from "@angular/core";
 import { Observable } from "rxjs";
 import { Board } from "../shared/board/board.model";
-import { BotService } from "../shared/game-engine/bot/bot.service";
-import { GameStatus } from "../shared/game-engine/game-engine.model";
 import { GameEngineService } from "../shared/game-engine/game-engine.service";
+import { GameStatus } from "../shared/game-engine/state/state.model";
 
 @Component({
   selector: "app-board",
@@ -17,10 +16,7 @@ export class BoardComponent {
 
   status$: Observable<GameStatus> = this.gameEngine.status$;
 
-  constructor(
-    private gameEngine: GameEngineService,
-    private botService: BotService
-  ) {}
+  constructor(private gameEngine: GameEngineService) {}
 
   onExecutePlay(board: Board) {
     this.gameEngine.executePlay(board);

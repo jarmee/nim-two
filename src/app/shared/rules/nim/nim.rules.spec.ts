@@ -1,7 +1,7 @@
 import { cloneDeep } from "lodash";
 import { BoardBuilder } from "../../board/board.builder";
 import { BoardDifferences } from "../../board/board.model";
-import { GameState, GameStatus } from "../../game-engine/game-engine.model";
+import { GameState, GameStatus } from "../../game-engine/state/state.model";
 import {
   isGameOverRule,
   isMaximumOfMatchesExceededRule,
@@ -279,7 +279,7 @@ describe("NimRules", () => {
         newState
       );
 
-      expect(actual.status).toBe(GameStatus.GameOverPlayerOne);
+      expect(actual.status).toBe(GameStatus.GameOver);
     });
   });
 

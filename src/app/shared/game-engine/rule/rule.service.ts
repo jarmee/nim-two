@@ -1,10 +1,10 @@
 import { Inject, Injectable, Optional } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
-import { map, skip, tap, withLatestFrom } from "rxjs/operators";
+import { map, skip, withLatestFrom } from "rxjs/operators";
 import { differenceOf } from "../../board/board.helpers";
 import { BoardDifferences } from "../../board/board.model";
-import { GameState, GAME_STATE_STORE } from "../game-engine.model";
-import { GameEngineStore } from "../game-engine.store";
+import { GameState, STATE_STORE } from "../state/state.model";
+import { GameStateStore } from "../state/state.store";
 import { Player } from "../turn/turn.model";
 import { TurnService } from "../turn/turn.service";
 import { applyRules, setPlayerForBoardIn } from "./rule.helpers";
@@ -19,7 +19,6 @@ export class RuleService {
   rulesApplied$: Observable<GameState> = this.applyRules$.pipe(
     skip(1),
     withLatestFrom(this.store, this.turnSerivce.selectedPlayer$),
-    tap(console.log),
     map(
       ([newGameState, onlyToTheChangedColumnsOfActualState, toPlayer]: [
         GameState,
@@ -63,7 +62,7 @@ export class RuleService {
   );
 
   constructor(
-    @Inject(GAME_STATE_STORE) private store: GameEngineStore,
+    @Inject(STATE_STORE) private store: GameStateStore,
     private turnSerivce: TurnService,
     @Optional() @Inject(GAME_RULES) private rules: GameRules = []
   ) {}

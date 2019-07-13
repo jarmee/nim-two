@@ -1,7 +1,7 @@
 import { TestBed } from "@angular/core/testing";
 import { NIM_BOARD } from "../../rules/nim/nim.board";
-import { GAME_STATE_STORE } from "../game-engine.model";
-import { GameEngineStore } from "../game-engine.store";
+import { GameStateStore } from "../state/state.store";
+import { STATE_STORE } from "../state/state.model";
 import {
   playerFactory,
   PlayerType,
@@ -21,8 +21,8 @@ describe("RuleService", () => {
       providers: [
         RuleService,
         {
-          provide: GAME_STATE_STORE,
-          useFactory: () => new GameEngineStore(NIM_BOARD)
+          provide: STATE_STORE,
+          useFactory: () => new GameStateStore(NIM_BOARD)
         },
         {
           provide: TURN_STATE_STORE,

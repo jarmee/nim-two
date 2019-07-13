@@ -1,9 +1,9 @@
 import { TestBed } from "@angular/core/testing";
 import { NIM_BOARD } from "../../rules/nim/nim.board";
-import { GAME_STATE_STORE } from "../game-engine.model";
-import { GameEngineService } from "../game-engine.service";
-import { GameEngineStore } from "../game-engine.store";
 import { RuleService } from "../rule/rule.service";
+import { STATE_STORE } from "../state/state.model";
+import { StateService } from "../state/state.service";
+import { GameStateStore } from "../state/state.store";
 import {
   playerFactory,
   PlayerType,
@@ -24,15 +24,15 @@ describe("BotService", () => {
         BotService,
         TurnService,
         {
-          provide: GAME_STATE_STORE,
-          useFactory: () => new GameEngineStore(NIM_BOARD)
+          provide: STATE_STORE,
+          useFactory: () => new GameStateStore(NIM_BOARD)
         },
         {
           provide: TURN_STATE_STORE,
           useFactory: () => new TurnStore(PLAYERS)
         },
         RuleService,
-        GameEngineService
+        StateService
       ]
     })
   );

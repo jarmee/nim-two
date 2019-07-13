@@ -1,6 +1,6 @@
 import * as faker from "faker";
 import { Board } from "../../board/board.model";
-import { GameState } from "../../game-engine/game-engine.model";
+import { GameState } from "../../game-engine/state/state.model";
 import { gameStateFactory } from "../../game-engine/testing/game-engine.mock";
 import {
   calculatePlayRule,

@@ -4,8 +4,8 @@ import {
   withColumnValueFalseFilter
 } from "../../board/board.helpers";
 import { BoardDifference, BoardDifferences } from "../../board/board.model";
-import { GameState, GameStatus } from "../../game-engine/game-engine.model";
 import { GameRule, GameRules } from "../../game-engine/rule/rule.model";
+import { GameState, GameStatus } from "../../game-engine/state/state.model";
 
 const MAX_MATCHES = 3;
 export const MAXIMUM_OF_MATCHES_EXCEEDED_ERROR = "Maximum Matches Exceeded";
@@ -63,12 +63,7 @@ export const isGameOverRule: GameRule = (
   if (state.status === GameStatus.Errornous) return state;
 
   if (countColumnsOf(newState.board, withColumnValueFalseFilter) === 0) {
-    const player = boardDifferences[0].newColumn.player;
-    const status =
-      player === "🤖"
-        ? GameStatus.GameOverPlayerTwo
-        : GameStatus.GameOverPlayerOne;
-    return { ...state, status };
+    return { ...state, status: GameStatus.GameOver };
   }
 
   return state;

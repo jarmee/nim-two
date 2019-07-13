@@ -1,5 +1,5 @@
 import { cloneDeep } from "lodash";
-import { GameState } from "../game-engine.model";
+import { GameState } from "../state/state.model";
 import { AiRule, AiRules } from "./bot.model";
 
 export const calculateState = (rules: AiRules) => (state: GameState) => {

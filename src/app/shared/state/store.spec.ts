@@ -1,6 +1,6 @@
 import { skip } from "rxjs/operators";
 import { BoardBuilder } from "../board/board.builder";
-import { GameState, GameStatus } from "../game-engine/game-engine.model";
+import { GameState, GameStatus } from "../game-engine/state/state.model";
 import { gameStateFactory } from "../game-engine/testing/game-engine.mock";
 import { Store } from "./store";
 
@@ -25,7 +25,7 @@ describe("Store", () => {
           false
         )
         .build(),
-      status: GameStatus.HumanPlay
+      status: GameStatus.Valid
     })
     .build();
   let store: Store<any>;

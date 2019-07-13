@@ -1,4 +1,4 @@
-import { Inject, Injectable, OnDestroy } from "@angular/core";
+import { Injectable, OnDestroy } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map, tap } from "rxjs/operators";
 import {
@@ -7,9 +7,10 @@ import {
 } from "../board/board.helpers";
 import { Board } from "../board/board.model";
 import { SubscriptionService } from "../state/subscription.service";
-import { GameState, GameStatus, GAME_STATE_STORE } from "./game-engine.model";
-import { GameEngineStore } from "./game-engine.store";
+import { BotService } from "./bot/bot.service";
 import { RuleService } from "./rule/rule.service";
+import { GameState, GameStatus } from "./state/state.model";
+import { StateService } from "./state/state.service";
 import { TurnService } from "./turn/turn.service";
 
 @Injectable()
@@ -19,7 +20,7 @@ export class GameEngineService extends SubscriptionService
     Partial<GameState>
   >(null);
 
-  state$: Observable<GameState> = this.store;
+  state$: Observable<GameState> = this.stateService.state$;
 
   amount$: Observable<number> = this.state$.pipe(
     map((state: GameState) => state.board),
@@ -35,14 +36,15 @@ export class GameEngineService extends SubscriptionService
   );
 
   constructor(
-    @Inject(GAME_STATE_STORE) private store: GameEngineStore,
     private turnService: TurnService,
-    private ruleService: RuleService
+    private ruleService: RuleService,
+    private stateService: StateService,
+    private botService: BotService
   ) {
     super();
     this.subscribeTo(
       this.ruleService.rulesApplied$.pipe(
-        tap((newState: GameState) => this.store.next(newState)),
+        tap((newState: GameState) => this.stateService.updateState(newState)),
         tap((newState: GameState) => {
           if (newState.status !== GameStatus.Errornous) {
             this.turnService.switchPlayer();
@@ -59,6 +61,6 @@ export class GameEngineService extends SubscriptionService
   }
 
   reset() {
-    this.store.reset();
+    this.stateService.resetState();
   }
 }

@@ -2,10 +2,10 @@ import { TestBed } from "@angular/core/testing";
 import { BoardBuilder } from "../board/board.builder";
 import { Board } from "../board/board.model";
 import { NIM_BOARD } from "../rules/nim/nim.board";
-import { GameStatus, GAME_STATE_STORE } from "./game-engine.model";
 import { GameEngineService } from "./game-engine.service";
-import { GameEngineStore } from "./game-engine.store";
 import { RuleService } from "./rule/rule.service";
+import { GameStateStore } from "./state/state.store";
+import { GameStatus, STATE_STORE } from "./state/state.model";
 import {
   Player,
   playerFactory,
@@ -22,7 +22,7 @@ describe("GameEngineService", () => {
   const players: Players = [player1, player2];
 
   let service: GameEngineService;
-  let store: GameEngineStore;
+  let store: GameStateStore;
   let turnService: TurnService;
   let ruleService: RuleService;
 
@@ -31,8 +31,8 @@ describe("GameEngineService", () => {
       providers: [
         GameEngineService,
         {
-          provide: GAME_STATE_STORE,
-          useFactory: () => new GameEngineStore(NIM_BOARD)
+          provide: STATE_STORE,
+          useFactory: () => new GameStateStore(NIM_BOARD)
         },
         {
           provide: TURN_STATE_STORE,
@@ -46,7 +46,7 @@ describe("GameEngineService", () => {
 
   beforeEach(() => {
     service = TestBed.get(GameEngineService);
-    store = TestBed.get(GAME_STATE_STORE);
+    store = TestBed.get(STATE_STORE);
     turnService = TestBed.get(TurnService);
     ruleService = TestBed.get(RuleService);
   });
