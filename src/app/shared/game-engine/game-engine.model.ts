@@ -21,18 +21,6 @@ export const initialGameState: GameState = {
   board: null
 };
 
-export type GameRule = (
-  newBoard: GameState,
-  currentBoard: GameState,
-  differences: BoardDifferences
-) => (calculatedGameState: Partial<GameState>) => GameState;
-
-export type GameRules = GameRule[];
-
 export const GAME_STATE_STORE: InjectionToken<GameState> = new InjectionToken<
   GameEngineStore
 >("GAME_STATE_STORE");
-
-export const GAME_RULES: InjectionToken<GameRules> = new InjectionToken<
-  GameRules
->("GAME_RULES");

@@ -5,6 +5,7 @@ import { NIM_BOARD } from "../rules/nim/nim.board";
 import { GameStatus, GAME_STATE_STORE } from "./game-engine.model";
 import { GameEngineService } from "./game-engine.service";
 import { GameEngineStore } from "./game-engine.store";
+import { RuleService } from "./rule/rule.service";
 import {
   Player,
   playerFactory,
@@ -23,6 +24,7 @@ describe("GameEngineService", () => {
   let service: GameEngineService;
   let store: GameEngineStore;
   let turnService: TurnService;
+  let ruleService: RuleService;
 
   beforeEach(() =>
     TestBed.configureTestingModule({
@@ -32,11 +34,12 @@ describe("GameEngineService", () => {
           provide: GAME_STATE_STORE,
           useFactory: () => new GameEngineStore(NIM_BOARD)
         },
-        TurnService,
         {
           provide: TURN_STATE_STORE,
           useFactory: () => new TurnStore(players)
-        }
+        },
+        TurnService,
+        RuleService
       ]
     })
   );
@@ -45,6 +48,7 @@ describe("GameEngineService", () => {
     service = TestBed.get(GameEngineService);
     store = TestBed.get(GAME_STATE_STORE);
     turnService = TestBed.get(TurnService);
+    ruleService = TestBed.get(RuleService);
   });
 
   it("should be created", () => {
@@ -53,10 +57,10 @@ describe("GameEngineService", () => {
 
   describe("executePlay", () => {
     beforeEach(() => {
-      store.next = jest.fn();
+      ruleService.applyRules = jest.fn();
     });
 
-    it("should call the next method of the store", () => {
+    it("should call the applyRules method of the ruleService", () => {
       const expectedBoard = BoardBuilder.create()
         .addRowWithColumns(
           false,
@@ -77,14 +81,9 @@ describe("GameEngineService", () => {
 
       service.executePlay(expectedBoard);
 
-      expect(store.next).toHaveBeenCalledWith({
-        status: GameStatus.HumanPlay,
+      expect(ruleService.applyRules).toHaveBeenCalledWith({
         board: expectedBoard
       });
-    });
-
-    afterEach(() => {
-      (store.next as jest.Mock).mockClear();
     });
   });
 

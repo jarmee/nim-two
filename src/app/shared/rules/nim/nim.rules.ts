@@ -4,12 +4,8 @@ import {
   withColumnValueFalseFilter
 } from "../../board/board.helpers";
 import { BoardDifference, BoardDifferences } from "../../board/board.model";
-import {
-  GameRule,
-  GameRules,
-  GameState,
-  GameStatus
-} from "../../game-engine/game-engine.model";
+import { GameState, GameStatus } from "../../game-engine/game-engine.model";
+import { GameRule, GameRules } from "../../game-engine/rule/rule.model";
 
 const MAX_MATCHES = 3;
 export const MAXIMUM_OF_MATCHES_EXCEEDED_ERROR = "Maximum Matches Exceeded";

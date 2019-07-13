@@ -1,12 +1,12 @@
 import * as faker from "faker";
-import { BoardBuilder } from "../board/board.builder";
-import { BoardDifferences } from "../board/board.model";
-import { applyRules, setPlayerForBoardIn } from "./game-engine.helpers";
-import { GameState } from "./game-engine.model";
-import { gameStateFactory } from "./testing/game-engine.mock";
-import { Player, playerFactory, PlayerType } from "./turn/turn.model";
+import { BoardBuilder } from "../../board/board.builder";
+import { BoardDifferences } from "../../board/board.model";
+import { GameState } from "../game-engine.model";
+import { gameStateFactory } from "../testing/game-engine.mock";
+import { Player, playerFactory, PlayerType } from "../turn/turn.model";
+import { applyRules, setPlayerForBoardIn } from "./rule.helpers";
 
-describe("GameEngineHelpers", () => {
+describe("RuleHelpers", () => {
   describe("applyRules", () => {
     const newState: GameState = gameStateFactory
       .extend({

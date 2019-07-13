@@ -3,10 +3,11 @@ import {
   areColumnsDifferentByValue,
   exchangeColumnsOf,
   findColumnOf
-} from "../board/board.helpers";
-import { Board, BoardDifferences, Column, Path } from "../board/board.model";
-import { GameRule, GameRules, GameState } from "./game-engine.model";
-import { Player } from "./turn/turn.model";
+} from "../../board/board.helpers";
+import { Board, BoardDifferences, Column, Path } from "../../board/board.model";
+import { GameState } from "../game-engine.model";
+import { Player } from "../turn/turn.model";
+import { GameRule, GameRules } from "./rule.model";
 
 export const applyRules = (rules: GameRules) => (
   newState: GameState,
