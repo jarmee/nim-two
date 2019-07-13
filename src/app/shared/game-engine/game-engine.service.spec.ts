@@ -5,9 +5,21 @@ import { GameState, GameStatus, GAME_STATE_STORE } from "./game-engine.model";
 import { GameEngineService } from "./game-engine.service";
 import { GameEngineStore } from "./game-engine.store";
 import { gameStateFactory } from "./testing/game-engine.mock";
+import {
+  Player,
+  playerFactory,
+  Players,
+  PlayerType,
+  TURN_STATE_STORE
+} from "./turn/turn.model";
+import { TurnService } from "./turn/turn.service";
+import { TurnStore } from "./turn/turn.store";
 
 describe("GameEngineService", () => {
   const initialGameState: GameState = gameStateFactory.build();
+  const player1: Player = playerFactory("Player 1", PlayerType.Human);
+  const player2: Player = playerFactory("Player 2", PlayerType.Artificial);
+  const players: Players = [player1, player2];
 
   let service: GameEngineService;
   let store: GameEngineStore;
@@ -19,6 +31,11 @@ describe("GameEngineService", () => {
         {
           provide: GAME_STATE_STORE,
           useFactory: () => new GameEngineStore(initialGameState)
+        },
+        TurnService,
+        {
+          provide: TURN_STATE_STORE,
+          useFactory: () => new TurnStore(players)
         }
       ]
     })

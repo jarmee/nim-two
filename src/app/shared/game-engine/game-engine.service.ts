@@ -19,6 +19,7 @@ import {
   GAME_STATE_STORE
 } from "./game-engine.model";
 import { GameEngineStore } from "./game-engine.store";
+import { TurnService } from './turn/turn.service';
 
 @Injectable()
 export class GameEngineService extends SubscriptionService
@@ -46,6 +47,7 @@ export class GameEngineService extends SubscriptionService
 
   constructor(
     @Inject(GAME_STATE_STORE) private store: GameEngineStore,
+    private turnSerivce: TurnService,
     @Optional() @Inject(GAME_RULES) private rules: GameRules = [],
     @Optional() @Inject(GAME_AI_RULES) private aiRules: AiRules = []
   ) {
