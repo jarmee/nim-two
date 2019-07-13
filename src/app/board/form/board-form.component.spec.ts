@@ -7,8 +7,8 @@ import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
 import * as faker from "faker";
-import { BoardBuilder } from "../../shared/board/board.builder";
-import { Board } from "../../shared/board/board.model";
+import { BoardBuilder } from "../../shared/game-engine/board/board.builder";
+import { Board } from "../../shared/game-engine/board/board.model";
 import { BoardFormBuilderService } from "./board-form-builder.service";
 import {
   andSetErrors,

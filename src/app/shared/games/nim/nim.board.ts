@@ -1,4 +1,4 @@
-import { BoardBuilder } from "../../board/board.builder";
+import { BoardBuilder } from "../../game-engine/board/board.builder";
 
 export const NIM_BOARD = BoardBuilder.create()
   .addRowWithColumns(

@@ -1,6 +1,6 @@
 import { cloneDeep } from "lodash";
-import { BoardBuilder } from "../../board/board.builder";
-import { BoardDifferences } from "../../board/board.model";
+import { BoardBuilder } from "../../game-engine/board/board.builder";
+import { BoardDifferences } from "../../game-engine/board/board.model";
 import { GameState, GameStatus } from "../../game-engine/state/state.model";
 import {
   isGameOverRule,

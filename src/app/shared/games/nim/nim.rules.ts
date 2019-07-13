@@ -2,8 +2,8 @@ import { cloneDeep } from "lodash";
 import {
   countColumnsOf,
   withColumnValueFalseFilter
-} from "../../board/board.helpers";
-import { BoardDifference, BoardDifferences } from "../../board/board.model";
+} from "../../game-engine/board/board.helpers";
+import { BoardDifference, BoardDifferences } from "../../game-engine/board/board.model";
 import { GameRule, GameRules } from "../../game-engine/rule/rule.model";
 import { GameState, GameStatus } from "../../game-engine/state/state.model";
 

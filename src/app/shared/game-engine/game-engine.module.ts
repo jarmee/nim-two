@@ -1,5 +1,5 @@
 import { ModuleWithProviders, NgModule } from "@angular/core";
-import { Board } from "../board/board.model";
+import { Board } from "./board/board.model";
 import { AiRules, GAME_AI_RULES } from "./bot/bot.model";
 import { BotService } from "./bot/bot.service";
 import { GameEngineService } from "./game-engine.service";

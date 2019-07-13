@@ -1,8 +1,8 @@
 import { Inject, Injectable, Optional } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { map, skip, withLatestFrom } from "rxjs/operators";
-import { differenceOf } from "../../board/board.helpers";
-import { BoardDifferences } from "../../board/board.model";
+import { differenceOf } from "../board/board.helpers";
+import { BoardDifferences } from "../board/board.model";
 import { GameState, STATE_STORE } from "../state/state.model";
 import { GameStateStore } from "../state/state.store";
 import { Player } from "../turn/turn.model";

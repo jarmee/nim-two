@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { Observable } from "rxjs";
-import { Board } from "../shared/board/board.model";
+import { Board } from "../shared/game-engine/board/board.model";
 import { GameEngineService } from "../shared/game-engine/game-engine.service";
 import { GameStatus } from "../shared/game-engine/state/state.model";
 

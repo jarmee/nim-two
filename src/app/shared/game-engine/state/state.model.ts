@@ -1,5 +1,5 @@
 import { InjectionToken } from "@angular/core";
-import { Board } from "../../board/board.model";
+import { Board } from "../board/board.model";
 import { GameStateStore } from "./state.store";
 
 export enum GameStatus {

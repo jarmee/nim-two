@@ -1,5 +1,5 @@
 import { skip } from "rxjs/operators";
-import { BoardBuilder } from "../board/board.builder";
+import { BoardBuilder } from "../game-engine/board/board.builder";
 import { GameState, GameStatus } from "../game-engine/state/state.model";
 import { gameStateFactory } from "../game-engine/testing/game-engine.mock";
 import { Store } from "./store";

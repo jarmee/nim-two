@@ -1,4 +1,4 @@
-import { BoardBuilder } from "../../board/board.builder";
+import { BoardBuilder } from "../board/board.builder";
 import { gameStateFactory } from "../testing/game-engine.mock";
 import { calculateState } from "./bot.helpers";
 

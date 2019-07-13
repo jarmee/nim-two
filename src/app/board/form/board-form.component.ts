@@ -9,7 +9,7 @@ import {
   SimpleChanges
 } from "@angular/core";
 import { FormGroup } from "@angular/forms";
-import { Board, Column, Columns } from "../../shared/board/board.model";
+import { Board, Column, Columns } from "../../shared/game-engine/board/board.model";
 import { SubscriptionService } from "../../shared/state/subscription.service";
 import { BoardFormBuilderService } from "./board-form-builder.service";
 

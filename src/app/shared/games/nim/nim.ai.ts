@@ -1,5 +1,5 @@
-import { exchangeColumnsOf } from "../../board/board.helpers";
-import { Column } from "../../board/board.model";
+import { exchangeColumnsOf } from "../../game-engine/board/board.helpers";
+import { Column } from "../../game-engine/board/board.model";
 import { AiRule, AiRules } from "../../game-engine/bot/bot.model";
 import { GameState } from "../../game-engine/state/state.model";
 

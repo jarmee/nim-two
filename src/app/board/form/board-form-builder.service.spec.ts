@@ -1,8 +1,8 @@
 import { TestBed } from "@angular/core/testing";
 import { FormGroup, ReactiveFormsModule } from "@angular/forms";
 import * as faker from "faker";
-import { BoardBuilder } from "../../shared/board/board.builder";
-import { Column } from "../../shared/board/board.model";
+import { BoardBuilder } from "../../shared/game-engine/board/board.builder";
+import { Column } from "../../shared/game-engine/board/board.model";
 import { BoardFormBuilderService } from "./board-form-builder.service";
 
 describe("BoardFormBuilderService", () => {

@@ -3,8 +3,8 @@ import {
   areColumnsDifferentByValue,
   exchangeColumnsOf,
   findColumnOf
-} from "../../board/board.helpers";
-import { Board, BoardDifferences, Column, Path } from "../../board/board.model";
+} from "../board/board.helpers";
+import { Board, BoardDifferences, Column, Path } from "../board/board.model";
 import { GameState } from "../state/state.model";
 import { Player } from "../turn/turn.model";
 import { GameRule, GameRules } from "./rule.model";

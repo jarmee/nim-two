@@ -4,8 +4,8 @@ import { map, tap } from "rxjs/operators";
 import {
   countColumnsOf,
   withColumnValueFalseFilter
-} from "../board/board.helpers";
-import { Board } from "../board/board.model";
+} from "./board/board.helpers";
+import { Board } from "./board/board.model";
 import { SubscriptionService } from "../state/subscription.service";
 import { BotService } from "./bot/bot.service";
 import { RuleService } from "./rule/rule.service";

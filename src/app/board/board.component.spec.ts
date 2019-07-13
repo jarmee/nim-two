@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 import { ReactiveFormsModule } from "@angular/forms";
 import { By } from "@angular/platform-browser";
-import { BoardBuilder } from "../shared/board/board.builder";
+import { BoardBuilder } from "../shared/game-engine/board/board.builder";
 import { GameEngineModule } from "../shared/game-engine/game-engine.module";
 import { GameEngineService } from "../shared/game-engine/game-engine.service";
 import { playerFactory, PlayerType } from "../shared/game-engine/turn/turn.model";

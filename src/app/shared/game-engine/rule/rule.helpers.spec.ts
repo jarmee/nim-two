@@ -1,6 +1,6 @@
 import * as faker from "faker";
-import { BoardBuilder } from "../../board/board.builder";
-import { BoardDifferences } from "../../board/board.model";
+import { BoardBuilder } from "../board/board.builder";
+import { BoardDifferences } from "../board/board.model";
 import { GameState } from "../state/state.model";
 import { gameStateFactory } from "../testing/game-engine.mock";
 import { Player, playerFactory, PlayerType } from "../turn/turn.model";

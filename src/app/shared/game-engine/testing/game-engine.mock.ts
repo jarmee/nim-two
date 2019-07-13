@@ -1,5 +1,5 @@
 import * as Factory from "factory.ts";
-import { BoardBuilder } from "../../board/board.builder";
+import { BoardBuilder } from "../board/board.builder";
 import { GameState, GameStatus } from "../state/state.model";
 
 export const gameStateFactory = Factory.Sync.makeFactory<GameState>({

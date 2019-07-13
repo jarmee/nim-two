@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
-import { Board, Columns } from "../../shared/board/board.model";
+import { Board, Columns } from "../../shared/game-engine/board/board.model";
 
 const initalFormGroup = new FormGroup({});
 
