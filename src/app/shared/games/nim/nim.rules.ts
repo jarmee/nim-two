@@ -27,7 +27,10 @@ export const isMaximumOfMatchesExceededRule: GameRule = (
     boardDifferences
       .map((difference: BoardDifference) => difference.path)
       .forEach((path: string[]) => {
-        const column = path.reduce((currentProperty, path) => currentProperty[path], errornousState.board);
+        const column = path.reduce(
+          (currentProperty: any, pathSection: string) => currentProperty[pathSection],
+          errornousState.board
+        );
         column.errorMessage = MAXIMUM_OF_MATCHES_EXCEEDED_ERROR;
       });
     return errornousState;

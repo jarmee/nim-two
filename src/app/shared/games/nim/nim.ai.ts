@@ -29,6 +29,7 @@ export const calculatePlayRule: (amountOfMatches: () => number) => AiRule = (amo
   state: GameState
 ) => {
   return (calculatedState: GameState) => {
+    // tslint:disable-next-line
     let amountOfMatches = amountOfMatchesProducer();
     return {
       ...calculatedState,

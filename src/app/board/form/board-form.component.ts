@@ -18,7 +18,7 @@ const DEFAULT_PLAYER_NAME = '😎';
 const DEFAULT_ERROR_CODE = 'errorMessage';
 
 function areRowsDifferent(currentValue: Board, previousValue: Board): boolean {
-  return Object.keys(currentValue).length != Object.keys(previousValue).length;
+  return Object.keys(currentValue).length !== Object.keys(previousValue).length;
 }
 
 function areColumnsDifferent(currentValue: Board, previousValue: Board): boolean {
@@ -26,17 +26,27 @@ function areColumnsDifferent(currentValue: Board, previousValue: Board): boolean
     .map((rowKey: string) => [currentValue[rowKey], previousValue[rowKey]])
     .map(
       ([currentColumns, previousColumns]: [Columns, Columns]) =>
-        Object.keys(currentColumns).length != Object.keys(previousColumns).length
+        Object.keys(currentColumns).length !== Object.keys(previousColumns).length
     )
     .some((result: boolean) => result);
 }
 
 export function hasChanged(currentValue: Board, previousValue: Board): boolean {
-  if (!currentValue && !previousValue) return false;
-  if (!currentValue && previousValue) return true;
-  if (currentValue && !previousValue) return true;
-  if (areRowsDifferent(currentValue, previousValue)) return true;
-  if (areColumnsDifferent(currentValue, previousValue)) return true;
+  if (!currentValue && !previousValue) {
+    return false;
+  }
+  if (!currentValue && previousValue) {
+    return true;
+  }
+  if (currentValue && !previousValue) {
+    return true;
+  }
+  if (areRowsDifferent(currentValue, previousValue)) {
+    return true;
+  }
+  if (areColumnsDifferent(currentValue, previousValue)) {
+    return true;
+  }
 
   return false;
 }
@@ -79,7 +89,7 @@ export class BoardFormComponent extends SubscriptionService implements OnChanges
   executePlay = new EventEmitter<Board>();
 
   @Output()
-  reset = new EventEmitter<void>();
+  resetGame = new EventEmitter<void>();
 
   formGroup: FormGroup = this.formBuilder.initial();
 
@@ -97,7 +107,9 @@ export class BoardFormComponent extends SubscriptionService implements OnChanges
 
   columnFormGroupControlNamesOf(formGroupName: string): string[] {
     const rowFormGroup = this.formGroup.get(formGroupName) as FormGroup;
-    if (!rowFormGroup) return [];
+    if (!rowFormGroup) {
+      return [];
+    }
 
     return Object.keys(rowFormGroup.controls);
   }
@@ -127,8 +139,8 @@ export class BoardFormComponent extends SubscriptionService implements OnChanges
     this.executePlay.emit(this.formGroup.value);
   }
 
-  onReset() {
-    this.reset.emit();
+  onResetGame() {
+    this.resetGame.emit();
   }
 
   ngOnChanges(changes: SimpleChanges) {

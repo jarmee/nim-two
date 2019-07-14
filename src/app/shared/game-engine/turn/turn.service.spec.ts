@@ -34,8 +34,8 @@ describe('TurnServiceService', () => {
 
   describe('players$', () => {
     it('should return the players', done => {
-      service.players$.subscribe((players: Players) => {
-        expect(players).toEqual([player1, player2]);
+      service.players$.subscribe((actualPlayers: Players) => {
+        expect(actualPlayers).toEqual([player1, player2]);
         done();
       });
     });

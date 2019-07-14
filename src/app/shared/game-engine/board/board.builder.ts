@@ -3,6 +3,10 @@ import { Board } from './board.model';
 export class BoardBuilder {
   board: Board = {};
 
+  static create(): BoardBuilder {
+    return new BoardBuilder();
+  }
+
   addRowWithColumns(...columns: boolean[]): BoardBuilder {
     const currentIndex = Object.keys(this.board).length++;
     this.board = {
@@ -24,9 +28,5 @@ export class BoardBuilder {
 
   build(): Board {
     return this.board;
-  }
-
-  static create(): BoardBuilder {
-    return new BoardBuilder();
   }
 }

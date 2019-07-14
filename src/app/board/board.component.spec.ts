@@ -63,7 +63,7 @@ describe('BoardComponent', () => {
       });
 
       it('should call the onExecutePlay event handler on board change', () => {
-        const boardElement = fixture.debugElement.query(By.css("[data-test-id='board']"));
+        const boardElement = fixture.debugElement.query(By.css('[data-test-id="board"]'));
 
         boardElement.triggerEventHandler('executePlay', board);
 
@@ -72,24 +72,24 @@ describe('BoardComponent', () => {
     });
   });
 
-  describe('onReset', () => {
+  describe('onResetGame', () => {
     it('should call the reset method of the GameEngine', () => {
-      component.onReset();
+      component.onResetGame();
 
       expect(gameEngine.reset).toHaveBeenCalled();
     });
 
     describe('UI Interaction', () => {
       beforeEach(() => {
-        component.onReset = jest.fn();
+        component.onResetGame = jest.fn();
       });
 
       it('should call the onExecutePlay event handler on board change', () => {
-        const boardElement = fixture.debugElement.query(By.css("[data-test-id='board']"));
+        const boardElement = fixture.debugElement.query(By.css('[data-test-id="board"]'));
 
         boardElement.triggerEventHandler('reset', null);
 
-        expect(component.onReset).toHaveBeenCalled();
+        expect(component.onResetGame).toHaveBeenCalled();
       });
     });
   });

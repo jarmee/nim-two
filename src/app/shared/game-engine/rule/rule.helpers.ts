@@ -10,7 +10,10 @@ export const applyRules = (rules: GameRules) => (
   actualState: GameState,
   boardDifferences: BoardDifferences
 ): GameState => {
-  if (!rules || !rules.length) return newState;
+  if (!rules || !rules.length) {
+    return newState;
+  }
+
   return rules.reduce(
     (state: GameState, rule: GameRule) => rule(newState, actualState, boardDifferences)(state),
     cloneDeep(newState)
@@ -37,7 +40,9 @@ export function setPlayerForBoardIn(
   onlyToTheChangedColumnsOfState: GameState,
   toPlayer: Player
 ): GameState {
-  if (!state) return null;
+  if (!state) {
+    return null;
+  }
 
   const compareToBoard = onlyToTheChangedColumnsOfState ? onlyToTheChangedColumnsOfState.board : null;
   return {

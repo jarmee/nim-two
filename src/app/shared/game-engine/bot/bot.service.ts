@@ -13,7 +13,7 @@ import { AiRules, GAME_AI_RULES } from './bot.model';
 @Injectable()
 export class BotService extends SubscriptionService {
   calculateState$: Observable<GameState> = this.turnService.selectedPlayer$.pipe(
-    filter((player: Player) => player.type == PlayerType.Artificial),
+    filter((player: Player) => player.type === PlayerType.Artificial),
     withLatestFrom(this.stateService.state$),
     map(([player, state]: [Player, GameState]) => state),
     delay(1000),

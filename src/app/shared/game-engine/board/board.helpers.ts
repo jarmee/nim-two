@@ -14,23 +14,35 @@ function createBoardDifferencesOf(boardA: Board, andBoardB: Board): BoardDiffere
 }
 
 export function areColumnsDifferentByValue(newColumn: Column, currentColumn: Column): boolean {
-  if (!newColumn && !currentColumn) return false;
-  if (!newColumn || !currentColumn) return true;
+  if (!newColumn && !currentColumn) {
+    return false;
+  }
+  if (!newColumn || !currentColumn) {
+    return true;
+  }
   return newColumn.value !== currentColumn.value;
 }
 
 export function findColumnOf(board: Board, path: Path): Column | null {
-  if (!board) return null;
-  if (!path || !path.length) return null;
+  if (!board) {
+    return null;
+  }
+  if (!path || !path.length) {
+    return null;
+  }
 
   return path.reduce((selectedProperty: any, pathElement: string) => {
-    if (!selectedProperty || !selectedProperty[pathElement]) return null;
+    if (!selectedProperty || !selectedProperty[pathElement]) {
+      return null;
+    }
     return selectedProperty[pathElement];
   }, board);
 }
 
 export function differenceOf(boardA: Board, andBoardB: Board): BoardDifferences {
-  if (!boardA && !andBoardB) return [];
+  if (!boardA && !andBoardB) {
+    return [];
+  }
 
   return createBoardDifferencesOf(boardA, andBoardB).filter(({ newColumn, currentColumn }: BoardDifference) =>
     areColumnsDifferentByValue(newColumn, currentColumn)
@@ -40,7 +52,9 @@ export function differenceOf(boardA: Board, andBoardB: Board): BoardDifferences 
 export const withColumnValueFalseFilter = (column: Column) => !column.value;
 
 export function countColumnsOf(board: Board, withFilter: (column: Column) => boolean): number {
-  if (!board) return 0;
+  if (!board) {
+    return 0;
+  }
 
   return Object.values(board)
     .map((columns: Columns) => Object.values(columns).filter(withFilter).length)
@@ -51,7 +65,9 @@ export function exchangeColumnsOf(
   board: Board,
   exchangeColumnCallback: (column: Column, path?: Path) => Column
 ): Board {
-  if (!board) return null;
+  if (!board) {
+    return null;
+  }
 
   return Object.keys(board)
     .map(rowKey => ({

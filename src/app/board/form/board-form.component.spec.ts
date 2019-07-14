@@ -117,12 +117,12 @@ describe('BoardFormComponent', () => {
   describe('columnFormGroupControlNamesOf', () => {
     it('should return the names of all form controls of a form group', () => {
       component.formGroup = new FormGroup({
-        '0': new FormGroup({
-          '0': new FormControl(false),
-          '1': new FormControl(false),
-          '2': new FormControl(false),
-          '3': new FormControl(false),
-          '4': new FormControl(false)
+        0: new FormGroup({
+          0: new FormControl(false),
+          1: new FormControl(false),
+          2: new FormControl(false),
+          3: new FormControl(false),
+          4: new FormControl(false)
         })
       });
 
@@ -305,7 +305,7 @@ describe('BoardFormComponent', () => {
 
         component.executePlay.emit = jest.fn();
 
-        const buttonElement = fixture.debugElement.query(By.css("[data-test-id='execute-play-button']"));
+        const buttonElement = fixture.debugElement.query(By.css('[data-test-id="execute-play-button"]'));
         buttonElement.triggerEventHandler('click', {});
 
         expect(component.executePlay.emit).toHaveBeenCalledWith(component.formGroup.value);
@@ -313,23 +313,23 @@ describe('BoardFormComponent', () => {
     });
   });
 
-  describe('onReset', () => {
+  describe('onResetGame', () => {
     it('should call the emit method of the reset event handler', () => {
-      component.reset.emit = jest.fn();
+      component.resetGame.emit = jest.fn();
 
-      component.onReset();
+      component.onResetGame();
 
-      expect(component.reset.emit).toHaveBeenCalledWith();
+      expect(component.resetGame.emit).toHaveBeenCalledWith();
     });
 
     describe('UI Interaction', () => {
       it('should call the emit method of the reset event handler', () => {
-        component.reset.emit = jest.fn();
+        component.resetGame.emit = jest.fn();
 
-        const buttonElement = fixture.debugElement.query(By.css("[data-test-id='reset-button']"));
+        const buttonElement = fixture.debugElement.query(By.css('[data-test-id="reset-button"]'));
         buttonElement.triggerEventHandler('click', {});
 
-        expect(component.reset.emit).toHaveBeenCalledWith();
+        expect(component.resetGame.emit).toHaveBeenCalledWith();
       });
     });
   });

@@ -8,8 +8,7 @@ import { GameStateStore } from './state.store';
 
 describe('StateService', () => {
   let service: StateService;
-  let store;
-  GameStateStore;
+  let store: GameStateStore;
 
   beforeEach(() =>
     TestBed.configureTestingModule({

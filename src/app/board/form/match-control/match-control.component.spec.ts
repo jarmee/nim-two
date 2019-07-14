@@ -97,7 +97,7 @@ describe('MatchControlComponent', () => {
 
     it('should call the onChange event handler if the checkbox changed', () => {
       const checked = faker.random.boolean();
-      const checkboxElement = fixture.debugElement.query(By.css("[data-test-id='match-checkbox']"));
+      const checkboxElement = fixture.debugElement.query(By.css('[data-test-id="match-checkbox"]'));
       component.onChange = jest.fn();
 
       checkboxElement.triggerEventHandler('change', {
@@ -120,7 +120,7 @@ describe('MatchControlComponent', () => {
     });
 
     it('should call the onTouched event handler if the checkbox gets blured', () => {
-      const checkboxElement = fixture.debugElement.query(By.css("[data-test-id='match-checkbox']"));
+      const checkboxElement = fixture.debugElement.query(By.css('[data-test-id="match-checkbox"]'));
       component.onTouched = jest.fn();
 
       checkboxElement.triggerEventHandler('blur', {});

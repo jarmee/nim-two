@@ -1,19 +1,19 @@
 export enum BoardStatus {
   InProgress = 'IN_PROGRESS'
 }
-export type Column = {
+export interface Column {
   value: boolean;
   player?: string;
   errorMessage?: string;
-};
+}
 export type Columns = Record<number, Column>;
-export type Board = {
+export interface Board {
   [key: number]: Columns;
-};
+}
 export type Path = string[];
-export type BoardDifference = {
+export interface BoardDifference {
   newColumn: Column;
   currentColumn: Column;
   path: Path;
-};
+}
 export type BoardDifferences = Array<BoardDifference>;

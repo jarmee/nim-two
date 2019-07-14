@@ -27,7 +27,7 @@ export class BoardComponent {
     this.gameEngine.executePlay(board);
   }
 
-  onReset() {
+  onResetGame() {
     this.gameEngine.reset();
   }
 }
