@@ -13,7 +13,9 @@ export const isMaximumOfMatchesExceededRule: GameRule = (
   actualState: GameState,
   boardDifferences: BoardDifferences
 ) => (state: GameState) => {
-  if (state.status === GameStatus.Errornous) return state;
+  if (state.status === GameStatus.Errornous) {
+    return state;
+  }
 
   if (boardDifferences.length > MAX_MATCHES) {
     const errornousState = {
@@ -38,7 +40,9 @@ export const preventBoardHasNoChangesRule: GameRule = (
   actualState: GameState,
   boardDifferences: BoardDifferences
 ) => (state: GameState) => {
-  if (state.status === GameStatus.Errornous) return state;
+  if (state.status === GameStatus.Errornous) {
+    return state;
+  }
 
   if (boardDifferences.length === 0) {
     let errornousState = cloneDeep(actualState);
@@ -60,7 +64,9 @@ export const isGameOverRule: GameRule = (
   actualState: GameState,
   boardDifferences: BoardDifferences
 ) => (state: GameState) => {
-  if (state.status === GameStatus.Errornous) return state;
+  if (state.status === GameStatus.Errornous) {
+    return state;
+  }
 
   if (countColumnsOf(newState.board, withColumnValueFalseFilter) === 0) {
     return { ...state, status: GameStatus.GameOver };
