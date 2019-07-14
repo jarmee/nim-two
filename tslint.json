@@ -15,6 +15,7 @@
     "interface-name": false,
     "max-classes-per-file": false,
     "member-access": false,
+    "quotemark": [true, "single"],
     "member-ordering": [
       true,
       {
