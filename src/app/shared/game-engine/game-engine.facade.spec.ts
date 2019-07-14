@@ -22,6 +22,7 @@ describe('GameEngineFacade', () => {
   let store: GameStateStore;
   let stateService: StateService;
   let ruleService: RuleService;
+  let turnService: TurnService;
 
   beforeEach(() =>
     TestBed.configureTestingModule({
@@ -49,6 +50,7 @@ describe('GameEngineFacade', () => {
     store = TestBed.get(STATE_STORE);
     stateService = TestBed.get(StateService);
     ruleService = TestBed.get(RuleService);
+    turnService = TestBed.get(TurnService);
   });
 
   it('should be created', () => {
@@ -77,12 +79,19 @@ describe('GameEngineFacade', () => {
   describe('reset', () => {
     beforeEach(() => {
       stateService.resetState = jest.fn();
+      turnService.switchPlayer = jest.fn();
     });
 
     it('should call the resetState method of the stateService', () => {
       service.reset();
 
       expect(stateService.resetState).toHaveBeenCalled();
+    });
+
+    it('should call the switchPlayer method of the turnService', () => {
+      service.reset();
+
+      expect(turnService.switchPlayer).toHaveBeenCalled();
     });
   });
 

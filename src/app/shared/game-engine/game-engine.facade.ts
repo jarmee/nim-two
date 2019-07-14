@@ -56,5 +56,6 @@ export class GameEngineFacade extends SubscriptionService implements OnDestroy {
 
   reset() {
     this.stateService.resetState();
+    this.turnService.switchPlayer();
   }
 }
