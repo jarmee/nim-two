@@ -10,19 +10,23 @@ exports[`AppComponent should match the snapshot 1`] = `
         class="row mt-5"
       >
         <div
-          class="col-12 text-center"
+          class="col-7 text-right"
         >
-          <h1
-            class="col-12"
-          >
+          <h1>
             You vs 🤖
           </h1>
         </div>
-      </div>
-      <div
-        class="row"
-      >
-        🤖 
+        <div
+          class="col-5"
+        >
+          <app-message>
+            <div
+              class="message p-1 px-2 bg-light"
+            >
+              
+            </div>
+          </app-message>
+        </div>
       </div>
       <div
         class="row mt-5"
@@ -41,20 +45,25 @@ exports[`AppComponent should match the snapshot 1`] = `
               <div
                 class="row mt-5"
               >
-                <button
-                  class="btn btn-primary"
-                  data-test-id="execute-play-button"
-                  type="button"
+                <div
+                  class="btn-group mx-auto"
+                  role="group"
                 >
-                   Finish Play 
-                </button>
-                <button
-                  class="btn btn-danger"
-                  data-test-id="reset-button"
-                  type="button"
-                >
-                   Reset Game 
-                </button>
+                  <button
+                    class="btn btn-primary"
+                    data-test-id="execute-play-button"
+                    type="button"
+                  >
+                     Finish Play 
+                  </button>
+                  <button
+                    class="btn btn-danger"
+                    data-test-id="reset-button"
+                    type="button"
+                  >
+                     Reset Game 
+                  </button>
+                </div>
               </div>
             </form>
           </app-board-form>

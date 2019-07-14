@@ -25,11 +25,13 @@
     No data :(
   </ng-template>
   <div class="row mt-5">
-    <button data-test-id="execute-play-button" type="button" class="btn btn-primary" (click)="onExecutePlay()">
-      Finish Play
-    </button>
-    <button data-test-id="reset-button" type="button" class="btn btn-danger" (click)="onResetGame()">
-      Reset Game
-    </button>
+    <div class="btn-group mx-auto" role="group">
+      <button data-test-id="execute-play-button" type="button" class="btn btn-primary" (click)="onExecutePlay()">
+        Finish Play
+      </button>
+      <button data-test-id="reset-button" type="button" class="btn btn-danger" (click)="onResetGame()">
+        Reset Game
+      </button>
+    </div>
   </div>
 </form>

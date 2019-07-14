@@ -1,8 +1,12 @@
 <div class="container">
   <div class="row mt-5">
-    <div class="col-12 text-center"><h1 class="col-12">You vs 🤖</h1></div>
+    <div class="col-7 text-right">
+      <h1>You vs 🤖</h1>
+    </div>
+    <div class="col-5">
+      <app-message [message]="messages$ | async"></app-message>
+    </div>
   </div>
-  <div class="row">🤖 {{ messages$ | async }}</div>
   <div class="row mt-5">
     <div class="col-12">
       <app-board-form

@@ -1,0 +1,12 @@
+:host {
+  .message {
+    display: inline-block;
+
+    &:before {
+      content: '◀';
+      position: absolute;
+      margin-left: -1em;
+      color: #f2f2f2;
+    }
+  }
+}

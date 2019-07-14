@@ -8,12 +8,14 @@ import { GameEngineService } from '../shared/game-engine/game-engine.service';
 import { playerFactory, PlayerType } from '../shared/game-engine/turn/turn.model';
 import { NIM_AI_RULES } from '../shared/games/nim/nim.ai';
 import { NIM_BOARD } from '../shared/games/nim/nim.board';
+import { NIM_MESSAGE_PRODUCER } from '../shared/games/nim/nim.messages';
 import { NIM_GAME_RULES } from '../shared/games/nim/nim.rules';
 import { BoardComponent } from './board.component';
 import { BoardFormBuilderService } from './form/board-form-builder.service';
 import { BoardFormComponent } from './form/board-form.component';
 import { MatchControlComponent } from './form/match-control/match-control.component';
 import { PlayerBatchComponent } from './form/player-batch/player-batch.component';
+import { MessageComponent } from './message/message.component';
 
 describe('BoardComponent', () => {
   const PLAYERS = [playerFactory('😎', PlayerType.Human), playerFactory('🤖', PlayerType.Artificial)];
@@ -23,8 +25,11 @@ describe('BoardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [BoardComponent, BoardFormComponent, MatchControlComponent, PlayerBatchComponent],
-      imports: [GameEngineModule.forRoot(NIM_BOARD, PLAYERS, NIM_GAME_RULES, NIM_AI_RULES), ReactiveFormsModule],
+      declarations: [BoardComponent, BoardFormComponent, MatchControlComponent, PlayerBatchComponent, MessageComponent],
+      imports: [
+        GameEngineModule.forRoot(NIM_BOARD, PLAYERS, NIM_GAME_RULES, NIM_AI_RULES, NIM_MESSAGE_PRODUCER),
+        ReactiveFormsModule
+      ],
       providers: [BoardFormBuilderService]
     }).compileComponents();
   }));

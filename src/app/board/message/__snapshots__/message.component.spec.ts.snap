@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessageComponent should match the snapshot 1`] = `
+<app-message
+  defaultMessage={[Function String]}
+>
+  <div
+    class="message p-1 px-2 bg-light"
+  >
+    Let\`s play a game...
+  </div>
+</app-message>
+`;

@@ -20,20 +20,25 @@ exports[`BoardFormComponent should match the snapshot 1`] = `
     <div
       class="row mt-5"
     >
-      <button
-        class="btn btn-primary"
-        data-test-id="execute-play-button"
-        type="button"
+      <div
+        class="btn-group mx-auto"
+        role="group"
       >
-         Finish Play 
-      </button>
-      <button
-        class="btn btn-danger"
-        data-test-id="reset-button"
-        type="button"
-      >
-         Reset Game 
-      </button>
+        <button
+          class="btn btn-primary"
+          data-test-id="execute-play-button"
+          type="button"
+        >
+           Finish Play 
+        </button>
+        <button
+          class="btn btn-danger"
+          data-test-id="reset-button"
+          type="button"
+        >
+           Reset Game 
+        </button>
+      </div>
     </div>
   </form>
 </app-board-form>
