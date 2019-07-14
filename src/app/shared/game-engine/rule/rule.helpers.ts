@@ -13,9 +13,8 @@ export const applyRules = (rules: GameRules) => (
   newState: GameState,
   actualState: GameState,
   boardDifferences: BoardDifferences
-) => {
+): GameState => {
   if (!rules || !rules.length) return newState;
-
   return rules.reduce(
     (state: GameState, rule: GameRule) =>
       rule(newState, actualState, boardDifferences)(state),

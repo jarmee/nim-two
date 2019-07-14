@@ -3,7 +3,10 @@ import {
   countColumnsOf,
   withColumnValueFalseFilter
 } from "../../game-engine/board/board.helpers";
-import { BoardDifference, BoardDifferences } from "../../game-engine/board/board.model";
+import {
+  BoardDifference,
+  BoardDifferences
+} from "../../game-engine/board/board.model";
 import { GameRule, GameRules } from "../../game-engine/rule/rule.model";
 import { GameState, GameStatus } from "../../game-engine/state/state.model";
 

@@ -1,10 +1,10 @@
 import { Inject, Injectable, Optional } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
-import { map, skip, withLatestFrom } from "rxjs/operators";
+import { filter, map, withLatestFrom } from "rxjs/operators";
 import { differenceOf } from "../board/board.helpers";
 import { BoardDifferences } from "../board/board.model";
-import { GameState, STATE_STORE } from "../state/state.model";
-import { GameStateStore } from "../state/state.store";
+import { GameState } from "../state/state.model";
+import { StateService } from "../state/state.service";
 import { Player } from "../turn/turn.model";
 import { TurnService } from "../turn/turn.service";
 import { applyRules, setPlayerForBoardIn } from "./rule.helpers";
@@ -17,8 +17,8 @@ export class RuleService {
   >(null);
 
   rulesApplied$: Observable<GameState> = this.applyRules$.pipe(
-    skip(1),
-    withLatestFrom(this.store, this.turnSerivce.selectedPlayer$),
+    filter((state: GameState) => !!state),
+    withLatestFrom(this.stateService.state$, this.turnSerivce.selectedPlayer$),
     map(
       ([newGameState, onlyToTheChangedColumnsOfActualState, toPlayer]: [
         GameState,
@@ -30,28 +30,19 @@ export class RuleService {
           onlyToTheChangedColumnsOfActualState,
           toPlayer
         ),
-        onlyToTheChangedColumnsOfActualState,
-        toPlayer
+        onlyToTheChangedColumnsOfActualState
       ]
     ),
+    map(([newGameState, andActualGameState]: [GameState, GameState]) => [
+      newGameState,
+      andActualGameState,
+      differenceOf(newGameState.board, andActualGameState.board)
+    ]),
     map(
-      ([newGameState, andActualGameState, player]: [
+      ([newState, actualState, boardDifferences]: [
         GameState,
         GameState,
-        Player
-      ]) => [
-        newGameState,
-        andActualGameState,
-        differenceOf(newGameState.board, andActualGameState.board),
-        player
-      ]
-    ),
-    map(
-      ([newState, actualState, boardDifferences, player]: [
-        GameState,
-        GameState,
-        BoardDifferences,
-        Player
+        BoardDifferences
       ]) =>
         applyRules(this.rules)(
           Object.freeze(newState),
@@ -62,7 +53,7 @@ export class RuleService {
   );
 
   constructor(
-    @Inject(STATE_STORE) private store: GameStateStore,
+    private stateService: StateService,
     private turnSerivce: TurnService,
     @Optional() @Inject(GAME_RULES) private rules: GameRules = []
   ) {}

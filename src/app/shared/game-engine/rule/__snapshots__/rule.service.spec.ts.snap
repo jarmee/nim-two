@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RuleService rulesApplied$ should emit a new game state which matches the snapshot 1`] = `
+Object {
+  "board": Object {
+    "0": Object {
+      "0": Object {
+        "errorMessage": null,
+        "player": "😎",
+        "value": true,
+      },
+      "1": Object {
+        "errorMessage": null,
+        "player": "😎",
+        "value": true,
+      },
+      "10": Object {
+        "errorMessage": null,
+        "player": null,
+        "value": false,
+      },
+      "11": Object {
+        "errorMessage": null,
+        "player": null,
+        "value": false,
+      },
+      "12": Object {
+        "errorMessage": null,
+        "player": null,
+        "value": false,
+      },
+      "2": Object {
+        "errorMessage": null,
+        "player": "😎",
+        "value": true,
+      },
+      "3": Object {
+        "errorMessage": null,
+        "player": null,
+        "value": false,
+      },
+      "4": Object {
+        "errorMessage": null,
+        "player": null,
+        "value": false,
+      },
+      "5": Object {
+        "errorMessage": null,
+        "player": null,
+        "value": false,
+      },
+      "6": Object {
+        "errorMessage": null,
+        "player": null,
+        "value": false,
+      },
+      "7": Object {
+        "errorMessage": null,
+        "player": null,
+        "value": false,
+      },
+      "8": Object {
+        "errorMessage": null,
+        "player": null,
+        "value": false,
+      },
+      "9": Object {
+        "errorMessage": null,
+        "player": null,
+        "value": false,
+      },
+    },
+  },
+  "status": "Valid",
+}
+`;

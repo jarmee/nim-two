@@ -2,6 +2,12 @@
   <div class="row mt-5">
     <div class="col-12 text-center"><h1 class="col-12">You vs 🤖</h1></div>
   </div>
+  <div class="row">
+    {{ status$ | async }}
+  </div>
+  <div class="row">
+    {{ selectedPlayer$ | async | json }}
+  </div>
   <div class="row mt-5">
     <div class="col-12">
       <app-board-form

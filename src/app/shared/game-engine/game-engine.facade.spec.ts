@@ -86,6 +86,7 @@ describe("GameEngineFacade", () => {
       service.executePlay(expectedBoard);
 
       expect(ruleService.applyRules).toHaveBeenCalledWith({
+        status: GameStatus.Valid,
         board: expectedBoard
       });
     });

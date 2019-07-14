@@ -7,7 +7,7 @@ import {
   playerFactory,
   PlayerType
 } from "./shared/game-engine/turn/turn.model";
-import { NIM_KI_RULES } from "./shared/games/nim/nim.ai";
+import { NIM_AI_RULES } from "./shared/games/nim/nim.ai";
 import { NIM_BOARD } from "./shared/games/nim/nim.board";
 import { NIM_GAME_RULES } from "./shared/games/nim/nim.rules";
 
@@ -28,7 +28,7 @@ describe("AppComponent", () => {
           NIM_BOARD,
           PLAYERS,
           NIM_GAME_RULES,
-          NIM_KI_RULES
+          NIM_AI_RULES
         )
       ],
       providers: [BoardFormBuilderService]

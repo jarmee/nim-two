@@ -40,6 +40,6 @@ export const calculatePlayRule: (amountOfMatches: () => number) => AiRule = (
   };
 };
 
-export const NIM_KI_RULES: AiRules = [
+export const NIM_AI_RULES: AiRules = [
   calculatePlayRule(() => randomNumberOfMatchesToPick(1, 3))
 ];

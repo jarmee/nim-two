@@ -1,7 +1,10 @@
 import { TestBed } from "@angular/core/testing";
+import { of } from "rxjs";
+import { calculatePlayRule } from "../../games/nim/nim.ai";
 import { NIM_BOARD } from "../../games/nim/nim.board";
+import { BoardBuilder } from "../board/board.builder";
 import { RuleService } from "../rule/rule.service";
-import { STATE_STORE } from "../state/state.model";
+import { GameState, initialGameState, STATE_STORE } from "../state/state.model";
 import { StateService } from "../state/state.service";
 import { GameStateStore } from "../state/state.store";
 import {
@@ -11,13 +14,18 @@ import {
 } from "../turn/turn.model";
 import { TurnService } from "../turn/turn.service";
 import { TurnStore } from "../turn/turn.store";
+import { GAME_AI_RULES } from "./bot.model";
 import { BotService } from "./bot.service";
 
 describe("BotService", () => {
-  const PLAYERS = [
-    playerFactory("😎", PlayerType.Human),
-    playerFactory("🤖", PlayerType.Artificial)
-  ];
+  const player1 = playerFactory("😎", PlayerType.Human);
+  const player2 = playerFactory("🤖", PlayerType.Artificial);
+  const PLAYERS = [player2, player1];
+  let service: BotService;
+  let turnService: TurnService;
+  let stateService: StateService;
+  let ruleService: RuleService;
+
   beforeEach(() =>
     TestBed.configureTestingModule({
       providers: [
@@ -31,14 +39,57 @@ describe("BotService", () => {
           provide: TURN_STATE_STORE,
           useFactory: () => new TurnStore(PLAYERS)
         },
+        {
+          provide: GAME_AI_RULES,
+          useValue: [calculatePlayRule(() => 1)]
+        },
         RuleService,
         StateService
       ]
     })
   );
 
+  beforeEach(() => {
+    service = TestBed.get(BotService);
+    turnService = TestBed.get(TurnService);
+    stateService = TestBed.get(StateService);
+    ruleService = TestBed.get(RuleService);
+  });
+
   it("should be created", () => {
-    const service: BotService = TestBed.get(BotService);
     expect(service).toBeTruthy();
+  });
+
+  describe("calculateState$", () => {
+    it("should emit a new game state which matches the snapshot", done => {
+      ruleService.applyRules = jest.fn();
+      stateService.state$ = of({
+        ...initialGameState,
+        board: BoardBuilder.create()
+          .addRowWithColumns(
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          )
+          .build()
+      });
+      turnService.selectedPlayer$ = of(player2);
+
+      service.calculateState$.subscribe((actual: GameState) => {
+        expect(actual).toMatchSnapshot();
+        expect(ruleService.applyRules).toHaveBeenCalled();
+        done();
+      });
+    });
   });
 });
