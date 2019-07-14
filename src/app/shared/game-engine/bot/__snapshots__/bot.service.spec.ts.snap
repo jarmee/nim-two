@@ -7,7 +7,7 @@ Object {
       "0": Object {
         "errorMessage": null,
         "player": null,
-        "value": true,
+        "value": false,
       },
       "1": Object {
         "errorMessage": null,

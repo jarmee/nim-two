@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { calculatePlayRule } from '../../games/nim/nim.ai';
 import { NIM_BOARD } from '../../games/nim/nim.board';
 import { BoardBuilder } from '../board/board.builder';
 import { RuleService } from '../rule/rule.service';
@@ -37,7 +36,7 @@ describe('BotService', () => {
         },
         {
           provide: GAME_AI_RULES,
-          useValue: [calculatePlayRule]
+          useValue: []
         },
         RuleService,
         StateService
