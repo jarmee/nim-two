@@ -71,7 +71,7 @@ Implement a dynamic form. Each form control represents a stick.
 
 ### Pre-Release
 
-[] Is the prod build working
+[x] Is the prod build working
 [] Is a clean setup of the project possible
 [] Are all tests green
 [] Is the application working in different browsers

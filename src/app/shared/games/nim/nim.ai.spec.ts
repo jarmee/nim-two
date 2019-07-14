@@ -95,6 +95,11 @@ describe('NimAi', () => {
               value: false,
               player: null,
               errorMessage: null
+            },
+            4: {
+              value: false,
+              player: null,
+              errorMessage: null
             }
           }
         };
@@ -103,8 +108,8 @@ describe('NimAi', () => {
         };
         const actual = calculatePlayRule(Object.freeze(gameState))(gameState);
 
-        expect(countColumnsOf(actual.board, withColumnValueFalseFilter)).toBeGreaterThan(1);
-        expect(countColumnsOf(actual.board, withColumnValueFalseFilter)).toBeLessThanOrEqual(4);
+        expect(countColumnsOf(actual.board, withColumnValueFalseFilter)).toBeGreaterThanOrEqual(1);
+        expect(countColumnsOf(actual.board, withColumnValueFalseFilter)).toBeLessThanOrEqual(3);
       });
     });
   });
