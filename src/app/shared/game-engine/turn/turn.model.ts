@@ -1,5 +1,5 @@
-import { InjectionToken } from "@angular/core";
-import { TurnStore } from "./turn.store";
+import { InjectionToken } from '@angular/core';
+import { TurnStore } from './turn.store';
 
 export enum PlayerType {
   Human,
@@ -15,22 +15,17 @@ export interface Player {
 
 export type Players = Array<Player>;
 
-export const playerFactory: (name: string, type: PlayerType) => Player = (
-  name: string,
-  type: PlayerType
-) => ({
+export const playerFactory: (name: string, type: PlayerType) => Player = (name: string, type: PlayerType) => ({
   name,
   type
 });
 
 export const playerTypeIconMap: PlayerTypeDescriptionMap = {
-  [PlayerType.Artificial]: "🤖",
-  [PlayerType.Human]: "😎"
+  [PlayerType.Artificial]: '🤖',
+  [PlayerType.Human]: '😎'
 };
 
-export const TURN_STATE_STORE: InjectionToken<TurnStore> = new InjectionToken<
-  TurnStore
->("TURN_STATE_STORE");
+export const TURN_STATE_STORE: InjectionToken<TurnStore> = new InjectionToken<TurnStore>('TURN_STATE_STORE');
 
 export interface TurnState {
   players: Players;

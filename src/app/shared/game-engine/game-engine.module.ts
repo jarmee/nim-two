@@ -1,21 +1,18 @@
-import { ModuleWithProviders, NgModule } from "@angular/core";
-import { Board } from "./board/board.model";
-import { AiRules, GAME_AI_RULES } from "./bot/bot.model";
-import { BotService } from "./bot/bot.service";
-import { GameEngineFacade } from "./game-engine.facade";
-import {
-  GAME_MESSAGE_PRODUCER,
-  MessageProducer
-} from "./message/message.model";
-import { MessageService } from "./message/message.service";
-import { GameRules, GAME_RULES } from "./rule/rule.model";
-import { RuleService } from "./rule/rule.service";
-import { STATE_STORE } from "./state/state.model";
-import { StateService } from "./state/state.service";
-import { GameStateStore } from "./state/state.store";
-import { Players, TURN_STATE_STORE } from "./turn/turn.model";
-import { TurnService } from "./turn/turn.service";
-import { TurnStore } from "./turn/turn.store";
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { Board } from './board/board.model';
+import { AiRules, GAME_AI_RULES } from './bot/bot.model';
+import { BotService } from './bot/bot.service';
+import { GameEngineFacade } from './game-engine.facade';
+import { GAME_MESSAGE_PRODUCER, MessageProducer } from './message/message.model';
+import { MessageService } from './message/message.service';
+import { GameRules, GAME_RULES } from './rule/rule.model';
+import { RuleService } from './rule/rule.service';
+import { STATE_STORE } from './state/state.model';
+import { StateService } from './state/state.service';
+import { GameStateStore } from './state/state.store';
+import { Players, TURN_STATE_STORE } from './turn/turn.model';
+import { TurnService } from './turn/turn.service';
+import { TurnStore } from './turn/turn.store';
 
 @NgModule({})
 export class GameEngineModule {

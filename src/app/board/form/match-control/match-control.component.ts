@@ -1,17 +1,10 @@
-import {
-  Component,
-  ElementRef,
-  forwardRef,
-  Input,
-  Renderer2,
-  ViewChild
-} from "@angular/core";
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { Component, ElementRef, forwardRef, Input, Renderer2, ViewChild } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-  selector: "app-match-control",
-  templateUrl: "./match-control.component.html",
-  styleUrls: ["./match-control.component.scss"],
+  selector: 'app-match-control',
+  templateUrl: './match-control.component.html',
+  styleUrls: ['./match-control.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -27,7 +20,7 @@ export class MatchControlComponent implements ControlValueAccessor {
   @Input()
   id: string;
 
-  @ViewChild("matchCheckbox", { static: true })
+  @ViewChild('matchCheckbox', { static: true })
   checkboxElementRef: ElementRef;
 
   onChangeCallback: (value: boolean) => void;
@@ -35,22 +28,14 @@ export class MatchControlComponent implements ControlValueAccessor {
   onTouchedCallback: () => void;
 
   get uniqueFormControlId() {
-    return `${this.formControlName}-${this.id}`
+    return `${this.formControlName}-${this.id}`;
   }
 
   constructor(private renderer: Renderer2, private elementRef: ElementRef) {}
 
   writeValue(value: boolean): void {
-    this.renderer.setProperty(
-      this.checkboxElementRef.nativeElement,
-      "checked",
-      value
-    );
-    this.renderer.setProperty(
-      this.checkboxElementRef.nativeElement,
-      "disabled",
-      value
-    );
+    this.renderer.setProperty(this.checkboxElementRef.nativeElement, 'checked', value);
+    this.renderer.setProperty(this.checkboxElementRef.nativeElement, 'disabled', value);
   }
 
   registerOnChange(callback: (value: boolean) => void): void {

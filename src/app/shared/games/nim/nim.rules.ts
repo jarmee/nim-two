@@ -1,18 +1,12 @@
-import { cloneDeep } from "lodash";
-import {
-  countColumnsOf,
-  withColumnValueFalseFilter
-} from "../../game-engine/board/board.helpers";
-import {
-  BoardDifference,
-  BoardDifferences
-} from "../../game-engine/board/board.model";
-import { GameRule, GameRules } from "../../game-engine/rule/rule.model";
-import { GameState, GameStatus } from "../../game-engine/state/state.model";
+import { cloneDeep } from 'lodash';
+import { countColumnsOf, withColumnValueFalseFilter } from '../../game-engine/board/board.helpers';
+import { BoardDifference, BoardDifferences } from '../../game-engine/board/board.model';
+import { GameRule, GameRules } from '../../game-engine/rule/rule.model';
+import { GameState, GameStatus } from '../../game-engine/state/state.model';
 
 const MAX_MATCHES = 3;
-export const MAXIMUM_OF_MATCHES_EXCEEDED_ERROR = "MAXIMUM_MATCHES_EXCEEDED";
-export const NOTHING_CHANGED_ERROR = "NOTHING_CHANGED_ERROR";
+export const MAXIMUM_OF_MATCHES_EXCEEDED_ERROR = 'MAXIMUM_MATCHES_EXCEEDED';
+export const NOTHING_CHANGED_ERROR = 'NOTHING_CHANGED_ERROR';
 
 export const isMaximumOfMatchesExceededRule: GameRule = (
   newState: GameState,
@@ -31,10 +25,7 @@ export const isMaximumOfMatchesExceededRule: GameRule = (
     boardDifferences
       .map((difference: BoardDifference) => difference.path)
       .forEach((path: string[]) => {
-        const column = path.reduce(
-          (currentProperty, path) => currentProperty[path],
-          errornousState.board
-        );
+        const column = path.reduce((currentProperty, path) => currentProperty[path], errornousState.board);
         column.errorMessage = MAXIMUM_OF_MATCHES_EXCEEDED_ERROR;
       });
     return errornousState;
@@ -78,8 +69,4 @@ export const isGameOverRule: GameRule = (
   return state;
 };
 
-export const NIM_GAME_RULES: GameRules = [
-  preventBoardHasNoChangesRule,
-  isMaximumOfMatchesExceededRule,
-  isGameOverRule
-];
+export const NIM_GAME_RULES: GameRules = [preventBoardHasNoChangesRule, isMaximumOfMatchesExceededRule, isGameOverRule];

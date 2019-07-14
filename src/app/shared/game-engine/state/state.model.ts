@@ -1,11 +1,11 @@
-import { InjectionToken } from "@angular/core";
-import { Board } from "../board/board.model";
-import { GameStateStore } from "./state.store";
+import { InjectionToken } from '@angular/core';
+import { Board } from '../board/board.model';
+import { GameStateStore } from './state.store';
 
 export enum GameStatus {
-  Valid = "Valid",
-  Errornous = "Errornous",
-  GameOver = "Game Over"
+  Valid = 'Valid',
+  Errornous = 'Errornous',
+  GameOver = 'Game Over'
 }
 export interface GameState {
   status?: GameStatus;
@@ -18,6 +18,4 @@ export const initialGameState: GameState = {
   board: null
 };
 
-export const STATE_STORE: InjectionToken<GameState> = new InjectionToken<
-  GameStateStore
->("GAME_STATE_STORE");
+export const STATE_STORE: InjectionToken<GameState> = new InjectionToken<GameStateStore>('GAME_STATE_STORE');

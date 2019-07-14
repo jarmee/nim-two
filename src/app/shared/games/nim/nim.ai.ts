@@ -1,7 +1,7 @@
-import { exchangeColumnsOf } from "../../game-engine/board/board.helpers";
-import { Column } from "../../game-engine/board/board.model";
-import { AiRule, AiRules } from "../../game-engine/bot/bot.model";
-import { GameState } from "../../game-engine/state/state.model";
+import { exchangeColumnsOf } from '../../game-engine/board/board.helpers';
+import { Column } from '../../game-engine/board/board.model';
+import { AiRule, AiRules } from '../../game-engine/bot/bot.model';
+import { GameState } from '../../game-engine/state/state.model';
 
 export function randomNumberOfMatchesToPick(min: number, max: number): number {
   return Math.round(Math.random() * max) || min;
@@ -25,21 +25,16 @@ export function ifValueIsPlayable(amountOfMatches: number) {
   };
 }
 
-export const calculatePlayRule: (amountOfMatches: () => number) => AiRule = (
-  amountOfMatchesProducer: () => number
-) => (state: GameState) => {
+export const calculatePlayRule: (amountOfMatches: () => number) => AiRule = (amountOfMatchesProducer: () => number) => (
+  state: GameState
+) => {
   return (calculatedState: GameState) => {
     let amountOfMatches = amountOfMatchesProducer();
     return {
       ...calculatedState,
-      board: exchangeColumnsOf(
-        calculatedState.board,
-        ifValueIsPlayable(amountOfMatches)
-      )
+      board: exchangeColumnsOf(calculatedState.board, ifValueIsPlayable(amountOfMatches))
     };
   };
 };
 
-export const NIM_AI_RULES: AiRules = [
-  calculatePlayRule(() => randomNumberOfMatchesToPick(1, 3))
-];
+export const NIM_AI_RULES: AiRules = [calculatePlayRule(() => randomNumberOfMatchesToPick(1, 3))];

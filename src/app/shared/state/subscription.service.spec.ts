@@ -1,8 +1,8 @@
-import { async, TestBed } from "@angular/core/testing";
-import { EMPTY, Observable } from "rxjs";
-import { SubscriptionService } from "./subscription.service";
+import { async, TestBed } from '@angular/core/testing';
+import { EMPTY, Observable } from 'rxjs';
+import { SubscriptionService } from './subscription.service';
 
-describe("SubscriptionService", () => {
+describe('SubscriptionService', () => {
   let service: SubscriptionService;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -14,12 +14,12 @@ describe("SubscriptionService", () => {
     service = TestBed.get(SubscriptionService);
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(service).toBeTruthy();
   });
 
-  describe("subscribeTo", () => {
-    it("should a subscribtion to the subscriptions array", () => {
+  describe('subscribeTo', () => {
+    it('should a subscribtion to the subscriptions array', () => {
       const fakeObservable: Observable<any> = EMPTY;
 
       service.subscribeTo(fakeObservable);
@@ -27,7 +27,7 @@ describe("SubscriptionService", () => {
       expect(service.subscriptions.length).toBe(1);
     });
 
-    it("should subscribe to the observable", () => {
+    it('should subscribe to the observable', () => {
       const fakeObservable: any = {
         subscribe: jest.fn(() => EMPTY.subscribe())
       };
@@ -38,8 +38,8 @@ describe("SubscriptionService", () => {
     });
   });
 
-  describe("ngOnDestroy", () => {
-    it("should unsubscribe from all subscriptions", () => {
+  describe('ngOnDestroy', () => {
+    it('should unsubscribe from all subscriptions', () => {
       const fakeSubscription1 = {
         unsubscribe: jest.fn()
       };

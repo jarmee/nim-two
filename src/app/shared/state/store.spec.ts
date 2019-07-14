@@ -1,29 +1,15 @@
-import { skip } from "rxjs/operators";
-import { BoardBuilder } from "../game-engine/board/board.builder";
-import { GameState, GameStatus } from "../game-engine/state/state.model";
-import { gameStateFactory } from "../game-engine/testing/game-engine.mock";
-import { Store } from "./store";
+import { skip } from 'rxjs/operators';
+import { BoardBuilder } from '../game-engine/board/board.builder';
+import { GameState, GameStatus } from '../game-engine/state/state.model';
+import { gameStateFactory } from '../game-engine/testing/game-engine.mock';
+import { Store } from './store';
 
-describe("Store", () => {
+describe('Store', () => {
   const initialGameState: GameState = gameStateFactory.build();
   const updatedState = gameStateFactory
     .extend({
       board: BoardBuilder.create()
-        .addRowWithColumns(
-          true,
-          true,
-          true,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false,
-          false
-        )
+        .addRowWithColumns(true, true, true, false, false, false, false, false, false, false, false, false, false)
         .build(),
       status: GameStatus.Valid
     })
@@ -34,18 +20,18 @@ describe("Store", () => {
     store = new Store(initialGameState);
   });
 
-  describe("Instantiation", () => {
-    it("should set the snapshot", () => {
+  describe('Instantiation', () => {
+    it('should set the snapshot', () => {
       expect(store.snapshot).toEqual(initialGameState);
     });
 
-    it("should set the initialState", () => {
+    it('should set the initialState', () => {
       expect(store.initialState).toEqual(initialGameState);
     });
   });
 
-  describe("next", () => {
-    it("should change the current state", done => {
+  describe('next', () => {
+    it('should change the current state', done => {
       store.pipe(skip(1)).subscribe((actualState: GameState) => {
         expect(actualState).toEqual(updatedState);
         done();
@@ -57,8 +43,8 @@ describe("Store", () => {
     });
   });
 
-  describe("reset", () => {
-    it("should set the state to the initial state", done => {
+  describe('reset', () => {
+    it('should set the state to the initial state', done => {
       store.pipe(skip(1)).subscribe((actualState: GameState) => {
         expect(actualState).toEqual(initialGameState);
         done();

@@ -1,8 +1,8 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import * as faker from "faker";
-import { PlayerBatchComponent } from "./player-batch.component";
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import * as faker from 'faker';
+import { PlayerBatchComponent } from './player-batch.component';
 
-describe("PlayerBatchComponent", () => {
+describe('PlayerBatchComponent', () => {
   let component: PlayerBatchComponent;
   let fixture: ComponentFixture<PlayerBatchComponent>;
 
@@ -18,18 +18,18 @@ describe("PlayerBatchComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  describe("shouldBeVisible", () => {
-    it("should return true if the name is set", () => {
+  describe('shouldBeVisible', () => {
+    it('should return true if the name is set', () => {
       component.name = faker.random.word();
 
       expect(component.shouldBeVisible).toBe(true);
     });
 
-    it("should return false if the name is not set", () => {
+    it('should return false if the name is not set', () => {
       component.name = null;
 
       expect(component.shouldBeVisible).toBe(false);

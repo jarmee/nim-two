@@ -1,21 +1,19 @@
-import { Injectable, OnDestroy } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
-import { tap } from "rxjs/operators";
-import { SubscriptionService } from "../state/subscription.service";
-import { Board } from "./board/board.model";
-import { BotService } from "./bot/bot.service";
-import { MessageService } from "./message/message.service";
-import { RuleService } from "./rule/rule.service";
-import { GameState, GameStatus } from "./state/state.model";
-import { StateService } from "./state/state.service";
-import { Player } from "./turn/turn.model";
-import { TurnService } from "./turn/turn.service";
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { SubscriptionService } from '../state/subscription.service';
+import { Board } from './board/board.model';
+import { BotService } from './bot/bot.service';
+import { MessageService } from './message/message.service';
+import { RuleService } from './rule/rule.service';
+import { GameState, GameStatus } from './state/state.model';
+import { StateService } from './state/state.service';
+import { Player } from './turn/turn.model';
+import { TurnService } from './turn/turn.service';
 
 @Injectable()
 export class GameEngineFacade extends SubscriptionService implements OnDestroy {
-  gameLoop$: BehaviorSubject<Partial<GameState>> = new BehaviorSubject<
-    Partial<GameState>
-  >(null);
+  gameLoop$: BehaviorSubject<Partial<GameState>> = new BehaviorSubject<Partial<GameState>>(null);
 
   state$: Observable<GameState> = this.stateService.state$;
 

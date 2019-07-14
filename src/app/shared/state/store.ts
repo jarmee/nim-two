@@ -1,5 +1,5 @@
-import { cloneDeep } from "lodash";
-import { BehaviorSubject } from "rxjs";
+import { cloneDeep } from 'lodash';
+import { BehaviorSubject } from 'rxjs';
 
 export class Store<T> extends BehaviorSubject<T> {
   snapshot: T;

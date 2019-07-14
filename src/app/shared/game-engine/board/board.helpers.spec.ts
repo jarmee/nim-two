@@ -1,4 +1,4 @@
-import { BoardBuilder } from "./board.builder";
+import { BoardBuilder } from './board.builder';
 import {
   areColumnsDifferentByValue,
   countColumnsOf,
@@ -6,21 +6,21 @@ import {
   exchangeColumnsOf,
   findColumnOf,
   withColumnValueFalseFilter
-} from "./board.helpers";
-import { Board, Column, Path } from "./board.model";
+} from './board.helpers';
+import { Board, Column, Path } from './board.model';
 
-describe("BoardHelpers", () => {
-  describe("findColumnOf", () => {
-    it("should return null if the given board is null", () => {
+describe('BoardHelpers', () => {
+  describe('findColumnOf', () => {
+    it('should return null if the given board is null', () => {
       const board: Board = null;
-      const path: Path = ["0", "0"];
+      const path: Path = ['0', '0'];
 
       const actual = findColumnOf(board, path);
 
       expect(actual).toBeNull();
     });
 
-    it("should return null if the path is null", () => {
+    it('should return null if the path is null', () => {
       const board: Board = BoardBuilder.create()
         .addRowWithColumns(true)
         .build();
@@ -31,7 +31,7 @@ describe("BoardHelpers", () => {
       expect(actual).toBeNull();
     });
 
-    it("should return null if the path is empty", () => {
+    it('should return null if the path is empty', () => {
       const board: Board = BoardBuilder.create()
         .addRowWithColumns(true)
         .build();
@@ -42,31 +42,31 @@ describe("BoardHelpers", () => {
       expect(actual).toBeNull();
     });
 
-    it("should return null if the path is invalid", () => {
+    it('should return null if the path is invalid', () => {
       const board: Board = BoardBuilder.create()
         .addRowWithColumns(true)
         .build();
-      const path: Path = ["0", "1"];
+      const path: Path = ['0', '1'];
 
       const actual = findColumnOf(board, path);
 
       expect(actual).toBeNull();
     });
 
-    it("should return the colum of the board", () => {
+    it('should return the colum of the board', () => {
       const board: Board = BoardBuilder.create()
         .addRowWithColumns(true)
         .build();
-      const path: Path = ["0", "0"];
+      const path: Path = ['0', '0'];
 
       const actual = findColumnOf(board, path);
 
-      expect(actual).toBe(board["0"]["0"]);
+      expect(actual).toBe(board['0']['0']);
     });
   });
 
-  describe("differenceOf", () => {
-    it("should return an empty array if both Board objects have the same values", () => {
+  describe('differenceOf', () => {
+    it('should return an empty array if both Board objects have the same values', () => {
       const newBoard: Board = BoardBuilder.create()
         .addRowWithColumns(false)
         .build();
@@ -80,7 +80,7 @@ describe("BoardHelpers", () => {
       expect(actual).toEqual([]);
     });
 
-    it("should return a diff of the two boards (newBoard=null)", () => {
+    it('should return a diff of the two boards (newBoard=null)', () => {
       const newBoard: Board = null;
       const currentBoard: Board = BoardBuilder.create()
         .addRowWithColumns(true)
@@ -89,12 +89,10 @@ describe("BoardHelpers", () => {
 
       const actual = differenceOf(newBoard, currentBoard);
 
-      expect(actual).toEqual([
-        { newColumn: null, currentColumn, path: ["0", "0"] }
-      ]);
+      expect(actual).toEqual([{ newColumn: null, currentColumn, path: ['0', '0'] }]);
     });
 
-    it("should return a diff of the two boards (currentBoard=null)", () => {
+    it('should return a diff of the two boards (currentBoard=null)', () => {
       const newBoard: Board = BoardBuilder.create()
         .addRowWithColumns(false)
         .build();
@@ -103,12 +101,10 @@ describe("BoardHelpers", () => {
 
       const actual = differenceOf(newBoard, currentBoard);
 
-      expect(actual).toEqual([
-        { newColumn, currentColumn: null, path: ["0", "0"] }
-      ]);
+      expect(actual).toEqual([{ newColumn, currentColumn: null, path: ['0', '0'] }]);
     });
 
-    it("should return a diff of the two boards", () => {
+    it('should return a diff of the two boards', () => {
       const newBoard: Board = BoardBuilder.create()
         .addRowWithColumns(false)
         .build();
@@ -120,12 +116,12 @@ describe("BoardHelpers", () => {
 
       const actual = differenceOf(newBoard, currentBoard);
 
-      expect(actual).toEqual([{ newColumn, currentColumn, path: ["0", "0"] }]);
+      expect(actual).toEqual([{ newColumn, currentColumn, path: ['0', '0'] }]);
     });
   });
 
-  describe("countColumnsOf", () => {
-    it("should return 0 if the board is null", () => {
+  describe('countColumnsOf', () => {
+    it('should return 0 if the board is null', () => {
       const board = null;
       const withFilter = (column: Column) => !column.value;
 
@@ -134,7 +130,7 @@ describe("BoardHelpers", () => {
       expect(actual).toBe(0);
     });
 
-    it("should return the count of coulmns which match the filter", () => {
+    it('should return the count of coulmns which match the filter', () => {
       const board = BoardBuilder.create()
         .addRowWithColumns(false, false, true)
         .addRowWithColumns(true, true, false)
@@ -147,8 +143,8 @@ describe("BoardHelpers", () => {
     });
   });
 
-  describe("withColumnValueFalseFilter", () => {
-    it("should return false", () => {
+  describe('withColumnValueFalseFilter', () => {
+    it('should return false', () => {
       const column: any = {
         value: true
       };
@@ -158,7 +154,7 @@ describe("BoardHelpers", () => {
       expect(actual).toBe(false);
     });
 
-    it("should return true", () => {
+    it('should return true', () => {
       const column: any = {
         value: false
       };
@@ -169,21 +165,21 @@ describe("BoardHelpers", () => {
     });
   });
 
-  describe("exchangeColumnsOf", () => {
+  describe('exchangeColumnsOf', () => {
     const fakeCallback = jest.fn((column: Column) => column);
     const board = BoardBuilder.create()
       .addRowWithColumns(false, false, false)
       .build();
 
-    it("should return null if the board is not set", () => {
+    it('should return null if the board is not set', () => {
       expect(exchangeColumnsOf(null, fakeCallback)).toBeNull();
     });
 
-    it("should create a copy of the board if the callback is not set", () => {
+    it('should create a copy of the board if the callback is not set', () => {
       expect(exchangeColumnsOf(board, null)).toEqual(board);
     });
 
-    it("should call the callback for each column of the board", () => {
+    it('should call the callback for each column of the board', () => {
       exchangeColumnsOf(board, fakeCallback);
 
       expect(fakeCallback).toHaveBeenCalledTimes(3);
@@ -194,15 +190,15 @@ describe("BoardHelpers", () => {
     });
   });
 
-  describe("areColumnsDifferentByValue", () => {
-    it("should return false if columnA is falsy and columnB is falsy", () => {
+  describe('areColumnsDifferentByValue', () => {
+    it('should return false if columnA is falsy and columnB is falsy', () => {
       const columnA: Column = null;
       const columnB: Column = null;
 
       expect(areColumnsDifferentByValue(columnA, columnB)).toBe(false);
     });
 
-    it("should return false if columnA and columnB have the same value", () => {
+    it('should return false if columnA and columnB have the same value', () => {
       const columnA: Column = {
         value: false,
         player: null,
@@ -217,7 +213,7 @@ describe("BoardHelpers", () => {
       expect(areColumnsDifferentByValue(columnA, columnB)).toBe(false);
     });
 
-    it("should return true if columnA is falsy", () => {
+    it('should return true if columnA is falsy', () => {
       const columnA: Column = null;
       const columnB: Column = {
         value: false,
@@ -228,7 +224,7 @@ describe("BoardHelpers", () => {
       expect(areColumnsDifferentByValue(columnA, columnB)).toBe(true);
     });
 
-    it("should return true if columnB is falsy", () => {
+    it('should return true if columnB is falsy', () => {
       const columnA: Column = {
         value: false,
         player: null,
@@ -239,7 +235,7 @@ describe("BoardHelpers", () => {
       expect(areColumnsDifferentByValue(columnA, columnB)).toBe(true);
     });
 
-    it("should return true if columnA and columnB have different values", () => {
+    it('should return true if columnA and columnB have different values', () => {
       const columnA: Column = {
         value: false,
         player: null,

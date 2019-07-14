@@ -1,5 +1,5 @@
 export enum BoardStatus {
-  InProgress = "IN_PROGRESS"
+  InProgress = 'IN_PROGRESS'
 }
 export type Column = {
   value: boolean;

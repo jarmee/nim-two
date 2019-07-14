@@ -7,30 +7,26 @@ import {
   OnDestroy,
   Output,
   SimpleChanges
-} from "@angular/core";
-import { FormGroup } from "@angular/forms";
-import { Board, Column, Columns } from "../../shared/game-engine/board/board.model";
-import { SubscriptionService } from "../../shared/state/subscription.service";
-import { BoardFormBuilderService } from "./board-form-builder.service";
+} from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { Board, Column, Columns } from '../../shared/game-engine/board/board.model';
+import { SubscriptionService } from '../../shared/state/subscription.service';
+import { BoardFormBuilderService } from './board-form-builder.service';
 
-const PLAYER_FORM_CONTROL_NAME = "player";
-const DEFAULT_PLAYER_NAME = "😎";
-const DEFAULT_ERROR_CODE = "errorMessage";
+const PLAYER_FORM_CONTROL_NAME = 'player';
+const DEFAULT_PLAYER_NAME = '😎';
+const DEFAULT_ERROR_CODE = 'errorMessage';
 
 function areRowsDifferent(currentValue: Board, previousValue: Board): boolean {
   return Object.keys(currentValue).length != Object.keys(previousValue).length;
 }
 
-function areColumnsDifferent(
-  currentValue: Board,
-  previousValue: Board
-): boolean {
+function areColumnsDifferent(currentValue: Board, previousValue: Board): boolean {
   return Object.keys(currentValue)
     .map((rowKey: string) => [currentValue[rowKey], previousValue[rowKey]])
     .map(
       ([currentColumns, previousColumns]: [Columns, Columns]) =>
-        Object.keys(currentColumns).length !=
-        Object.keys(previousColumns).length
+        Object.keys(currentColumns).length != Object.keys(previousColumns).length
     )
     .some((result: boolean) => result);
 }
@@ -70,13 +66,12 @@ export function andSetErrors() {
 }
 
 @Component({
-  selector: "app-board-form",
-  templateUrl: "./board-form.component.html",
-  styleUrls: ["./board-form.component.scss"],
+  selector: 'app-board-form',
+  templateUrl: './board-form.component.html',
+  styleUrls: ['./board-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BoardFormComponent extends SubscriptionService
-  implements OnChanges, OnDestroy {
+export class BoardFormComponent extends SubscriptionService implements OnChanges, OnDestroy {
   @Input()
   board: Board;
 
@@ -107,43 +102,24 @@ export class BoardFormComponent extends SubscriptionService
     return Object.keys(rowFormGroup.controls);
   }
 
-  columnFormGroup(
-    formGroupName: string,
-    columnFormGroupName: string
-  ): FormGroup {
+  columnFormGroup(formGroupName: string, columnFormGroupName: string): FormGroup {
     const rowFormGroup = this.formGroup.get(formGroupName);
     return rowFormGroup.get(columnFormGroupName) as FormGroup;
   }
 
   playerName(formGroupName: string, columnFormGroupName: string): string {
-    return (
-      (this.columnFormGroup(formGroupName, columnFormGroupName).value as Column)
-        .player || ""
-    );
+    return (this.columnFormGroup(formGroupName, columnFormGroupName).value as Column).player || '';
   }
 
-  isColumnErrornous(
-    formGroupName: string,
-    columnFormGroupName: string
-  ): boolean {
-    return this.columnFormGroup(formGroupName, columnFormGroupName).hasError(
-      DEFAULT_ERROR_CODE
-    );
+  isColumnErrornous(formGroupName: string, columnFormGroupName: string): boolean {
+    return this.columnFormGroup(formGroupName, columnFormGroupName).hasError(DEFAULT_ERROR_CODE);
   }
 
-  columnErrorMessage(
-    formGroupName: string,
-    columnFormGroupName: string
-  ): string {
-    return this.columnFormGroup(formGroupName, columnFormGroupName).getError(
-      DEFAULT_ERROR_CODE
-    );
+  columnErrorMessage(formGroupName: string, columnFormGroupName: string): string {
+    return this.columnFormGroup(formGroupName, columnFormGroupName).getError(DEFAULT_ERROR_CODE);
   }
 
-  uniqueFormControlId(
-    formGroupName: string,
-    columnFormGroupName: string
-  ): string {
+  uniqueFormControlId(formGroupName: string, columnFormGroupName: string): string {
     return `${formGroupName}-${columnFormGroupName}`;
   }
 

@@ -1,10 +1,10 @@
-import { ElementRef, Renderer2, Type } from "@angular/core";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { By } from "@angular/platform-browser";
-import * as faker from "faker";
-import { MatchControlComponent } from "./match-control.component";
+import { ElementRef, Renderer2, Type } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import * as faker from 'faker';
+import { MatchControlComponent } from './match-control.component';
 
-describe("MatchControlComponent", () => {
+describe('MatchControlComponent', () => {
   let component: MatchControlComponent;
   let fixture: ComponentFixture<MatchControlComponent>;
   let renderer: Renderer2;
@@ -20,36 +20,32 @@ describe("MatchControlComponent", () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MatchControlComponent);
     component = fixture.componentInstance;
-    component.formControlName = "match-control";
-    renderer = fixture.componentRef.injector.get<Renderer2>(Renderer2 as Type<
-      Renderer2
-    >);
+    component.formControlName = 'match-control';
+    renderer = fixture.componentRef.injector.get<Renderer2>(Renderer2 as Type<Renderer2>);
     elementRef = fixture.elementRef;
     checkboxElementRef = fixture.componentInstance.checkboxElementRef;
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it("should match the snapshot", () => {
+  it('should match the snapshot', () => {
     expect(fixture).toMatchSnapshot();
   });
 
-  describe("uniqueFormControlId", () => {
-    it("should return a id containing the formControlName and the given id", () => {
+  describe('uniqueFormControlId', () => {
+    it('should return a id containing the formControlName and the given id', () => {
       component.formControlName = faker.random.word();
       component.id = faker.random.uuid();
 
-      expect(component.uniqueFormControlId).toBe(
-        `${component.formControlName}-${component.id}`
-      );
+      expect(component.uniqueFormControlId).toBe(`${component.formControlName}-${component.id}`);
     });
   });
 
-  describe("registerOnChange", () => {
-    it("should set the onChangeCallback", () => {
+  describe('registerOnChange', () => {
+    it('should set the onChangeCallback', () => {
       const fakeCallback = jest.fn();
       component.registerOnChange(fakeCallback);
 
@@ -57,8 +53,8 @@ describe("MatchControlComponent", () => {
     });
   });
 
-  describe("registerOnTouched", () => {
-    it("should set the onTouchedCallback", () => {
+  describe('registerOnTouched', () => {
+    it('should set the onTouchedCallback', () => {
       const fakeCallback = jest.fn();
       component.registerOnTouched(fakeCallback);
 
@@ -66,8 +62,8 @@ describe("MatchControlComponent", () => {
     });
   });
 
-  describe("writeValue", () => {
-    it("should set the ckecked property of the elementRef", () => {
+  describe('writeValue', () => {
+    it('should set the ckecked property of the elementRef', () => {
       const value = faker.random.boolean();
       renderer.setProperty = jest.fn();
 
@@ -75,13 +71,13 @@ describe("MatchControlComponent", () => {
 
       expect((renderer.setProperty as jest.Mock).mock.calls[0]).toEqual([
         checkboxElementRef.nativeElement,
-        "checked",
+        'checked',
         value
       ]);
 
       expect((renderer.setProperty as jest.Mock).mock.calls[1]).toEqual([
         checkboxElementRef.nativeElement,
-        "disabled",
+        'disabled',
         value
       ]);
 
@@ -89,8 +85,8 @@ describe("MatchControlComponent", () => {
     });
   });
 
-  describe("onChange", () => {
-    it("should call the onChangeCallback function", () => {
+  describe('onChange', () => {
+    it('should call the onChangeCallback function', () => {
       const value = faker.random.boolean();
       component.onChangeCallback = jest.fn();
 
@@ -99,14 +95,12 @@ describe("MatchControlComponent", () => {
       expect(component.onChangeCallback).toHaveBeenCalledWith(value);
     });
 
-    it("should call the onChange event handler if the checkbox changed", () => {
+    it('should call the onChange event handler if the checkbox changed', () => {
       const checked = faker.random.boolean();
-      const checkboxElement = fixture.debugElement.query(
-        By.css("[data-test-id='match-checkbox']")
-      );
+      const checkboxElement = fixture.debugElement.query(By.css("[data-test-id='match-checkbox']"));
       component.onChange = jest.fn();
 
-      checkboxElement.triggerEventHandler("change", {
+      checkboxElement.triggerEventHandler('change', {
         target: {
           checked
         }
@@ -116,8 +110,8 @@ describe("MatchControlComponent", () => {
     });
   });
 
-  describe("onTouched", () => {
-    it("should call the onTouchedCallback function", () => {
+  describe('onTouched', () => {
+    it('should call the onTouchedCallback function', () => {
       component.onTouchedCallback = jest.fn();
 
       component.onTouched();
@@ -125,13 +119,11 @@ describe("MatchControlComponent", () => {
       expect(component.onTouchedCallback).toHaveBeenCalledWith();
     });
 
-    it("should call the onTouched event handler if the checkbox gets blured", () => {
-      const checkboxElement = fixture.debugElement.query(
-        By.css("[data-test-id='match-checkbox']")
-      );
+    it('should call the onTouched event handler if the checkbox gets blured', () => {
+      const checkboxElement = fixture.debugElement.query(By.css("[data-test-id='match-checkbox']"));
       component.onTouched = jest.fn();
 
-      checkboxElement.triggerEventHandler("blur", {});
+      checkboxElement.triggerEventHandler('blur', {});
 
       expect(component.onTouched).toHaveBeenCalled();
     });

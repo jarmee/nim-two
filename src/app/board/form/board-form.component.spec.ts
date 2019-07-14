@@ -1,52 +1,25 @@
-import {
-  ChangeDetectionStrategy,
-  SimpleChange,
-  SimpleChanges
-} from "@angular/core";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { FormControl, FormGroup, ReactiveFormsModule } from "@angular/forms";
-import { By } from "@angular/platform-browser";
-import * as faker from "faker";
-import { BoardBuilder } from "../../shared/game-engine/board/board.builder";
-import { Board } from "../../shared/game-engine/board/board.model";
-import { BoardFormBuilderService } from "./board-form-builder.service";
-import {
-  andSetErrors,
-  BoardFormComponent,
-  hasChanged,
-  patchValueOf
-} from "./board-form.component";
-import { MatchControlComponent } from "./match-control/match-control.component";
-import { PlayerBatchComponent } from "./player-batch/player-batch.component";
+import { ChangeDetectionStrategy, SimpleChange, SimpleChanges } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
+import * as faker from 'faker';
+import { BoardBuilder } from '../../shared/game-engine/board/board.builder';
+import { Board } from '../../shared/game-engine/board/board.model';
+import { BoardFormBuilderService } from './board-form-builder.service';
+import { andSetErrors, BoardFormComponent, hasChanged, patchValueOf } from './board-form.component';
+import { MatchControlComponent } from './match-control/match-control.component';
+import { PlayerBatchComponent } from './player-batch/player-batch.component';
 
-describe("BoardFormComponent", () => {
+describe('BoardFormComponent', () => {
   const board: Board = BoardBuilder.create()
-    .addRowWithColumns(
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
-    )
+    .addRowWithColumns(false, false, false, false, false, false, false, false, false, false, false, false, false)
     .build();
   let component: BoardFormComponent;
   let fixture: ComponentFixture<BoardFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        BoardFormComponent,
-        MatchControlComponent,
-        PlayerBatchComponent
-      ],
+      declarations: [BoardFormComponent, MatchControlComponent, PlayerBatchComponent],
       imports: [ReactiveFormsModule],
       providers: [BoardFormBuilderService]
     }).compileComponents();
@@ -64,28 +37,28 @@ describe("BoardFormComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it("should match the snapshot", () => {
+  it('should match the snapshot', () => {
     expect(fixture).toMatchSnapshot();
   });
 
-  describe("hasChanged", () => {
-    it("should return false if both values are null", () => {
+  describe('hasChanged', () => {
+    it('should return false if both values are null', () => {
       expect(hasChanged(null, null)).toBe(false);
     });
 
-    it("should return true if the current board is null and the previous board has a value", () => {
+    it('should return true if the current board is null and the previous board has a value', () => {
       expect(hasChanged(null, {})).toBe(true);
     });
 
-    it("should return true if the current board is not null and the previous board is null", () => {
+    it('should return true if the current board is not null and the previous board is null', () => {
       expect(hasChanged({}, null)).toBe(true);
     });
 
-    it("should return true if the row count of both boards is not equal", () => {
+    it('should return true if the row count of both boards is not equal', () => {
       const currentBoard = BoardBuilder.create()
         .addRowWithColumns(false)
         .addRowWithColumns(false)
@@ -97,7 +70,7 @@ describe("BoardFormComponent", () => {
       expect(hasChanged(currentBoard, previousBoard)).toBe(true);
     });
 
-    it("should return true if the row count is equal but one colum count of one row differs", () => {
+    it('should return true if the row count is equal but one colum count of one row differs', () => {
       const currentBoard = BoardBuilder.create()
         .addRowWithColumns(true, false)
         .addRowWithColumns(false)
@@ -112,7 +85,7 @@ describe("BoardFormComponent", () => {
     });
   });
 
-  describe("ngOnChanges", () => {
+  describe('ngOnChanges', () => {
     const changes: SimpleChanges = {
       board: new SimpleChange(null, board, true)
     };
@@ -120,53 +93,45 @@ describe("BoardFormComponent", () => {
       component.board = null;
     });
 
-    it("should set the board property", () => {
+    it('should set the board property', () => {
       component.ngOnChanges(changes);
 
       expect(component.board).toBe(board);
     });
 
-    it("should set the form group", () => {
+    it('should set the form group', () => {
       component.ngOnChanges(changes);
 
-      expect(Object.keys(component.formGroup.controls).length).toBe(
-        Object.keys(board).length
-      );
+      expect(Object.keys(component.formGroup.controls).length).toBe(Object.keys(board).length);
     });
   });
 
-  describe("formGroupControlNames", () => {
-    it("should return the names of all form groups", () => {
+  describe('formGroupControlNames', () => {
+    it('should return the names of all form groups', () => {
       component.formGroup = new FormGroup({ 0: new FormGroup({}) });
 
-      expect(component.formGroupControlNames).toEqual(["0"]);
+      expect(component.formGroupControlNames).toEqual(['0']);
     });
   });
 
-  describe("columnFormGroupControlNamesOf", () => {
-    it("should return the names of all form controls of a form group", () => {
+  describe('columnFormGroupControlNamesOf', () => {
+    it('should return the names of all form controls of a form group', () => {
       component.formGroup = new FormGroup({
-        "0": new FormGroup({
-          "0": new FormControl(false),
-          "1": new FormControl(false),
-          "2": new FormControl(false),
-          "3": new FormControl(false),
-          "4": new FormControl(false)
+        '0': new FormGroup({
+          '0': new FormControl(false),
+          '1': new FormControl(false),
+          '2': new FormControl(false),
+          '3': new FormControl(false),
+          '4': new FormControl(false)
         })
       });
 
-      expect(component.columnFormGroupControlNamesOf("0")).toEqual([
-        "0",
-        "1",
-        "2",
-        "3",
-        "4"
-      ]);
+      expect(component.columnFormGroupControlNamesOf('0')).toEqual(['0', '1', '2', '3', '4']);
     });
   });
 
-  describe("playerName", () => {
-    it("should return the playerName property", () => {
+  describe('playerName', () => {
+    it('should return the playerName property', () => {
       const player = faker.name.firstName();
       component.formGroup = new FormGroup({
         0: new FormGroup({
@@ -177,26 +142,26 @@ describe("BoardFormComponent", () => {
         })
       });
 
-      expect(component.playerName("0", "0")).toBe(player);
+      expect(component.playerName('0', '0')).toBe(player);
     });
   });
 
-  describe("hasControls", () => {
-    it("should return false if no controls are available", () => {
+  describe('hasControls', () => {
+    it('should return false if no controls are available', () => {
       component.formGroup = new FormGroup({});
 
       expect(component.hasControls).toBe(false);
     });
 
-    it("should return true if at least one control is available", () => {
+    it('should return true if at least one control is available', () => {
       component.formGroup = new FormGroup({ 0: new FormGroup({}) });
 
       expect(component.hasControls).toBe(true);
     });
   });
 
-  describe("patchValueOf", () => {
-    it("should call the patchValue method of the formGroup", () => {
+  describe('patchValueOf', () => {
+    it('should call the patchValue method of the formGroup', () => {
       const fakeCallback = jest.fn();
       const value = {};
       const formGroup = new FormGroup({});
@@ -209,7 +174,7 @@ describe("BoardFormComponent", () => {
       });
     });
 
-    it("should call the given callback", () => {
+    it('should call the given callback', () => {
       const fakeCallback = jest.fn();
       const value = {};
       const formGroup = new FormGroup({});
@@ -221,8 +186,8 @@ describe("BoardFormComponent", () => {
     });
   });
 
-  describe("andSetErrors", () => {
-    it("should set the error", () => {
+  describe('andSetErrors', () => {
+    it('should set the error', () => {
       const errorMessage = faker.random.words();
       const boardWithErrors: Board = {
         0: {
@@ -243,15 +208,13 @@ describe("BoardFormComponent", () => {
       });
       andSetErrors()(formGroup, boardWithErrors);
 
-      expect(formGroup.hasError("errorMessage", ["0", "0"]));
-      expect(formGroup.getError("errorMessage", ["0", "0"])).toEqual(
-        errorMessage
-      );
+      expect(formGroup.hasError('errorMessage', ['0', '0']));
+      expect(formGroup.getError('errorMessage', ['0', '0'])).toEqual(errorMessage);
     });
   });
 
-  describe("columnFormGroup", () => {
-    it("should return the form group of the column", () => {
+  describe('columnFormGroup', () => {
+    it('should return the form group of the column', () => {
       const columnFormGroup: FormGroup = new FormGroup({
         value: new FormControl(false),
         player: new FormControl(null)
@@ -263,14 +226,14 @@ describe("BoardFormComponent", () => {
       });
       component.formGroup = formGroup;
 
-      const actualFormGroup = component.columnFormGroup("0", "0");
+      const actualFormGroup = component.columnFormGroup('0', '0');
 
       expect(actualFormGroup).toBe(columnFormGroup);
     });
   });
 
-  describe("isColumnErrornous", () => {
-    it("should return true if the column form group is errornous", () => {
+  describe('isColumnErrornous', () => {
+    it('should return true if the column form group is errornous', () => {
       const errorMessage = faker.random.words();
       const columnFormGroup: FormGroup = new FormGroup({
         value: new FormControl(false),
@@ -286,10 +249,10 @@ describe("BoardFormComponent", () => {
       });
       component.formGroup = formGroup;
 
-      expect(component.isColumnErrornous("0", "0")).toBe(true);
+      expect(component.isColumnErrornous('0', '0')).toBe(true);
     });
 
-    it("should return false if the column form group is valid", () => {
+    it('should return false if the column form group is valid', () => {
       const columnFormGroup: FormGroup = new FormGroup({
         value: new FormControl(false),
         player: new FormControl(null)
@@ -301,12 +264,12 @@ describe("BoardFormComponent", () => {
       });
       component.formGroup = formGroup;
 
-      expect(component.isColumnErrornous("0", "0")).toBe(false);
+      expect(component.isColumnErrornous('0', '0')).toBe(false);
     });
   });
 
-  describe("columnErrorMessage", () => {
-    it("should return an error message if the form group is errornous", () => {
+  describe('columnErrorMessage', () => {
+    it('should return an error message if the form group is errornous', () => {
       const errorMessage = faker.random.words();
       const columnFormGroup: FormGroup = new FormGroup({
         value: new FormControl(false),
@@ -322,42 +285,36 @@ describe("BoardFormComponent", () => {
       });
       component.formGroup = formGroup;
 
-      expect(component.columnErrorMessage("0", "0")).toBe(errorMessage);
+      expect(component.columnErrorMessage('0', '0')).toBe(errorMessage);
     });
   });
 
-  describe("onExecutePlay", () => {
-    it("should call the emit method of the executePlay event handler", () => {
+  describe('onExecutePlay', () => {
+    it('should call the emit method of the executePlay event handler', () => {
       component.executePlay.emit = jest.fn();
 
       component.onExecutePlay();
 
-      expect(component.executePlay.emit).toHaveBeenCalledWith(
-        component.formGroup.value
-      );
+      expect(component.executePlay.emit).toHaveBeenCalledWith(component.formGroup.value);
     });
 
-    describe("UI Interaction", () => {
-      it("should call the emit method of the executePlay event handler", () => {
+    describe('UI Interaction', () => {
+      it('should call the emit method of the executePlay event handler', () => {
         component.board = board;
         fixture.detectChanges();
 
         component.executePlay.emit = jest.fn();
 
-        const buttonElement = fixture.debugElement.query(
-          By.css("[data-test-id='execute-play-button']")
-        );
-        buttonElement.triggerEventHandler("click", {});
+        const buttonElement = fixture.debugElement.query(By.css("[data-test-id='execute-play-button']"));
+        buttonElement.triggerEventHandler('click', {});
 
-        expect(component.executePlay.emit).toHaveBeenCalledWith(
-          component.formGroup.value
-        );
+        expect(component.executePlay.emit).toHaveBeenCalledWith(component.formGroup.value);
       });
     });
   });
 
-  describe("onReset", () => {
-    it("should call the emit method of the reset event handler", () => {
+  describe('onReset', () => {
+    it('should call the emit method of the reset event handler', () => {
       component.reset.emit = jest.fn();
 
       component.onReset();
@@ -365,28 +322,26 @@ describe("BoardFormComponent", () => {
       expect(component.reset.emit).toHaveBeenCalledWith();
     });
 
-    describe("UI Interaction", () => {
-      it("should call the emit method of the reset event handler", () => {
+    describe('UI Interaction', () => {
+      it('should call the emit method of the reset event handler', () => {
         component.reset.emit = jest.fn();
 
-        const buttonElement = fixture.debugElement.query(
-          By.css("[data-test-id='reset-button']")
-        );
-        buttonElement.triggerEventHandler("click", {});
+        const buttonElement = fixture.debugElement.query(By.css("[data-test-id='reset-button']"));
+        buttonElement.triggerEventHandler('click', {});
 
         expect(component.reset.emit).toHaveBeenCalledWith();
       });
     });
   });
 
-  describe("uniqueFormControlId", () => {
-    it("should return a string consisting of the given parameters", () => {
+  describe('uniqueFormControlId', () => {
+    it('should return a string consisting of the given parameters', () => {
       const rowFormGroupName = faker.random.word();
       const columnFormGroupName = faker.random.word();
 
-      expect(
-        component.uniqueFormControlId(rowFormGroupName, columnFormGroupName)
-      ).toBe(`${rowFormGroupName}-${columnFormGroupName}`);
+      expect(component.uniqueFormControlId(rowFormGroupName, columnFormGroupName)).toBe(
+        `${rowFormGroupName}-${columnFormGroupName}`
+      );
     });
   });
 });

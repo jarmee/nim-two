@@ -1,16 +1,6 @@
-import {
-  Board,
-  BoardDifference,
-  BoardDifferences,
-  Column,
-  Columns,
-  Path
-} from "./board.model";
+import { Board, BoardDifference, BoardDifferences, Column, Columns, Path } from './board.model';
 
-function createBoardDifferencesOf(
-  boardA: Board,
-  andBoardB: Board
-): BoardDifferences {
+function createBoardDifferencesOf(boardA: Board, andBoardB: Board): BoardDifferences {
   const sourceBoard = boardA || andBoardB;
   return Object.keys(sourceBoard)
     .map(rowKey =>
@@ -20,16 +10,10 @@ function createBoardDifferencesOf(
         path: [rowKey, columnKey]
       }))
     )
-    .reduce(
-      (flatten: [Column, Column][], element: any) => [...flatten, ...element],
-      []
-    );
+    .reduce((flatten: [Column, Column][], element: any) => [...flatten, ...element], []);
 }
 
-export function areColumnsDifferentByValue(
-  newColumn: Column,
-  currentColumn: Column
-): boolean {
+export function areColumnsDifferentByValue(newColumn: Column, currentColumn: Column): boolean {
   if (!newColumn && !currentColumn) return false;
   if (!newColumn || !currentColumn) return true;
   return newColumn.value !== currentColumn.value;
@@ -45,32 +29,22 @@ export function findColumnOf(board: Board, path: Path): Column | null {
   }, board);
 }
 
-export function differenceOf(
-  boardA: Board,
-  andBoardB: Board
-): BoardDifferences {
+export function differenceOf(boardA: Board, andBoardB: Board): BoardDifferences {
   if (!boardA && !andBoardB) return [];
 
-  return createBoardDifferencesOf(boardA, andBoardB).filter(
-    ({ newColumn, currentColumn }: BoardDifference) =>
-      areColumnsDifferentByValue(newColumn, currentColumn)
+  return createBoardDifferencesOf(boardA, andBoardB).filter(({ newColumn, currentColumn }: BoardDifference) =>
+    areColumnsDifferentByValue(newColumn, currentColumn)
   );
 }
 
 export const withColumnValueFalseFilter = (column: Column) => !column.value;
 
-export function countColumnsOf(
-  board: Board,
-  withFilter: (column: Column) => boolean
-): number {
+export function countColumnsOf(board: Board, withFilter: (column: Column) => boolean): number {
   if (!board) return 0;
 
   return Object.values(board)
     .map((columns: Columns) => Object.values(columns).filter(withFilter).length)
-    .reduce(
-      (amount: number, columnCount: number) => (amount += columnCount),
-      0
-    );
+    .reduce((amount: number, columnCount: number) => (amount += columnCount), 0);
 }
 
 export function exchangeColumnsOf(
@@ -84,10 +58,7 @@ export function exchangeColumnsOf(
       [rowKey]: Object.keys(board[rowKey])
         .map(columnKey => ({
           [columnKey]: exchangeColumnCallback
-            ? exchangeColumnCallback(board[rowKey][columnKey], [
-                rowKey,
-                columnKey
-              ])
+            ? exchangeColumnCallback(board[rowKey][columnKey], [rowKey, columnKey])
             : { ...board[rowKey][columnKey] }
         }))
         .reduce((newRow, column) => ({ ...newRow, ...column }))

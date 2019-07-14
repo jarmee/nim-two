@@ -1,6 +1,6 @@
-import { InjectionToken } from "@angular/core";
-import { BoardDifferences } from "../board/board.model";
-import { GameState } from "../state/state.model";
+import { InjectionToken } from '@angular/core';
+import { BoardDifferences } from '../board/board.model';
+import { GameState } from '../state/state.model';
 
 export type GameRule = (
   newBoard: GameState,
@@ -10,6 +10,4 @@ export type GameRule = (
 
 export type GameRules = GameRule[];
 
-export const GAME_RULES: InjectionToken<GameRules> = new InjectionToken<
-  GameRules
->("GAME_RULES");
+export const GAME_RULES: InjectionToken<GameRules> = new InjectionToken<GameRules>('GAME_RULES');

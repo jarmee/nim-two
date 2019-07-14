@@ -1,4 +1,4 @@
-import { Board } from "./board.model";
+import { Board } from './board.model';
 
 export class BoardBuilder {
   board: Board = {};

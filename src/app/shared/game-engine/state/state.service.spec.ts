@@ -1,12 +1,12 @@
-import { TestBed } from "@angular/core/testing";
-import { NIM_BOARD } from "../../games/nim/nim.board";
-import { Board } from "../board/board.model";
-import { gameStateFactory } from "../testing/game-engine.mock";
-import { GameStatus, STATE_STORE } from "./state.model";
-import { StateService } from "./state.service";
-import { GameStateStore } from "./state.store";
+import { TestBed } from '@angular/core/testing';
+import { NIM_BOARD } from '../../games/nim/nim.board';
+import { Board } from '../board/board.model';
+import { gameStateFactory } from '../testing/game-engine.mock';
+import { GameStatus, STATE_STORE } from './state.model';
+import { StateService } from './state.service';
+import { GameStateStore } from './state.store';
 
-describe("StateService", () => {
+describe('StateService', () => {
   let service: StateService;
   let store;
   GameStateStore;
@@ -28,12 +28,12 @@ describe("StateService", () => {
     store = TestBed.get(STATE_STORE);
   });
 
-  it("should be created", () => {
+  it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  describe("amount$", () => {
-    it("should emit the current amount", done => {
+  describe('amount$', () => {
+    it('should emit the current amount', done => {
       service.amount$.subscribe((actualAmount: number) => {
         expect(actualAmount).toBe(13);
         done();
@@ -41,8 +41,8 @@ describe("StateService", () => {
     });
   });
 
-  describe("board$", () => {
-    it("should emit the current board", done => {
+  describe('board$', () => {
+    it('should emit the current board', done => {
       service.board$.subscribe((actualBoard: Board) => {
         expect(actualBoard).toEqual(store.snapshot.board);
         done();
@@ -50,8 +50,8 @@ describe("StateService", () => {
     });
   });
 
-  describe("status$", () => {
-    it("should emit the current game status", done => {
+  describe('status$', () => {
+    it('should emit the current game status', done => {
       service.status$.subscribe((actualStatus: GameStatus) => {
         expect(actualStatus).toBe(store.snapshot.status);
         done();
@@ -59,10 +59,10 @@ describe("StateService", () => {
     });
   });
 
-  describe("updateState", () => {
+  describe('updateState', () => {
     const gameState = gameStateFactory.build();
 
-    it("should call the next method of the store", () => {
+    it('should call the next method of the store', () => {
       store.next = jest.fn();
 
       service.updateState(gameState);
@@ -71,8 +71,8 @@ describe("StateService", () => {
     });
   });
 
-  describe("resetState", () => {
-    it("should call the reset method of the store", () => {
+  describe('resetState', () => {
+    it('should call the reset method of the store', () => {
       store.reset = jest.fn();
 
       service.resetState();

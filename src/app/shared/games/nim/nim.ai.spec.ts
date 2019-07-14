@@ -1,17 +1,13 @@
-import * as faker from "faker";
-import { Board } from "../../game-engine/board/board.model";
-import { GameState } from "../../game-engine/state/state.model";
-import { gameStateFactory } from "../../game-engine/testing/game-engine.mock";
-import {
-  calculatePlayRule,
-  isPlayable,
-  randomNumberOfMatchesToPick
-} from "./nim.ai";
-import { MAX_MATCHES, MIN_MATCHES } from "./nim.model";
+import * as faker from 'faker';
+import { Board } from '../../game-engine/board/board.model';
+import { GameState } from '../../game-engine/state/state.model';
+import { gameStateFactory } from '../../game-engine/testing/game-engine.mock';
+import { calculatePlayRule, isPlayable, randomNumberOfMatchesToPick } from './nim.ai';
+import { MAX_MATCHES, MIN_MATCHES } from './nim.model';
 
-describe("NimAi", () => {
-  describe("randomNumberOfMatchesToPick", () => {
-    it("should return a number between a given min and given max", () => {
+describe('NimAi', () => {
+  describe('randomNumberOfMatchesToPick', () => {
+    it('should return a number between a given min and given max', () => {
       const actual = randomNumberOfMatchesToPick(MIN_MATCHES, MAX_MATCHES);
 
       expect(actual).toBeGreaterThanOrEqual(MIN_MATCHES);
@@ -19,8 +15,8 @@ describe("NimAi", () => {
     });
   });
 
-  describe("isPlayable", () => {
-    it("should return true if the value of the column is false", () => {
+  describe('isPlayable', () => {
+    it('should return true if the value of the column is false', () => {
       const column = {
         value: false
       };
@@ -28,7 +24,7 @@ describe("NimAi", () => {
       expect(isPlayable(column)).toBe(true);
     });
 
-    it("should return false if the value of the column is true", () => {
+    it('should return false if the value of the column is true', () => {
       const column = {
         value: true
       };
@@ -37,9 +33,9 @@ describe("NimAi", () => {
     });
   });
 
-  describe("calculatePlay", () => {
-    describe("calculate a new game state", () => {
-      it("should not change anything if all columns marked as false", () => {
+  describe('calculatePlay', () => {
+    describe('calculate a new game state', () => {
+      it('should not change anything if all columns marked as false', () => {
         const board: Board = {
           0: {
             0: {
@@ -70,14 +66,12 @@ describe("NimAi", () => {
           })
           .build();
 
-        const actual = calculatePlayRule(() => MAX_MATCHES)(
-          Object.freeze(gameState)
-        )(gameState);
+        const actual = calculatePlayRule(() => MAX_MATCHES)(Object.freeze(gameState))(gameState);
 
         expect(actual.board).toEqual(board);
       });
 
-      it("should set amount of columns to true", () => {
+      it('should set amount of columns to true', () => {
         const oponent = faker.name.firstName();
         const board: Board = {
           0: {
@@ -132,9 +126,7 @@ describe("NimAi", () => {
           board
         };
 
-        const actual = calculatePlayRule(() => MAX_MATCHES)(
-          Object.freeze(gameState)
-        )(gameState);
+        const actual = calculatePlayRule(() => MAX_MATCHES)(Object.freeze(gameState))(gameState);
 
         expect(actual.board).toEqual(expectedBoard);
       });

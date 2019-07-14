@@ -1,1 +1,1 @@
-export * from "./game-engine.facade";
+export * from './game-engine.facade';
