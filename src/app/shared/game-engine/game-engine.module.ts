@@ -1,5 +1,5 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { Board } from './board/board.model';
+import { Board, BOARD } from './board/board.model';
 import { AiRules, GAME_AI_RULES } from './bot/bot.model';
 import { BotService } from './bot/bot.service';
 import { GameEngineFacade } from './game-engine.facade';
@@ -10,9 +10,17 @@ import { RuleService } from './rule/rule.service';
 import { STATE_STORE } from './state/state.model';
 import { StateService } from './state/state.service';
 import { GameStateStore } from './state/state.store';
-import { Players, TURN_STATE_STORE } from './turn/turn.model';
+import { Players, PLAYERS, TURN_STATE_STORE } from './turn/turn.model';
 import { TurnService } from './turn/turn.service';
 import { TurnStore } from './turn/turn.store';
+
+export function gameStateStoreFactory(board: Board) {
+  return new GameStateStore(board);
+}
+
+export function turnStoreFactory(players: Players) {
+  return new TurnStore(players);
+}
 
 @NgModule({})
 export class GameEngineModule {
@@ -27,12 +35,22 @@ export class GameEngineModule {
       ngModule: GameEngineModule,
       providers: [
         {
+          provide: BOARD,
+          useValue: board
+        },
+        {
+          provide: PLAYERS,
+          useValue: players
+        },
+        {
           provide: STATE_STORE,
-          useFactory: () => new GameStateStore(board)
+          useFactory: gameStateStoreFactory,
+          deps: [BOARD]
         },
         {
           provide: TURN_STATE_STORE,
-          useFactory: () => new TurnStore(players)
+          useFactory: turnStoreFactory,
+          deps: [PLAYERS]
         },
         {
           provide: GAME_RULES,

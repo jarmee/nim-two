@@ -1,3 +1,5 @@
+import { InjectionToken } from '@angular/core';
+
 export enum BoardStatus {
   InProgress = 'IN_PROGRESS'
 }
@@ -17,3 +19,4 @@ export interface BoardDifference {
   path: Path;
 }
 export type BoardDifferences = Array<BoardDifference>;
+export const BOARD: InjectionToken<Board> = new InjectionToken<Board>('BOARD');

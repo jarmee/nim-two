@@ -37,7 +37,7 @@ describe('BotService', () => {
         },
         {
           provide: GAME_AI_RULES,
-          useValue: [calculatePlayRule(() => 1)]
+          useValue: [calculatePlayRule]
         },
         RuleService,
         StateService

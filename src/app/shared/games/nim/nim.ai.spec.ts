@@ -1,4 +1,5 @@
 import * as faker from 'faker';
+import { countColumnsOf, withColumnValueFalseFilter } from '../../game-engine/board/board.helpers';
 import { Board } from '../../game-engine/board/board.model';
 import { GameState } from '../../game-engine/state/state.model';
 import { gameStateFactory } from '../../game-engine/testing/game-engine.mock';
@@ -66,7 +67,7 @@ describe('NimAi', () => {
           })
           .build();
 
-        const actual = calculatePlayRule(() => MAX_MATCHES)(Object.freeze(gameState))(gameState);
+        const actual = calculatePlayRule(Object.freeze(gameState))(gameState);
 
         expect(actual.board).toEqual(board);
       });
@@ -97,38 +98,13 @@ describe('NimAi', () => {
             }
           }
         };
-
-        const expectedBoard: Board = {
-          0: {
-            0: {
-              value: true,
-              player: oponent,
-              errorMessage: null
-            },
-            1: {
-              value: true,
-              player: null,
-              errorMessage: null
-            },
-            2: {
-              value: true,
-              player: null,
-              errorMessage: null
-            },
-            3: {
-              value: true,
-              player: null,
-              errorMessage: null
-            }
-          }
-        };
         const gameState: GameState = {
           board
         };
+        const actual = calculatePlayRule(Object.freeze(gameState))(gameState);
 
-        const actual = calculatePlayRule(() => MAX_MATCHES)(Object.freeze(gameState))(gameState);
-
-        expect(actual.board).toEqual(expectedBoard);
+        expect(countColumnsOf(actual.board, withColumnValueFalseFilter)).toBeGreaterThan(1);
+        expect(countColumnsOf(actual.board, withColumnValueFalseFilter)).toBeLessThanOrEqual(4);
       });
     });
   });

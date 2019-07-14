@@ -36,3 +36,5 @@ export const initialTurnState: TurnState = {
   players: [],
   selected: 0
 };
+
+export const PLAYERS: InjectionToken<Players> = new InjectionToken<Players>('PLAYEERS');

@@ -1,4 +1,3 @@
-import { MessageProducer } from '../../game-engine/message/message.model';
 import { GameStatus } from '../../game-engine/state/state.model';
 import { Player, PlayerType } from '../../game-engine/turn/turn.model';
 import { MAXIMUM_OF_MATCHES_EXCEEDED_ERROR, NOTHING_CHANGED_ERROR } from './nim.rules';
@@ -13,7 +12,7 @@ export const ARTIFICIAL_PLAYER_WINS = 'Game Over! You loose...';
 export const DEFAULT_MESSAGE = 'It`s your turn...';
 export const UNKNOWN_ERROR = 'Unknown error code...';
 
-export const NIM_MESSAGE_PRODUCER: MessageProducer = (status: GameStatus, player: Player, errorCode: string) => {
+export function NIM_MESSAGE_PRODUCER(status: GameStatus, player: Player, errorCode: string): string {
   if (GameStatus.Valid === status && PlayerType.Artificial === player.type) {
     return BOT_THINKING;
   }
@@ -27,4 +26,4 @@ export const NIM_MESSAGE_PRODUCER: MessageProducer = (status: GameStatus, player
     return ARTIFICIAL_PLAYER_WINS;
   }
   return DEFAULT_MESSAGE;
-};
+}
