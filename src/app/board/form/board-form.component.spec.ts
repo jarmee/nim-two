@@ -303,23 +303,6 @@ describe("BoardFormComponent", () => {
 
       expect(component.isColumnErrornous("0", "0")).toBe(false);
     });
-
-    xit("should display the error message", async(() => {
-      const errorMessage = faker.random.words();
-      component.board = BoardBuilder.create()
-        .addRowWithColumns(false, false)
-        .addRowWithColumns(false, false)
-        .build();
-
-      fixture.detectChanges();
-
-      const errorElement = fixture.debugElement.query(
-        By.css("[data-test-id='column-error']")
-      );
-
-      expect(errorElement).toBeTruthy();
-      expect(errorElement.nativeElement.innerText).toBe(errorMessage);
-    }));
   });
 
   describe("columnErrorMessage", () => {

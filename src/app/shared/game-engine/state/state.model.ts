@@ -9,6 +9,7 @@ export enum GameStatus {
 }
 export interface GameState {
   status?: GameStatus;
+  errorMessage?: string;
   board: Board;
 }
 

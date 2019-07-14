@@ -4,6 +4,7 @@ import { tap } from "rxjs/operators";
 import { SubscriptionService } from "../state/subscription.service";
 import { Board } from "./board/board.model";
 import { BotService } from "./bot/bot.service";
+import { MessageService } from "./message/message.service";
 import { RuleService } from "./rule/rule.service";
 import { GameState, GameStatus } from "./state/state.model";
 import { StateService } from "./state/state.service";
@@ -26,11 +27,14 @@ export class GameEngineFacade extends SubscriptionService implements OnDestroy {
 
   selectedPlayer$: Observable<Player> = this.turnService.selectedPlayer$;
 
+  messages$: Observable<string> = this.messageService.messages$;
+
   constructor(
     private turnService: TurnService,
     private ruleService: RuleService,
     private stateService: StateService,
-    private botService: BotService
+    private botService: BotService,
+    private messageService: MessageService
   ) {
     super();
     this.subscribeTo(

@@ -6,6 +6,7 @@ import {
   isGameOverRule,
   isMaximumOfMatchesExceededRule,
   MAXIMUM_OF_MATCHES_EXCEEDED_ERROR,
+  NOTHING_CHANGED_ERROR,
   preventBoardHasNoChangesRule
 } from "./nim.rules";
 
@@ -214,7 +215,8 @@ describe("NimRules", () => {
               }
             }
           },
-          status: GameStatus.Errornous
+          status: GameStatus.Errornous,
+          errorMessage: MAXIMUM_OF_MATCHES_EXCEEDED_ERROR
         };
 
         const actual = isMaximumOfMatchesExceededRule(
@@ -326,7 +328,8 @@ describe("NimRules", () => {
       };
       const errornousState = {
         ...cloneDeep(actualState),
-        status: GameStatus.Errornous
+        status: GameStatus.Errornous,
+        errorMessage: NOTHING_CHANGED_ERROR
       };
       const differences: BoardDifferences = [];
 

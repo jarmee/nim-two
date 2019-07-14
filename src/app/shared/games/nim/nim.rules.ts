@@ -11,7 +11,8 @@ import { GameRule, GameRules } from "../../game-engine/rule/rule.model";
 import { GameState, GameStatus } from "../../game-engine/state/state.model";
 
 const MAX_MATCHES = 3;
-export const MAXIMUM_OF_MATCHES_EXCEEDED_ERROR = "Maximum Matches Exceeded";
+export const MAXIMUM_OF_MATCHES_EXCEEDED_ERROR = "MAXIMUM_MATCHES_EXCEEDED";
+export const NOTHING_CHANGED_ERROR = "NOTHING_CHANGED_ERROR";
 
 export const isMaximumOfMatchesExceededRule: GameRule = (
   newState: GameState,
@@ -23,6 +24,7 @@ export const isMaximumOfMatchesExceededRule: GameRule = (
   if (boardDifferences.length > MAX_MATCHES) {
     const errornousState = {
       ...cloneDeep(actualState),
+      errorMessage: MAXIMUM_OF_MATCHES_EXCEEDED_ERROR,
       status: GameStatus.Errornous
     };
 
@@ -35,7 +37,6 @@ export const isMaximumOfMatchesExceededRule: GameRule = (
         );
         column.errorMessage = MAXIMUM_OF_MATCHES_EXCEEDED_ERROR;
       });
-
     return errornousState;
   }
   return state;
@@ -49,9 +50,14 @@ export const preventBoardHasNoChangesRule: GameRule = (
   if (state.status === GameStatus.Errornous) return state;
 
   if (boardDifferences.length === 0) {
-    const errornousState = {
-      ...cloneDeep(actualState),
-      status: GameStatus.Errornous
+    let errornousState = cloneDeep(actualState);
+    errornousState = {
+      ...errornousState,
+      status: GameStatus.Errornous,
+      errorMessage: NOTHING_CHANGED_ERROR,
+      board: {
+        ...errornousState.board
+      }
     };
     return errornousState;
   }

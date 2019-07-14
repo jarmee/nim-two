@@ -22,12 +22,7 @@ exports[`AppComponent should match the snapshot 1`] = `
       <div
         class="row"
       >
-         
-      </div>
-      <div
-        class="row"
-      >
-         
+        🤖 
       </div>
       <div
         class="row mt-5"

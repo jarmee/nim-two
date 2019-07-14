@@ -1,4 +1,6 @@
 :host {
+  display: block;
+
   .custom-control-label {
     cursor: pointer;
     &:before {

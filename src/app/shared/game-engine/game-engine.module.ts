@@ -3,6 +3,11 @@ import { Board } from "./board/board.model";
 import { AiRules, GAME_AI_RULES } from "./bot/bot.model";
 import { BotService } from "./bot/bot.service";
 import { GameEngineFacade } from "./game-engine.facade";
+import {
+  GAME_MESSAGE_PRODUCER,
+  MessageProducer
+} from "./message/message.model";
+import { MessageService } from "./message/message.service";
 import { GameRules, GAME_RULES } from "./rule/rule.model";
 import { RuleService } from "./rule/rule.service";
 import { STATE_STORE } from "./state/state.model";
@@ -18,7 +23,8 @@ export class GameEngineModule {
     board: Board,
     players: Players,
     rules: GameRules,
-    aiRules: AiRules
+    aiRules: AiRules,
+    messageProducer: MessageProducer
   ): ModuleWithProviders {
     return {
       ngModule: GameEngineModule,
@@ -39,10 +45,15 @@ export class GameEngineModule {
           provide: GAME_AI_RULES,
           useValue: aiRules
         },
+        {
+          provide: GAME_MESSAGE_PRODUCER,
+          useValue: messageProducer
+        },
         BotService,
         RuleService,
         TurnService,
         StateService,
+        MessageService,
         GameEngineFacade
       ]
     };

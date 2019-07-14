@@ -17,4 +17,3 @@ export type BoardDifference = {
   path: Path;
 };
 export type BoardDifferences = Array<BoardDifference>;
-

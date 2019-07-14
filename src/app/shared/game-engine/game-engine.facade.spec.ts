@@ -4,6 +4,7 @@ import { NIM_BOARD } from "../games/nim/nim.board";
 import { BoardBuilder } from "./board/board.builder";
 import { Board } from "./board/board.model";
 import { BotService } from "./bot/bot.service";
+import { MessageService } from "./message/message.service";
 import { RuleService } from "./rule/rule.service";
 import { GameStatus, STATE_STORE } from "./state/state.model";
 import { StateService } from "./state/state.service";
@@ -43,7 +44,8 @@ describe("GameEngineFacade", () => {
         TurnService,
         RuleService,
         StateService,
-        BotService
+        BotService,
+        MessageService
       ]
     })
   );

@@ -1,7 +1,8 @@
 import { TestBed } from "@angular/core/testing";
 import { NIM_BOARD } from "../../games/nim/nim.board";
+import { Board } from "../board/board.model";
 import { gameStateFactory } from "../testing/game-engine.mock";
-import { STATE_STORE } from "./state.model";
+import { GameStatus, STATE_STORE } from "./state.model";
 import { StateService } from "./state.service";
 import { GameStateStore } from "./state.store";
 

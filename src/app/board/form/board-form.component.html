@@ -15,6 +15,12 @@
       >
         <app-match-control
           formControlName="value"
+          [ngClass]="{
+            errornous: isColumnErrornous(
+              formGroupControlName,
+              columnFormGroupControlName
+            )
+          }"
           [id]="
             uniqueFormControlId(
               formGroupControlName,
@@ -25,16 +31,6 @@
         <app-player-batch
           [name]="playerName(formGroupControlName, columnFormGroupControlName)"
         ></app-player-batch>
-        <span
-          data-test-id="column-error"
-          *ngIf="
-            isColumnErrornous(formGroupControlName, columnFormGroupControlName)
-          "
-        >
-          {{
-            columnErrorMessage(formGroupControlName, columnFormGroupControlName)
-          }}
-        </span>
       </div>
     </div>
     <div></div>
