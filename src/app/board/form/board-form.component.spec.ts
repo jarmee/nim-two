@@ -319,7 +319,7 @@ describe('BoardFormComponent', () => {
 
       component.onResetGame();
 
-      expect(component.resetGame.emit).toHaveBeenCalledWith();
+      expect(component.resetGame.emit).toHaveBeenCalled();
     });
 
     describe('UI Interaction', () => {
@@ -329,7 +329,7 @@ describe('BoardFormComponent', () => {
         const buttonElement = fixture.debugElement.query(By.css('[data-test-id="reset-button"]'));
         buttonElement.triggerEventHandler('click', {});
 
-        expect(component.resetGame.emit).toHaveBeenCalledWith();
+        expect(component.resetGame.emit).toHaveBeenCalled();
       });
     });
   });

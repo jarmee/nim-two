@@ -87,7 +87,7 @@ describe('BoardComponent', () => {
       it('should call the onExecutePlay event handler on board change', () => {
         const boardElement = fixture.debugElement.query(By.css('[data-test-id="board"]'));
 
-        boardElement.triggerEventHandler('reset', null);
+        boardElement.triggerEventHandler('resetGame', null);
 
         expect(component.onResetGame).toHaveBeenCalled();
       });

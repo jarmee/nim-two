@@ -7,30 +7,16 @@
     >
       <div
         [formGroupName]="columnFormGroupControlName"
-        *ngFor="
-          let columnFormGroupControlName of columnFormGroupControlNamesOf(
-            formGroupControlName
-          )
-        "
+        *ngFor="let columnFormGroupControlName of columnFormGroupControlNamesOf(formGroupControlName)"
       >
         <app-match-control
           formControlName="value"
           [ngClass]="{
-            errornous: isColumnErrornous(
-              formGroupControlName,
-              columnFormGroupControlName
-            )
+            errornous: isColumnErrornous(formGroupControlName, columnFormGroupControlName)
           }"
-          [id]="
-            uniqueFormControlId(
-              formGroupControlName,
-              columnFormGroupControlName
-            )
-          "
+          [id]="uniqueFormControlId(formGroupControlName, columnFormGroupControlName)"
         ></app-match-control>
-        <app-player-batch
-          [name]="playerName(formGroupControlName, columnFormGroupControlName)"
-        ></app-player-batch>
+        <app-player-batch [name]="playerName(formGroupControlName, columnFormGroupControlName)"></app-player-batch>
       </div>
     </div>
     <div></div>
@@ -39,20 +25,10 @@
     No data :(
   </ng-template>
   <div class="row mt-5">
-    <button
-      data-test-id="execute-play-button"
-      type="button"
-      class="btn btn-primary"
-      (click)="onExecutePlay()"
-    >
+    <button data-test-id="execute-play-button" type="button" class="btn btn-primary" (click)="onExecutePlay()">
       Finish Play
     </button>
-    <button
-      data-test-id="reset-button"
-      type="button"
-      class="btn btn-danger"
-      (click)="onReset()"
-    >
+    <button data-test-id="reset-button" type="button" class="btn btn-danger" (click)="onResetGame()">
       Reset Game
     </button>
   </div>
