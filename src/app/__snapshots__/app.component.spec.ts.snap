@@ -19,7 +19,9 @@ exports[`AppComponent should match the snapshot 1`] = `
         <div
           class="col-5"
         >
-          <app-message>
+          <app-message
+            class="ml-n3"
+          >
             <div
               class="message p-1 px-2 bg-light"
             >
