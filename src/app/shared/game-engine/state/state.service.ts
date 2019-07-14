@@ -1,14 +1,16 @@
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GameState, STATE_STORE, GameStatus } from './state.model';
-import { GameStateStore } from './state.store';
 import { map } from 'rxjs/operators';
-import { Board } from '../board/board.model';
 import { countColumnsOf, withColumnValueFalseFilter } from '../board/board.helpers';
+import { Board } from '../board/board.model';
+import { GameState, GameStatus, STATE_STORE } from './state.model';
+import { GameStateStore } from './state.store';
 
 @Injectable()
 export class StateService {
   state$: Observable<GameState> = this.store;
+
+  errorCode$: Observable<string> = this.store.pipe(map((state: GameState) => state.errorMessage));
 
   amount$: Observable<number> = this.state$.pipe(
     map((state: GameState) => state.board),

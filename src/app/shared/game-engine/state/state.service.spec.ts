@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import * as faker from 'faker';
 import { NIM_BOARD } from '../../games/nim/nim.board';
 import { Board } from '../board/board.model';
 import { gameStateFactory } from '../testing/game-engine.mock';
@@ -7,6 +8,7 @@ import { StateService } from './state.service';
 import { GameStateStore } from './state.store';
 
 describe('StateService', () => {
+  const errorCode = faker.random.words();
   let service: StateService;
   let store: GameStateStore;
 
@@ -29,6 +31,18 @@ describe('StateService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+  });
+
+  describe('errorCode$', () => {
+    it('should emit the error code', done => {
+      store.next({
+        errorMessage: errorCode
+      });
+      service.errorCode$.subscribe((actualErrorCode: string) => {
+        expect(actualErrorCode).toBe(errorCode);
+        done();
+      });
+    });
   });
 
   describe('amount$', () => {

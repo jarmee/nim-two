@@ -11,8 +11,10 @@ import { defaultMessageProducer, GAME_MESSAGE_PRODUCER, MessageProducer } from '
 @Injectable()
 export class MessageService {
   messages$: Observable<string> = this.ruleService.rulesApplied$.pipe(
-    withLatestFrom(this.stateService.status$, this.turnService.selectedPlayer$),
-    map(([, status, player]: [GameState, GameStatus, Player]) => this.messageProducer(status, player))
+    withLatestFrom(this.stateService.status$, this.turnService.selectedPlayer$, this.stateService.errorCode$),
+    map(([, status, player, errorCode]: [GameState, GameStatus, Player, string]) =>
+      this.messageProducer(status, player, errorCode)
+    )
   );
   constructor(
     private ruleService: RuleService,

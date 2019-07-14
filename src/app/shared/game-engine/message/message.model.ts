@@ -2,7 +2,7 @@ import { InjectionToken } from '@angular/core';
 import { GameStatus } from '../state/state.model';
 import { Player } from '../turn/turn.model';
 
-export type MessageProducer = (status: GameStatus, player: Player) => string;
+export type MessageProducer = (status: GameStatus, player: Player, errorCode: string) => string;
 
 export const defaultMessageProducer: MessageProducer = (status: GameStatus, player: Player) => '';
 
