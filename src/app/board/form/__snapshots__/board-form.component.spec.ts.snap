@@ -25,14 +25,14 @@ exports[`BoardFormComponent should match the snapshot 1`] = `
         role="group"
       >
         <button
-          class="btn btn-primary"
+          class="btn btn-info"
           data-test-id="execute-play-button"
           type="button"
         >
-           Finish Play 
+           End Play 
         </button>
         <button
-          class="btn btn-danger"
+          class="btn btn-light"
           data-test-id="reset-button"
           type="button"
         >

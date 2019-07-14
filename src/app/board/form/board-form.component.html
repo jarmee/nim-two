@@ -11,9 +11,6 @@
       >
         <app-match-control
           formControlName="value"
-          [ngClass]="{
-            errornous: isColumnErrornous(formGroupControlName, columnFormGroupControlName)
-          }"
           [id]="uniqueFormControlId(formGroupControlName, columnFormGroupControlName)"
         ></app-match-control>
         <app-player-batch [name]="playerName(formGroupControlName, columnFormGroupControlName)"></app-player-batch>
@@ -26,10 +23,10 @@
   </ng-template>
   <div class="row mt-5">
     <div class="btn-group mx-auto" role="group">
-      <button data-test-id="execute-play-button" type="button" class="btn btn-primary" (click)="onExecutePlay()">
-        Finish Play
+      <button data-test-id="execute-play-button" type="button" class="btn btn-info" (click)="onExecutePlay()">
+        End Play
       </button>
-      <button data-test-id="reset-button" type="button" class="btn btn-danger" (click)="onResetGame()">
+      <button data-test-id="reset-button" type="button" class="btn btn-light" (click)="onResetGame()">
         Reset Game
       </button>
     </div>

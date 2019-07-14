@@ -67,7 +67,6 @@ exports[`BoardComponent should match the snapshot 1`] = `
                   ng-reflect-form-control-name="value"
                   ng-reflect-id="0-0"
                   ng-reflect-name="value"
-                  ng-reflect-ng-class="[object Object]"
                 >
                   <div
                     class="custom-control custom-checkbox"
@@ -101,7 +100,6 @@ exports[`BoardComponent should match the snapshot 1`] = `
                   ng-reflect-form-control-name="value"
                   ng-reflect-id="0-1"
                   ng-reflect-name="value"
-                  ng-reflect-ng-class="[object Object]"
                 >
                   <div
                     class="custom-control custom-checkbox"
@@ -135,7 +133,6 @@ exports[`BoardComponent should match the snapshot 1`] = `
                   ng-reflect-form-control-name="value"
                   ng-reflect-id="0-2"
                   ng-reflect-name="value"
-                  ng-reflect-ng-class="[object Object]"
                 >
                   <div
                     class="custom-control custom-checkbox"
@@ -169,7 +166,6 @@ exports[`BoardComponent should match the snapshot 1`] = `
                   ng-reflect-form-control-name="value"
                   ng-reflect-id="0-3"
                   ng-reflect-name="value"
-                  ng-reflect-ng-class="[object Object]"
                 >
                   <div
                     class="custom-control custom-checkbox"
@@ -203,7 +199,6 @@ exports[`BoardComponent should match the snapshot 1`] = `
                   ng-reflect-form-control-name="value"
                   ng-reflect-id="0-4"
                   ng-reflect-name="value"
-                  ng-reflect-ng-class="[object Object]"
                 >
                   <div
                     class="custom-control custom-checkbox"
@@ -237,7 +232,6 @@ exports[`BoardComponent should match the snapshot 1`] = `
                   ng-reflect-form-control-name="value"
                   ng-reflect-id="0-5"
                   ng-reflect-name="value"
-                  ng-reflect-ng-class="[object Object]"
                 >
                   <div
                     class="custom-control custom-checkbox"
@@ -271,7 +265,6 @@ exports[`BoardComponent should match the snapshot 1`] = `
                   ng-reflect-form-control-name="value"
                   ng-reflect-id="0-6"
                   ng-reflect-name="value"
-                  ng-reflect-ng-class="[object Object]"
                 >
                   <div
                     class="custom-control custom-checkbox"
@@ -305,7 +298,6 @@ exports[`BoardComponent should match the snapshot 1`] = `
                   ng-reflect-form-control-name="value"
                   ng-reflect-id="0-7"
                   ng-reflect-name="value"
-                  ng-reflect-ng-class="[object Object]"
                 >
                   <div
                     class="custom-control custom-checkbox"
@@ -339,7 +331,6 @@ exports[`BoardComponent should match the snapshot 1`] = `
                   ng-reflect-form-control-name="value"
                   ng-reflect-id="0-8"
                   ng-reflect-name="value"
-                  ng-reflect-ng-class="[object Object]"
                 >
                   <div
                     class="custom-control custom-checkbox"
@@ -373,7 +364,6 @@ exports[`BoardComponent should match the snapshot 1`] = `
                   ng-reflect-form-control-name="value"
                   ng-reflect-id="0-9"
                   ng-reflect-name="value"
-                  ng-reflect-ng-class="[object Object]"
                 >
                   <div
                     class="custom-control custom-checkbox"
@@ -407,7 +397,6 @@ exports[`BoardComponent should match the snapshot 1`] = `
                   ng-reflect-form-control-name="value"
                   ng-reflect-id="0-10"
                   ng-reflect-name="value"
-                  ng-reflect-ng-class="[object Object]"
                 >
                   <div
                     class="custom-control custom-checkbox"
@@ -441,7 +430,6 @@ exports[`BoardComponent should match the snapshot 1`] = `
                   ng-reflect-form-control-name="value"
                   ng-reflect-id="0-11"
                   ng-reflect-name="value"
-                  ng-reflect-ng-class="[object Object]"
                 >
                   <div
                     class="custom-control custom-checkbox"
@@ -475,7 +463,6 @@ exports[`BoardComponent should match the snapshot 1`] = `
                   ng-reflect-form-control-name="value"
                   ng-reflect-id="0-12"
                   ng-reflect-name="value"
-                  ng-reflect-ng-class="[object Object]"
                 >
                   <div
                     class="custom-control custom-checkbox"
@@ -510,14 +497,14 @@ exports[`BoardComponent should match the snapshot 1`] = `
                 role="group"
               >
                 <button
-                  class="btn btn-primary"
+                  class="btn btn-info"
                   data-test-id="execute-play-button"
                   type="button"
                 >
-                   Finish Play 
+                   End Play 
                 </button>
                 <button
-                  class="btn btn-danger"
+                  class="btn btn-light"
                   data-test-id="reset-button"
                   type="button"
                 >
