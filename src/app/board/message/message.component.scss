@@ -3,10 +3,16 @@
     display: inline-block;
 
     &:before {
-      content: '◀';
+      content: '';
       position: absolute;
-      margin-left: -1em;
-      color: #f2f2f2;
+      width: 0;
+      height: 0;
+      border: 10px solid transparent;
+      border-right-color: #f2f2f2;
+      border-left: 0;
+      border-bottom: 0;
+      margin-top: 10px;
+      margin-left: -18px;
     }
   }
 }

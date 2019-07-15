@@ -1,12 +1,22 @@
 :host {
   display: block;
+  cursor: pointer;
 
   .custom-control-label {
     cursor: pointer;
+    text-align: center;
     &:before {
       content: '💣';
       border: 0px solid transparent;
       background: transparent;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+    }
+    &:after {
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
     }
   }
   .custom-control-input:checked ~ {
@@ -15,8 +25,14 @@
         content: '💥';
         border: 0px solid transparent;
         background: transparent;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
       }
       &:after {
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
         background: transparent;
       }
     }

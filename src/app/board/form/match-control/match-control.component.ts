@@ -47,6 +47,7 @@ export class MatchControlComponent implements ControlValueAccessor {
   }
 
   onChange(value: boolean) {
+    console.log(value);
     this.onChangeCallback(value);
   }
 
