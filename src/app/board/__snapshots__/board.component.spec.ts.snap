@@ -495,7 +495,7 @@ exports[`BoardComponent should match the snapshot 1`] = `
               class="row mt-5"
             >
               <div
-                class="btn-group mx-auto"
+                class="mt-5 btn-group mx-auto"
                 role="group"
               >
                 <button
