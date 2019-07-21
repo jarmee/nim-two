@@ -3,7 +3,7 @@ import { countColumnsOf, withColumnValueFalseFilter } from '../../game-engine/bo
 import { Board } from '../../game-engine/board/board.model';
 import { GameState } from '../../game-engine/state/state.model';
 import { gameStateFactory } from '../../game-engine/testing/game-engine.mock';
-import { calculatePlayRule, isPlayable, randomNumberOfMatchesToPick } from './nim.ai';
+import { calculatePlayRule, isPlayable, optimalStickCount, randomNumberOfMatchesToPick } from './nim.ai';
 import { MAX_MATCHES, MIN_MATCHES } from './nim.model';
 
 describe('NimAi', () => {
@@ -111,6 +111,34 @@ describe('NimAi', () => {
         expect(countColumnsOf(actual.board, withColumnValueFalseFilter)).toBeGreaterThanOrEqual(1);
         expect(countColumnsOf(actual.board, withColumnValueFalseFilter)).toBeLessThanOrEqual(3);
       });
+    });
+  });
+
+  describe('optimalStickCount', () => {
+    const min = 1;
+    const max = 3;
+    it('should return 2', () => {
+      const leftPlayableColumns = 3;
+      const expected = 2;
+      expect(optimalStickCount(leftPlayableColumns, min, max)).toBe(expected);
+    });
+
+    it('should return 1', () => {
+      const leftPlayableColumns = 5;
+      const expected = 1;
+      expect(optimalStickCount(leftPlayableColumns, min, max)).toBe(expected);
+    });
+
+    it('should return 1', () => {
+      const leftPlayableColumns = 6;
+      const expected = 1;
+      expect(optimalStickCount(leftPlayableColumns, min, max)).toBe(expected);
+    });
+
+    it('should return 3', () => {
+      const leftPlayableColumns = 8;
+      const expected = 3;
+      expect(optimalStickCount(leftPlayableColumns, min, max)).toBe(expected);
     });
   });
 });
